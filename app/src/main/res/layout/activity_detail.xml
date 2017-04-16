@@ -60,12 +60,13 @@
                         android:layout_weight="0"
                         android:layout_gravity="center"
                         android:id="@+id/rating"
-                        style="?android:attr/ratingBarStyleSmall"
+                        style= "@style/CustomRatingBar"
+                        android:background="@null"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:numStars="5"
                         android:rating="4.5"
-                        android:stepSize="0.1" />
+                        android:stepSize="0.1"/>
 
                 </LinearLayout>
 
