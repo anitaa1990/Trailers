@@ -100,6 +100,47 @@
                     android:textColor="#333"
                     android:textSize="15sp" />
 
+                <LinearLayout
+                    android:paddingLeft="@dimen/margin_xlarge"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.an.trailers.views.CollectionPicker
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:id="@+id/movie_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cp_itemBackgroundNormal="@color/green"
+                    app:cp_itemBackgroundPressed="@color/green"
+                    app:cp_textPaddingLeft="3dp"
+                    app:cp_textPaddingRight="3dp"
+                    app:cp_textPaddingBottom="3dp"
+                    app:cp_textPaddingTop="4dp"
+                    app:cp_simplified="true" />
+
+
+                    <com.an.trailers.views.CollectionPicker
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:orientation="horizontal"
+                        android:id="@+id/txt_runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cp_itemBackgroundNormal="@color/yellow"
+                        app:cp_itemBackgroundPressed="@color/yellow"
+                        app:cp_textPaddingLeft="3dp"
+                        app:cp_textPaddingRight="3dp"
+                        app:cp_textPaddingBottom="3dp"
+                        app:cp_textPaddingTop="4dp"
+                        app:cp_simplified="true"/>
+
+                </LinearLayout>
+
             </LinearLayout>
 
 

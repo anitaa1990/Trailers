@@ -113,43 +113,6 @@
         android:orientation="horizontal">
 
         <com.an.trailers.views.CustomTextView
-            android:layout_gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:text="Status: "
-            android:textColor="#111"
-            android:textSize="16sp"
-            app:font="circular_medium" />
-
-        <com.an.trailers.views.CollectionPicker
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:id="@+id/movie_status"
-            android:layout_width="0dp"
-            android:layout_weight="4.5"
-            android:layout_height="wrap_content"
-            app:cp_itemBackgroundNormal="@color/green"
-            app:cp_itemBackgroundPressed="@color/green"
-            app:cp_textPaddingLeft="3dp"
-            app:cp_textPaddingRight="3dp"
-            app:cp_textPaddingBottom="3dp"
-            app:cp_textPaddingTop="4dp"
-            app:cp_simplified="true" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <com.an.trailers.views.CustomTextView
             android:layout_gravity="top"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -166,38 +129,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_small"
             android:layout_weight="4.2"
-            android:gravity="left"
-            android:textColor="#7c7d88"
-            android:textSize="16sp"
-            app:font="circular_book"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <com.an.trailers.views.CustomTextView
-            android:layout_gravity="top"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="left"
-            android:text="Runtime: "
-            android:textColor="#111"
-            android:textSize="16sp"
-            app:font="circular_medium" />
-
-        <com.an.trailers.views.CustomTextView
-            android:id="@+id/txt_runtime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_weight="7"
             android:gravity="left"
             android:textColor="#7c7d88"
             android:textSize="16sp"

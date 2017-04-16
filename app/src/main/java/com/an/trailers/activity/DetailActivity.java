@@ -59,7 +59,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     private LinearLayout listContainer;
     private RecyclerView recyclerView;
     private RecyclerView castView, crewView;
-    private TextView runtimeTxt;
+    private CollectionPicker runtimeTxt;
     private TextView imdbTxt;
 //    private TextView directorTxt;
 
@@ -76,6 +76,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         ratingBar = (RatingBar) findViewById(R.id.rating);
         listContainer = (LinearLayout) findViewById(R.id.detail_list_container);
         picker = (CollectionPicker) findViewById(R.id.collection_item_picker);
+        movieStatusTxt = (CollectionPicker) findViewById(R.id.movie_status);
+        runtimeTxt = (CollectionPicker) findViewById(R.id.txt_runtime);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -112,15 +114,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View childView = layoutInflater.inflate(R.layout.detail_list_item, null);
 
-        movieStatusTxt = (CollectionPicker) childView.findViewById(R.id.movie_status);
-
         TextView releaseTxt = (TextView) childView.findViewById(R.id.txt_release);
         releaseTxt.setText(BaseUtils.getFormattedDate(movie.getReleaseDate()));
 
-//        castTxt = (TextView) childView.findViewById(R.id.txt_cast);
-//        directorTxt = (TextView) childView.findViewById(R.id.txt_director);
-
-        runtimeTxt = (TextView) childView.findViewById(R.id.txt_runtime);
         imdbTxt = (TextView) childView.findViewById(R.id.txt_imdb);
 
         recyclerView = (RecyclerView) childView.findViewById(R.id.list);
@@ -160,7 +156,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         movieStatusTxt.setSelector(colorCode);
         movieStatusTxt.setItems(Arrays.asList(new String[]{ status }));
 
-        runtimeTxt.setText(String.format("%s mins", String.valueOf(movie.getRuntime())));
+        runtimeTxt.setTextColor(android.R.color.black);
+        runtimeTxt.setItems(Arrays.asList(new String[] { String.format("%s mins", String.valueOf(movie.getRuntime())) }));
         imdbTxt.setText(String.format(Constants.IMDB_MOVIE_LINK, movie.getImdbId()));
 
         List<Genre> genres = movie.getGenres();

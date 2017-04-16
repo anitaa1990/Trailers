@@ -285,6 +285,10 @@ public class CollectionPicker extends LinearLayout {
         mItems.clear();
     }
 
+    public void setTextColor(int color) {
+        this.mTextColor = color;
+    }
+
     public void setOnItemClickListener(OnItemClickListener clickListener) {
         mClickListener = clickListener;
     }
