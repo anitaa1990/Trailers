@@ -35,11 +35,11 @@
                 android:background="@drawable/paper_background"
                 android:orientation="vertical"
                 android:paddingTop="@dimen/margin_large"
-                android:paddingBottom="@dimen/margin_large"
-                android:paddingLeft="@dimen/margin_xlarge"
-                android:paddingRight="@dimen/margin_xlarge">
+                android:paddingBottom="@dimen/margin_large">
 
                 <LinearLayout
+                    android:paddingLeft="@dimen/margin_xlarge"
+                    android:paddingRight="@dimen/margin_xlarge"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -72,6 +72,7 @@
 
 
                 <com.an.trailers.views.CollectionPicker
+                    android:paddingLeft="@dimen/margin_xlarge"
                     android:layout_gravity="left"
                     android:gravity="left"
                     android:orientation="vertical"
@@ -88,6 +89,8 @@
                     app:cp_simplified="true" />
 
                 <com.an.trailers.views.CustomTextView
+                    android:paddingLeft="@dimen/margin_xlarge"
+                    android:paddingRight="@dimen/margin_xlarge"
                     android:id="@+id/movie_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,16 +98,6 @@
                     android:text="NO. 7911847"
                     android:textColor="#333"
                     android:textSize="15sp" />
-
-                <!--<RatingBar-->
-                    <!--android:id="@+id/rating_1"-->
-                    <!--style="?android:attr/ratingBarStyleSmall"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:numStars="5"-->
-                    <!--android:rating="4.5"-->
-                    <!--android:stepSize="0.1" />-->
 
             </LinearLayout>
 

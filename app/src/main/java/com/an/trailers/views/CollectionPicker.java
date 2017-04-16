@@ -24,7 +24,7 @@ import java.util.List;
 
 public class CollectionPicker extends LinearLayout {
 
-    public static final int LAYOUT_WIDTH_OFFSET = 3;
+    public static final int LAYOUT_WIDTH_OFFSET = 0;
 
     private ViewTreeObserver mViewTreeObserver;
     private LayoutInflater mInflater;
@@ -161,11 +161,10 @@ public class CollectionPicker extends LinearLayout {
             itemWidth += BaseUtils.dpToPx(getContext(), 30) + textPaddingLeft
                     + textPaddingRight;
 
-            if (mWidth <= totalPadding + itemWidth + BaseUtils
-                    .dpToPx(this.getContext(), LAYOUT_WIDTH_OFFSET)) {
+            if (mWidth <= itemWidth) {
                 totalPadding = getPaddingLeft() + getPaddingRight();
                 indexFrontView = i;
-                addItemView(itemLayout, itemParams, false, i);
+                addItemView(itemLayout, itemParams, true, i);
             } else {
                 if (i != indexFrontView) {
                     itemParams.rightMargin = mItemMargin;
