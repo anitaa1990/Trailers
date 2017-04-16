@@ -12,6 +12,7 @@ import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.an.trailers.Constants;
@@ -142,6 +143,9 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
 
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
         this.movies.addAll(movies);
         this.totalPages = totalPages;
         this.currentPage = currentPage + 1;
