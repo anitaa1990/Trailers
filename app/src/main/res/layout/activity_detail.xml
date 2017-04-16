@@ -124,6 +124,7 @@
 
 
                     <com.an.trailers.views.CollectionPicker
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_gravity="left"
                         android:gravity="left"
                         android:layout_marginLeft="@dimen/margin_large"
@@ -138,6 +139,9 @@
                         app:cp_textPaddingBottom="3dp"
                         app:cp_textPaddingTop="4dp"
                         app:cp_simplified="true"/>
+
+
+                    <include  layout="@layout/ratings"/>
 
                 </LinearLayout>
 

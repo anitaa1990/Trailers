@@ -10,6 +10,7 @@ import com.an.trailers.callback.RESTListener;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
 import com.an.trailers.model.Movie;
+import com.an.trailers.model.Rating;
 import com.an.trailers.model.Video;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
@@ -75,8 +76,9 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 
     @Override
     public void onVideoResponse(List<Video> videos) {
+        this.videoId = videos.get(0).getKey();
         if(youTubePlayer != null) {
-            youTubePlayer.loadVideo(videos.get(0).getKey());
+            youTubePlayer.loadVideo(this.videoId);
         }
     }
 
@@ -87,6 +89,11 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 
     @Override
     public void onCreditsResponse(Pair<List<Cast>, List<Crew>> creditPair) {
+
+    }
+
+    @Override
+    public void onRatingsResponse(Rating ratings) {
 
     }
 }

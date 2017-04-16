@@ -161,7 +161,7 @@ public class CollectionPicker extends LinearLayout {
             itemWidth += BaseUtils.dpToPx(getContext(), 30) + textPaddingLeft
                     + textPaddingRight;
 
-            if (mWidth <= itemWidth) {
+            if (mWidth <= (itemWidth + totalPadding)) {
                 totalPadding = getPaddingLeft() + getPaddingRight();
                 indexFrontView = i;
                 addItemView(itemLayout, itemParams, true, i);

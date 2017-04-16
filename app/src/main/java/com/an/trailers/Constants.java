@@ -13,9 +13,14 @@ public interface Constants {
     String METHOD_VIDEO = "movie_video";
     String METHOD_CAST = "movie_cast";
     String METHOD_SEARCH = "movie_search";
+    String METHOD_RATING = "movie_rating";
 
     String CREDIT_CAST = "cast";
     String CREDIT_CREW = "crew";
+
+    String SOURCE_IMDB = "Internet Movie Database";
+    String SOURCE_RT = "Rotten Tomatoes";
+    String SOURCE_MC = "Metacritic";
 
     String YOUTUBE_VIDEO_PATH = "https://www.youtube.com/watch?v=%s";
 
@@ -26,4 +31,5 @@ public interface Constants {
     String MOVIE_VIDEOS_PATH = "movie/%s/videos?api_key=%s";
     String MOVIE_CAST_PATH = "movie/%s/credits?api_key=%s";
     String MOVIE_SEARCH_PATH = "search/movie?api_key=%s&query=%s";
+    String MOVIE_RATING_PATH = "http://www.omdbapi.com/?i=%s&tomatoes=true&r=json";
 }

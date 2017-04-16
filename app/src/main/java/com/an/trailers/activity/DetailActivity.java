@@ -26,6 +26,7 @@ import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
 import com.an.trailers.model.Genre;
 import com.an.trailers.model.Movie;
+import com.an.trailers.model.Rating;
 import com.an.trailers.model.Video;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
@@ -36,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 
 public class DetailActivity extends FragmentActivity implements RESTListener, Constants {
@@ -61,7 +63,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     private RecyclerView castView, crewView;
     private CollectionPicker runtimeTxt;
     private TextView imdbTxt;
-//    private TextView directorTxt;
+    private TextView imdbRatingTxt;
+
+    private View imdbLayout;
 
     private Movie movie;
 
@@ -78,6 +82,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         picker = (CollectionPicker) findViewById(R.id.collection_item_picker);
         movieStatusTxt = (CollectionPicker) findViewById(R.id.movie_status);
         runtimeTxt = (CollectionPicker) findViewById(R.id.txt_runtime);
+        imdbLayout = findViewById(R.id.layout_imdb);
+        imdbRatingTxt = (TextView) findViewById(R.id.imdbRating);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -151,13 +157,17 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
     @Override
     public void onMovieDetailResponse(Movie movie) {
+        RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
+
         String status = movie.getStatus();
         int colorCode = status.equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? getResources().getColor(R.color.green) : getResources().getColor(R.color.orange);
         movieStatusTxt.setSelector(colorCode);
         movieStatusTxt.setItems(Arrays.asList(new String[]{ status }));
 
         runtimeTxt.setTextColor(android.R.color.black);
-        runtimeTxt.setItems(Arrays.asList(new String[] { String.format("%s mins", String.valueOf(movie.getRuntime())) }));
+        String runTxt = status.equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? String.format("%s mins", String.valueOf(movie.getRuntime())) :
+                BaseUtils.getFormattedDate(movie.getReleaseDate());
+        runtimeTxt.setItems(Arrays.asList(new String[] { runTxt }));
         imdbTxt.setText(String.format(Constants.IMDB_MOVIE_LINK, movie.getImdbId()));
 
         List<Genre> genres = movie.getGenres();
@@ -174,5 +184,13 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         castView.setAdapter(creditAdapter);
         CreditAdapter crewAdapter = new CreditAdapter(this, CREDIT_CREW, null, creditPair.second);
         crewView.setAdapter(crewAdapter);
+    }
+
+    @Override
+    public void onRatingsResponse(Rating rating) {
+        if(rating != null) {
+            imdbLayout.setVisibility(View.VISIBLE);
+            imdbRatingTxt.setText(rating.getImdbRating());
+        } else imdbLayout.setVisibility(View.GONE);
     }
 }

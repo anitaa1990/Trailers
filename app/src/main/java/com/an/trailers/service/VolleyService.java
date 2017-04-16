@@ -10,15 +10,15 @@ import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.MovieResponse;
+import com.an.trailers.model.Rating;
 import com.an.trailers.model.Video;
 import com.an.trailers.utils.BaseUtils;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 public class VolleyService implements Constants {
 
@@ -128,5 +128,23 @@ public class VolleyService implements Constants {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void getRatingForMovie(Context context, String tmdbId, final RESTListener listener) {
+        CacheRequest stringRequest = new CacheRequest(Request.Method.GET,
+                String.format(MOVIE_RATING_PATH, tmdbId),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Rating rating = BaseUtils.getRatings(response);
+                        listener.onRatingsResponse(rating);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+        MyVolley.getInstance(context).addToRequestQueue(stringRequest);
     }
 }

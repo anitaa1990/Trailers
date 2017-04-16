@@ -17,6 +17,7 @@ import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
 import com.an.trailers.model.MovieResponse;
 import com.an.trailers.model.Movie;
+import com.an.trailers.model.Rating;
 import com.an.trailers.model.Video;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -107,6 +108,12 @@ public class BaseUtils {
         return new Pair<>(apiResponse.getCast(), apiResponse.getCrew());
     }
 
+    public static Rating getRatings(String jsonString) {
+        Type listType = new TypeToken<Rating>() {}.getType();
+        Rating rating = new Gson().fromJson(jsonString, listType);
+        return rating;
+    }
+
     public static void shareMovie(Activity activity,
                                   String videoId) {
         String shareText = String.format(Constants.YOUTUBE_VIDEO_PATH, videoId);
@@ -116,5 +123,15 @@ public class BaseUtils {
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
         shareIntent.setType("text/*");
         activity.startActivity(Intent.createChooser(shareIntent, "Share via:"));
+    }
+
+    public static Map<String, String> getRatingSource(List<Map<String, String>> list,
+                                                      String source) {
+        for(Map<String, String> map : list) {
+            if(source.equalsIgnoreCase(map.get("Source"))) {
+                return map;
+            }
+        }
+        return null;
     }
 }
