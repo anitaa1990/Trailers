@@ -17,6 +17,8 @@ public interface Constants {
     String CREDIT_CAST = "cast";
     String CREDIT_CREW = "crew";
 
+    String YOUTUBE_VIDEO_PATH = "https://www.youtube.com/watch?v=%s";
+
     String BASE_URL = "https://api.themoviedb.org/3/";
 
     String MOVIES_LIST_PATH = "movie/upcoming?api_key=%s&language=en-US&page=%s";

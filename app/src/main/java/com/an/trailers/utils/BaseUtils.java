@@ -1,10 +1,16 @@
 package com.an.trailers.utils;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.model.APIResponse;
 import com.an.trailers.model.Cast;
@@ -28,73 +34,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BaseUtils {
-
-    private static List<Map> getGenres(Context context) {
-        String rulesJson = getJSONStringFromRaw(context, R.raw.genres);
-        Type listType = new TypeToken<Map>() {}.getType();
-        Map categories = new Gson().fromJson(rulesJson, listType);
-        List<Map> genres = (List<Map>) categories.get("genres");
-        return genres;
-    }
-
-    public static List<Movie> getMovies(Context context) {
-        String rulesJson = getJSONStringFromRaw(context, R.raw.sample);
-        Type listType = new TypeToken<MovieResponse>() {}.getType();
-        MovieResponse apiResponseMessage = new Gson().fromJson(rulesJson, listType);
-        List<Movie> movies = apiResponseMessage.getResults();
-        return movies;
-    }
-
-    public static Movie getMovieDetails(Context context) {
-        String rulesJson = getJSONStringFromRaw(context, R.raw.sample_detail);
-        Type listType = new TypeToken<Movie>() {}.getType();
-        Movie movie = new Gson().fromJson(rulesJson, listType);
-        return movie;
-    }
-
-    public static List<Video> getSampleVideos(Context context) {
-        String rulesJson = getJSONStringFromRaw(context, R.raw.video);
-        Type listType = new TypeToken<APIResponse>() {}.getType();
-        APIResponse apiResponse = new Gson().fromJson(rulesJson, listType);
-        List<Video> videos = apiResponse.getResults();
-        return videos;
-    }
-
-    public static APIResponse getSampleCast(Context context) {
-        String rulesJson = getJSONStringFromRaw(context, R.raw.sample_cast);
-        Type listType = new TypeToken<APIResponse>() {}.getType();
-        APIResponse apiResponse = new Gson().fromJson(rulesJson, listType);
-        return apiResponse;
-    }
-
-    public static List<String> getGenresByMovie(Context context,
-                                                List<Integer> genreIds) {
-        List<String> genreNames = new ArrayList<>();
-        List<Map> genres = getGenres(context);
-        for(Map map : genres) {
-            Double id = ((Number)map.get("id")).doubleValue();
-            if(genreIds.contains(id)) genreNames.add(String.valueOf(map.get("name")));
-        }
-        return genreNames;
-    }
-
-    public static Pair<String, String> getCasts(Context context) {
-        List<String> castNames = new ArrayList<>();
-        String director = null;
-        APIResponse apiResponse = getSampleCast(context);
-        List<Crew> crewList = apiResponse.getCrew();
-        List<Cast> castList = apiResponse.getCast();
-        for(Cast cast : castList) {
-            if(castNames.size() > 4) break;
-            castNames.add(cast.getName());
-        }
-        for(Crew crew : crewList) {
-            if(crew.getJob().equalsIgnoreCase("Director")) {
-                director = crew.getName();
-            }
-        }
-        return new Pair<>(TextUtils.join(",", castNames), director);
-    }
 
     private static String getJSONStringFromRaw(Context context, int rawId) {
 
@@ -166,5 +105,16 @@ public class BaseUtils {
         Type listType = new TypeToken<APIResponse>() {}.getType();
         APIResponse apiResponse = new Gson().fromJson(jsonString, listType);
         return new Pair<>(apiResponse.getCast(), apiResponse.getCrew());
+    }
+
+    public static void shareMovie(Activity activity,
+                                  String videoId) {
+        String shareText = String.format(Constants.YOUTUBE_VIDEO_PATH, videoId);
+
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+        shareIntent.setType("text/*");
+        activity.startActivity(Intent.createChooser(shareIntent, "Share via:"));
     }
 }

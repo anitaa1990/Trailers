@@ -1,6 +1,7 @@
 package com.an.trailers.adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.activity.VideoActivity;
 import com.an.trailers.model.Video;
+import com.an.trailers.utils.BaseUtils;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
@@ -22,9 +24,9 @@ import java.util.List;
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder> {
 
     List<Video> feedItems;
-    Context ctx;
+    private Activity ctx;
 
-    public VideoAdapter(Context context, List<Video> feedItems) {
+    public VideoAdapter(Activity context, List<Video> feedItems) {
         this.ctx = context;
         this.feedItems = feedItems;
     }
@@ -77,20 +79,28 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
     public class VideoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private YouTubeThumbnailView youTubeThumbnailView;
         private ImageView playBtn;
+        private ImageView shareBtn;
 
         public VideoHolder(View itemView) {
             super(itemView);
             youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail);
             youTubeThumbnailView.setOnClickListener(this);
             playBtn = (ImageView) itemView.findViewById(R.id.btnYoutube_player);
+            shareBtn = (ImageView) itemView.findViewById(R.id.share_btn);
+            shareBtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Video video =  feedItems.get(getLayoutPosition());
-            Intent intent = new Intent(ctx, VideoActivity.class);
-            intent.putExtra("video_key", video.getKey());
-            ctx.startActivity(intent);
+            Video video = feedItems.get(getLayoutPosition());
+            if(v == youTubeThumbnailView) {
+                Intent intent = new Intent(ctx, VideoActivity.class);
+                intent.putExtra("video_key", video.getKey());
+                ctx.startActivity(intent);
+
+            } else if(v == shareBtn) {
+                BaseUtils.shareMovie(ctx, video.getKey());
+            }
         }
     }
 }

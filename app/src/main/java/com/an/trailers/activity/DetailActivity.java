@@ -149,7 +149,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
     @Override
     public void onVideoResponse(List<Video> videos) {
-        VideoAdapter adapter = new VideoAdapter(getApplicationContext(), videos);
+        VideoAdapter adapter = new VideoAdapter(DetailActivity.this, videos);
         recyclerView.setAdapter(adapter);
     }
 
