@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
+
+    </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/paper_background"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/margin_large"
+                android:paddingBottom="@dimen/margin_large"
+                android:paddingLeft="@dimen/margin_xlarge"
+                android:paddingRight="@dimen/margin_xlarge">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.an.trailers.views.CustomTextView
+                        android:id="@+id/movie_title"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="The Boss Baby"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        app:font="gt_medium"/>
+
+                    <RatingBar
+                        android:layout_weight="0"
+                        android:layout_gravity="center"
+                        android:id="@+id/rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4.5"
+                        android:stepSize="0.1" />
+
+                </LinearLayout>
+
+
+
+                <com.an.trailers.views.CollectionPicker
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:id="@+id/collection_item_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cp_itemBackgroundNormal="@color/blue"
+                    app:cp_itemBackgroundPressed="@color/blue"
+                    app:cp_textPaddingLeft="3dp"
+                    app:cp_textPaddingRight="3dp"
+                    android:layout_marginTop="3dp"
+                    app:cp_textPaddingBottom="3dp"
+                    app:cp_textPaddingTop="3dp"
+                    app:cp_simplified="true" />
+
+                <com.an.trailers.views.CustomTextView
+                    android:id="@+id/movie_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="NO. 7911847"
+                    android:textColor="#333"
+                    android:textSize="15sp" />
+
+                <!--<RatingBar-->
+                    <!--android:id="@+id/rating_1"-->
+                    <!--style="?android:attr/ratingBarStyleSmall"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:numStars="5"-->
+                    <!--android:rating="4.5"-->
+                    <!--android:stepSize="0.1" />-->
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/detail_list_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+</LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,31 @@
+{
+  "id": 263115,
+  "results": [{
+    "id": "58cfc8499251415a61037481",
+    "iso_639_1": "en",
+    "iso_3166_1": "US",
+    "key": "XaE_9pfybL4",
+    "name": "Official Trailer #2 [UK]",
+    "site": "YouTube",
+    "size": 1080,
+    "type": "Trailer"
+  }, {
+    "id": "58cfc8c09251415a39034879",
+    "iso_639_1": "en",
+    "iso_3166_1": "US",
+    "key": "G0HRx_0fimc",
+    "name": "Official Trailer #1 [UK]",
+    "site": "YouTube",
+    "size": 1080,
+    "type": "Trailer"
+  }, {
+    "id": "58cfc820c3a36850fb033208",
+    "iso_639_1": "en",
+    "iso_3166_1": "US",
+    "key": "RH3OxVFvTeg",
+    "name": "Official Trailer #2",
+    "site": "YouTube",
+    "size": 1080,
+    "type": "Trailer"
+  }]
+}

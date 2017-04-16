@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="app">
+        <attr name="bottomDragVisibleHeight" format="dimension" />
+        <attr name="bototmExtraIndicatorHeight" format="dimension" />
+    </declare-styleable>
+
+    <attr name="font">
+        <enum name="circular_medium" value="1" />
+        <enum name="circular_bold" value="2" />
+        <enum name="circular_book" value="3" />
+        <enum name="gt_medium" value="4" />
+    </attr>
+
+    <declare-styleable name="CustomEditText">
+        <attr name="font" />
+    </declare-styleable>
+    <declare-styleable name="CustomButton">
+        <attr name="font" />
+    </declare-styleable>
+    <declare-styleable name="CustomTextView">
+        <attr name="font" />
+    </declare-styleable>
+
+    <declare-styleable name="CollectionPicker">
+        <attr name="cp_itemRadius" format="dimension" />
+        <attr name="cp_itemBackgroundNormal" format="color" />
+        <attr name="cp_itemBackgroundPressed" format="color" />
+        <attr name="cp_itemBackgroundPressedCorrect" format="color" />
+        <attr name="cp_addIcon" format="reference" />
+        <attr name="cp_cancelIcon" format="reference" />
+        <attr name="cp_itemMargin" format="dimension" />
+        <attr name="cp_itemTextColor" format="color"/>
+        <attr name="cp_textPaddingLeft" format="dimension" />
+        <attr name="cp_textPaddingRight" format="dimension" />
+        <attr name="cp_textPaddingTop" format="dimension" />
+        <attr name="cp_textPaddingBottom" format="dimension" />
+        <attr name="cp_simplified" format="boolean" />
+    </declare-styleable>
+
+</resources>
