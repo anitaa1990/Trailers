@@ -15,7 +15,6 @@
         android:id="@+id/btnYoutube_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/play_button_overlay"
         android:scaleType="center"
         android:layout_centerVertical="true"
         />

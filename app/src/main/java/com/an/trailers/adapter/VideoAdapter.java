@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
@@ -47,6 +48,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
             @Override
             public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
                 youTubeThumbnailView.setVisibility(View.VISIBLE);
+                holder.playBtn.setImageResource(R.drawable.play_button_overlay);
             }
         };
 
@@ -57,7 +59,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
                 youTubeThumbnailLoader.setVideo(item.getKey());
                 youTubeThumbnailView.setImageBitmap(null);
                 //new LoadImage(youTubeThumbnailView).execute(item.getSnippet().getThumbnails().getDefault().getUrl());
-
                 youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
             }
 
@@ -74,12 +75,14 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
     }
 
     public class VideoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        YouTubeThumbnailView youTubeThumbnailView;
+        private YouTubeThumbnailView youTubeThumbnailView;
+        private ImageView playBtn;
 
         public VideoHolder(View itemView) {
             super(itemView);
             youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail);
             youTubeThumbnailView.setOnClickListener(this);
+            playBtn = (ImageView) itemView.findViewById(R.id.btnYoutube_player);
         }
 
         @Override

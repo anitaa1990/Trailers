@@ -136,11 +136,6 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
         });
     }
 
-    public void bindImage(Bitmap loadedImage) {
-        bindImage(loadedImage, containerView, overlayView);
-    }
-
-
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

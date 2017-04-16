@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         positionView = findViewById(R.id.position_view);
         overlayView = findViewById(R.id.overlay);
         searchIcon = findViewById(R.id.search_icon);
-        searchIcon.setVisibility(View.VISIBLE);
+        searchIcon.setVisibility(View.GONE);
         searchIcon.setOnClickListener(this);
         searchView = (SearchView) findViewById(R.id.search);
         searchView.setVisibility(View.GONE);
@@ -84,14 +84,14 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
-                    String imageUrl = String.format(Constants.IMAGE_URL, movies.get(position).getPosterPath());
-                    Glide.with(HomeActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
-                            bindImage(loadedImage, containerView, overlayView);
-                            pos++;
-                        }
-                    });
+//                    String imageUrl = String.format(Constants.IMAGE_URL, movies.get(position).getPosterPath());
+//                    Glide.with(HomeActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
+//                        @Override
+//                        public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
+//                            bindImage(loadedImage, containerView, overlayView);
+//                            pos++;
+//                        }
+//                    });
             }
 
             @Override
@@ -113,16 +113,13 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
 
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
+        searchIcon.setVisibility(View.VISIBLE);
         this.movies.addAll(movies);
         this.totalPages = totalPages;
         this.currentPage = currentPage + 1;
         if(this.movies.size() == movies.size()) {
             handleFirstMovieResponse();
         } else handleMovieRepsonse(movies);
-    }
-
-    public void bindImage(Bitmap loadedImage) {
-        bindImage(loadedImage, containerView, overlayView);
     }
 
     private void handleFirstMovieResponse() {
