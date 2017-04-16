@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/layout_imdb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +29,7 @@
             <com.an.trailers.views.CustomTextView
                 android:layout_marginLeft="-1dp"
                 android:background="@drawable/bg_imdb"
-                android:paddingTop="@dimen/margin_xsmall"
+                android:paddingTop="@dimen/padding_xsmall"
                 android:paddingBottom="@dimen/margin_xsmall"
                 android:paddingLeft="@dimen/padding_medium"
                 android:paddingRight="@dimen/padding_medium"

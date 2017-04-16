@@ -157,6 +157,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
     @Override
     public void onMovieDetailResponse(Movie movie) {
+        this.movie = movie;
         RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
 
         String status = movie.getStatus();
@@ -188,7 +189,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
     @Override
     public void onRatingsResponse(Rating rating) {
-        if(rating != null) {
+        if(rating != null && MOVIE_STATUS_RELEASED.equalsIgnoreCase(movie.getStatus())) {
             imdbLayout.setVisibility(View.VISIBLE);
             imdbRatingTxt.setText(rating.getImdbRating());
         } else imdbLayout.setVisibility(View.GONE);
