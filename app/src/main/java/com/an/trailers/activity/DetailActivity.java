@@ -19,8 +19,11 @@ import android.widget.TextView;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
+import com.an.trailers.adapter.CreditAdapter;
 import com.an.trailers.adapter.VideoAdapter;
 import com.an.trailers.callback.RESTListener;
+import com.an.trailers.model.Cast;
+import com.an.trailers.model.Crew;
 import com.an.trailers.model.Genre;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.Video;
@@ -55,10 +58,10 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
     private LinearLayout listContainer;
     private RecyclerView recyclerView;
+    private RecyclerView castView, crewView;
     private TextView runtimeTxt;
     private TextView imdbTxt;
-    private TextView castTxt;
-    private TextView directorTxt;
+//    private TextView directorTxt;
 
     private Movie movie;
 
@@ -114,8 +117,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         TextView releaseTxt = (TextView) childView.findViewById(R.id.txt_release);
         releaseTxt.setText(BaseUtils.getFormattedDate(movie.getReleaseDate()));
 
-        castTxt = (TextView) childView.findViewById(R.id.txt_cast);
-        directorTxt = (TextView) childView.findViewById(R.id.txt_director);
+//        castTxt = (TextView) childView.findViewById(R.id.txt_cast);
+//        directorTxt = (TextView) childView.findViewById(R.id.txt_director);
 
         runtimeTxt = (TextView) childView.findViewById(R.id.txt_runtime);
         imdbTxt = (TextView) childView.findViewById(R.id.txt_imdb);
@@ -126,12 +129,27 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.smoothScrollToPosition(1);
+
+        castView = (RecyclerView) childView.findViewById(R.id.cast_list);
+        castView.setNestedScrollingEnabled(false);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        castView.setLayoutManager(linearLayoutManager1);
+        castView.smoothScrollToPosition(1);
+
+        crewView = (RecyclerView) childView.findViewById(R.id.crew_list);
+        crewView.setNestedScrollingEnabled(false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this);
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        crewView.setLayoutManager(linearLayoutManager2);
+        crewView.smoothScrollToPosition(1);
+
         listContainer.addView(childView);
     }
 
     @Override
     public void onVideoResponse(List<Video> videos) {
-        VideoAdapter adapter = new VideoAdapter(this, videos);
+        VideoAdapter adapter = new VideoAdapter(getApplicationContext(), videos);
         recyclerView.setAdapter(adapter);
     }
 
@@ -154,8 +172,10 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     }
 
     @Override
-    public void onCreditsResponse(Pair<String, String> creditPair) {
-        castTxt.setText(creditPair.first);
-        directorTxt.setText(creditPair.second);
+    public void onCreditsResponse(Pair<List<Cast>, List<Crew>> creditPair) {
+        CreditAdapter creditAdapter = new CreditAdapter(this, CREDIT_CAST, creditPair.first, null);
+        castView.setAdapter(creditAdapter);
+        CreditAdapter crewAdapter = new CreditAdapter(this, CREDIT_CREW, null, creditPair.second);
+        crewView.setAdapter(crewAdapter);
     }
 }

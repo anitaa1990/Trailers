@@ -6,6 +6,8 @@ import com.an.trailers.Constants;
 import com.an.trailers.MyVolley;
 import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.callback.RESTListener;
+import com.an.trailers.model.Cast;
+import com.an.trailers.model.Crew;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.MovieResponse;
 import com.an.trailers.model.Video;
@@ -71,7 +73,7 @@ public class VolleyService implements Constants {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Pair<String, String> castDetails = BaseUtils.getMovieCast(response);
+                        Pair<List<Cast>, List<Crew>> castDetails = BaseUtils.getMovieCast(response);
                         listener.onCreditsResponse(castDetails);
                     }
                 },

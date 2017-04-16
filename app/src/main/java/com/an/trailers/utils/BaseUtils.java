@@ -162,23 +162,9 @@ public class BaseUtils {
         return videos;
     }
 
-    public static Pair<String, String> getMovieCast(String jsonString) {
-        List<String> castNames = new ArrayList<>();
-        String director = null;
-
+    public static Pair<List<Cast>, List<Crew>> getMovieCast(String jsonString) {
         Type listType = new TypeToken<APIResponse>() {}.getType();
         APIResponse apiResponse = new Gson().fromJson(jsonString, listType);
-        List<Crew> crewList = apiResponse.getCrew();
-        List<Cast> castList = apiResponse.getCast();
-        for(Cast cast : castList) {
-            if(castNames.size() > 4) break;
-            castNames.add(cast.getName());
-        }
-        for(Crew crew : crewList) {
-            if(crew.getJob().equalsIgnoreCase("Director")) {
-                director = crew.getName();
-            }
-        }
-        return new Pair<>(TextUtils.join(",", castNames), director);
+        return new Pair<>(apiResponse.getCast(), apiResponse.getCrew());
     }
 }

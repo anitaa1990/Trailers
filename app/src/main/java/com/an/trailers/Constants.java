@@ -14,6 +14,9 @@ public interface Constants {
     String METHOD_CAST = "movie_cast";
     String METHOD_SEARCH = "movie_search";
 
+    String CREDIT_CAST = "cast";
+    String CREDIT_CREW = "crew";
+
     String BASE_URL = "https://api.themoviedb.org/3/";
 
     String MOVIES_LIST_PATH = "movie/upcoming?api_key=%s&language=en-US&page=%s";
