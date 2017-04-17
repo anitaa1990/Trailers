@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#292631">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:id="@+id/layout_first"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+        </FrameLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="158dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/movie_detail_view"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_below="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_below="@+id/list"
+                android:id="@+id/layout_second"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+                <View
+                    android:layout_weight="0."
+                    android:layout_marginLeft="@dimen/margin_xxxxlarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+                <View
+                    android:layout_marginLeft="@dimen/padding_megalarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+                <View
+                    android:layout_marginLeft="@dimen/padding_megalarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+                <View
+                    android:layout_marginLeft="@dimen/padding_megalarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+                <View
+                    android:layout_marginLeft="@dimen/padding_megalarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+                <View
+                    android:layout_marginLeft="@dimen/padding_megalarge"
+                    android:layout_marginRight="@dimen/padding_megalarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+                <View
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/padding_megalarge"
+                    android:background="@drawable/circle"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"/>
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="20dp"
+                android:id="@+id/movie_detail_card"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardPreventCornerOverlap="false">
+
+
+                <LinearLayout
+                    android:paddingTop="@dimen/padding_large"
+                    android:paddingBottom="@dimen/padding_large"
+                    android:paddingLeft="@dimen/padding_medium"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.an.trailers.views.CustomTextView
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:paddingBottom="@dimen/padding"
+                        android:id="@+id/movie_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="The Boss Baby"
+                        android:textColor="#292631"
+                        android:textSize="17sp"
+                        app:font="gt_medium"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/layout_imdb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:layout_marginRight="@dimen/margin"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:paddingRight="@dimen/padding_small"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="@dimen/padding_small"
+                            android:background="@drawable/bg_imdb"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_imdb_2"
+                                android:adjustViewBounds="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <com.an.trailers.views.CustomTextView
+                                android:drawableLeft="@drawable/ic_star"
+                                android:drawablePadding="@dimen/padding_small"
+                                android:paddingTop="2dp"
+                                android:textSize="11dp"
+                                android:text="3.2"
+                                android:id="@+id/imdbRating"
+                                android:textColor="@android:color/white"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                app:font="gt_medium"/>
+
+
+                        </LinearLayout>
+
+                        <com.an.trailers.views.CollectionPicker
+                            android:paddingLeft="@dimen/margin_xlarge"
+                            android:layout_gravity="left"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/collection_item_picker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cp_itemBackgroundNormal="@color/blue"
+                            app:cp_itemBackgroundPressed="@color/blue"
+                            app:cp_textPaddingLeft="3dp"
+                            app:cp_textPaddingRight="3dp"
+                            android:layout_marginTop="3dp"
+                            app:cp_textPaddingBottom="@dimen/padding_xsmall"
+                            app:cp_textPaddingTop="@dimen/padding_small"
+                            app:cp_simplified="true" />
+
+
+                    </LinearLayout>
+
+
+                    <com.an.trailers.views.CustomTextView
+                        android:paddingRight="@dimen/margin_xlarge"
+                        android:id="@+id/movie_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin"
+                        android:layout_marginBottom="@dimen/margin_large"
+                        android:text="NO. 7911847"
+                        android:lineSpacingExtra="5dp"
+                        android:textColor="#68666e"
+                        android:textSize="13sp"/>
+
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin"
+                        android:paddingBottom="@dimen/margin_large"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.an.trailers.views.CollectionPicker
+                            android:layout_gravity="left"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/movie_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cp_itemBackgroundNormal="@color/light_blue"
+                            app:cp_itemBackgroundPressed="@color/light_blue"
+                            app:cp_textPaddingLeft="3dp"
+                            app:cp_textPaddingRight="3dp"
+                            app:cp_textPaddingBottom="@dimen/margin_xsmall"
+                            app:cp_textPaddingTop="@dimen/padding_small"
+                            app:cp_simplified="true" />
+
+
+                        <com.an.trailers.views.CustomTextView
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:textColor="#7f7e83"
+                            android:textSize="12dp"
+                            android:layout_marginLeft="@dimen/margin_large"
+                            android:orientation="horizontal"
+                            android:id="@+id/txt_runtime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:font="gt_medium"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+              </android.support.v7.widget.CardView>
+
+            <android.support.design.widget.FloatingActionButton
+                app:fabSize="mini"
+                app:paddingStart="@dimen/padding_small"
+                android:id="@+id/android_floating_action_button_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_xxxlarge"
+                android:clickable="true"
+                android:src="@drawable/ic_heart"
+                app:backgroundTint="#f64959"
+                app:elevation="2dp"
+                android:layout_gravity="right"/>
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin"
+            android:layout_below="@+id/movie_detail_view"
+            android:layout_gravity="bottom"
+            android:id="@+id/detail_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+
+    </RelativeLayout>
+
+    </FrameLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
+
+
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/android_floating_action_button_fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@drawable/ic_heart"-->
+        <!--app:backgroundTint="#f64959"-->
+        <!--app:elevation="4dp"-->
+        <!--app:layout_anchor="@id/layout_first"-->
+        <!--app:layout_anchorGravity="bottom|right|end" />-->
+
+
+<!--<android.support.v4.widget.NestedScrollView-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#292631">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+
+        <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="200dp">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/image"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="200dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:scaleType="centerCrop" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/paper_background"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingTop="@dimen/margin_large"-->
+                <!--android:paddingBottom="@dimen/margin_large">-->
+
+                <!--<LinearLayout-->
+                    <!--android:paddingLeft="@dimen/margin_xlarge"-->
+                    <!--android:paddingRight="@dimen/margin_xlarge"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<com.an.trailers.views.CustomTextView-->
+                        <!--android:id="@+id/movie_title"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:ellipsize="end"-->
+                        <!--android:maxLines="1"-->
+                        <!--android:text="The Boss Baby"-->
+                        <!--android:textColor="@android:color/black"-->
+                        <!--android:textSize="17sp"-->
+                        <!--app:font="gt_medium"/>-->
+
+                    <!--<RatingBar-->
+                        <!--android:isIndicator="true"-->
+                        <!--android:layout_weight="0"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:id="@+id/rating"-->
+                        <!--style= "@style/CustomRatingBar"-->
+                        <!--android:background="@null"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:numStars="5"-->
+                        <!--android:rating="4.5"-->
+                        <!--android:stepSize="0.1"/>-->
+
+                <!--</LinearLayout>-->
+
+
+
+                <!--<com.an.trailers.views.CollectionPicker-->
+                    <!--android:paddingLeft="@dimen/margin_xlarge"-->
+                    <!--android:layout_gravity="left"-->
+                    <!--android:gravity="left"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:id="@+id/collection_item_picker"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:cp_itemBackgroundNormal="@color/blue"-->
+                    <!--app:cp_itemBackgroundPressed="@color/blue"-->
+                    <!--app:cp_textPaddingLeft="3dp"-->
+                    <!--app:cp_textPaddingRight="3dp"-->
+                    <!--android:layout_marginTop="3dp"-->
+                    <!--app:cp_textPaddingBottom="3dp"-->
+                    <!--app:cp_textPaddingTop="3dp"-->
+                    <!--app:cp_simplified="true" />-->
+
+                <!--<com.an.trailers.views.CustomTextView-->
+                    <!--android:paddingLeft="@dimen/margin_xlarge"-->
+                    <!--android:paddingRight="@dimen/margin_xlarge"-->
+                    <!--android:id="@+id/movie_desc"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_small"-->
+                    <!--android:text="NO. 7911847"-->
+                    <!--android:textColor="#333"-->
+                    <!--android:textSize="15sp" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:paddingLeft="@dimen/margin_xlarge"-->
+                    <!--android:layout_marginTop="@dimen/margin_small"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<com.an.trailers.views.CollectionPicker-->
+                        <!--android:layout_gravity="left"-->
+                        <!--android:gravity="left"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:id="@+id/movie_status"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--app:cp_itemBackgroundNormal="@color/green"-->
+                        <!--app:cp_itemBackgroundPressed="@color/green"-->
+                        <!--app:cp_textPaddingLeft="3dp"-->
+                        <!--app:cp_textPaddingRight="3dp"-->
+                        <!--app:cp_textPaddingBottom="3dp"-->
+                        <!--app:cp_textPaddingTop="4dp"-->
+                        <!--app:cp_simplified="true" />-->
+
+
+                    <!--<com.an.trailers.views.CollectionPicker-->
+                        <!--android:layout_marginRight="@dimen/margin_large"-->
+                        <!--android:layout_gravity="left"-->
+                        <!--android:gravity="left"-->
+                        <!--android:layout_marginLeft="@dimen/margin_large"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:id="@+id/txt_runtime"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--app:cp_itemBackgroundNormal="@color/yellow"-->
+                        <!--app:cp_itemBackgroundPressed="@color/yellow"-->
+                        <!--app:cp_textPaddingLeft="3dp"-->
+                        <!--app:cp_textPaddingRight="3dp"-->
+                        <!--app:cp_textPaddingBottom="3dp"-->
+                        <!--app:cp_textPaddingTop="4dp"-->
+                        <!--app:cp_simplified="true"/>-->
+
+
+                    <!--<include  layout="@layout/ratings"/>-->
+
+                <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/detail_list_container"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical" />-->
+
+        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+<!--</android.support.v4.widget.NestedScrollView>-->

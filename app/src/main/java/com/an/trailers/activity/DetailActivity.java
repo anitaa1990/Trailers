@@ -61,8 +61,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     private LinearLayout listContainer;
     private RecyclerView recyclerView;
     private RecyclerView castView, crewView;
-    private CollectionPicker runtimeTxt;
-    private TextView imdbTxt;
+    private TextView runtimeTxt;
+//    private TextView imdbTxt;
     private TextView imdbRatingTxt;
 
     private View imdbLayout;
@@ -72,16 +72,23 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.test);
 
         imageView = (ImageView) findViewById(R.id.image);
+        recyclerView = (RecyclerView) findViewById(R.id.list);
+        recyclerView.setNestedScrollingEnabled(false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.smoothScrollToPosition(1);
+
         movieTitle = (TextView) findViewById(R.id.movie_title);
         movieDesc = (TextView) findViewById(R.id.movie_desc);
-        ratingBar = (RatingBar) findViewById(R.id.rating);
+//        ratingBar = (RatingBar) findViewById(R.id.rating);
         listContainer = (LinearLayout) findViewById(R.id.detail_list_container);
         picker = (CollectionPicker) findViewById(R.id.collection_item_picker);
         movieStatusTxt = (CollectionPicker) findViewById(R.id.movie_status);
-        runtimeTxt = (CollectionPicker) findViewById(R.id.txt_runtime);
+        runtimeTxt = (TextView) findViewById(R.id.txt_runtime);
         imdbLayout = findViewById(R.id.layout_imdb);
         imdbRatingTxt = (TextView) findViewById(R.id.imdbRating);
 
@@ -95,10 +102,10 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         movie = (Movie) getIntent().getSerializableExtra(EXTRA_MAP);
         movieTitle.setText(movie.getTitle());
         movieDesc.setText(movie.getOverview());
-        if(movie.getVoteAverage() != null) {
-            Float value = (movie.getVoteAverage() / 10) * 5;
-            ratingBar.setRating(value);
-        }
+//        if(movie.getVoteAverage() != null) {
+//            Float value = (movie.getVoteAverage() / 10) * 5;
+//            ratingBar.setRating(value);
+//        }
 
         String imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
         Picasso.with(this).load(imageUrl).into(imageView);
@@ -106,13 +113,13 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         ViewCompat.setTransitionName(imageView, IMAGE_TRANSITION_NAME);
         ViewCompat.setTransitionName(movieTitle, TITLE_TRANSITION_NAME);
         ViewCompat.setTransitionName(movieDesc, DESC_TRANSITION_NAME);
-        ViewCompat.setTransitionName(ratingBar, RATINGBAR_TRANSITION_NAME);
+//        ViewCompat.setTransitionName(ratingBar, RATINGBAR_TRANSITION_NAME);
 
 
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE, String.valueOf(movie.getId()), this));
         RESTExecutorService.submit(new VolleyTask(this, METHOD_VIDEO, String.valueOf(movie.getId()), this));
-        RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
-        dealListView();
+//        RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
+//        dealListView();
     }
 
     private void dealListView() {
@@ -123,14 +130,14 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         TextView releaseTxt = (TextView) childView.findViewById(R.id.txt_release);
         releaseTxt.setText(BaseUtils.getFormattedDate(movie.getReleaseDate()));
 
-        imdbTxt = (TextView) childView.findViewById(R.id.txt_imdb);
+//        imdbTxt = (TextView) childView.findViewById(R.id.txt_imdb);
 
-        recyclerView = (RecyclerView) childView.findViewById(R.id.list);
-        recyclerView.setNestedScrollingEnabled(false);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.smoothScrollToPosition(1);
+//        recyclerView = (RecyclerView) childView.findViewById(R.id.list);
+//        recyclerView.setNestedScrollingEnabled(false);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.smoothScrollToPosition(1);
 
         castView = (RecyclerView) childView.findViewById(R.id.cast_list);
         castView.setNestedScrollingEnabled(false);
@@ -161,15 +168,11 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
 
         String status = movie.getStatus();
-        int colorCode = status.equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? getResources().getColor(R.color.green) : getResources().getColor(R.color.orange);
-        movieStatusTxt.setSelector(colorCode);
         movieStatusTxt.setItems(Arrays.asList(new String[]{ status }));
 
-        runtimeTxt.setTextColor(android.R.color.black);
         String runTxt = status.equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? String.format("%s mins", String.valueOf(movie.getRuntime())) :
                 BaseUtils.getFormattedDate(movie.getReleaseDate());
-        runtimeTxt.setItems(Arrays.asList(new String[] { runTxt }));
-        imdbTxt.setText(String.format(Constants.IMDB_MOVIE_LINK, movie.getImdbId()));
+        runtimeTxt.setText(runTxt);
 
         List<Genre> genres = movie.getGenres();
         List<String> genreNames = new ArrayList<>();

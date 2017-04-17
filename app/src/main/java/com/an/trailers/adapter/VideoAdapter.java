@@ -50,7 +50,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
             @Override
             public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
                 youTubeThumbnailView.setVisibility(View.VISIBLE);
-                holder.playBtn.setImageResource(R.drawable.play_button_overlay);
+                holder.playBtn.setImageResource(R.drawable.ic_play);
             }
         };
 

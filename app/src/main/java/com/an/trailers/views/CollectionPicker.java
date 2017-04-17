@@ -3,6 +3,7 @@ package com.an.trailers.views;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
@@ -46,6 +47,7 @@ public class CollectionPicker extends LinearLayout {
     private int mTextColor = android.R.color.white;
     private int mRadius = 5;
     private boolean mInitialized;
+    private Typeface tf;
 
     private boolean simplifiedTags;
 
@@ -97,6 +99,7 @@ public class CollectionPicker extends LinearLayout {
                 .getColor(R.styleable.CollectionPicker_cp_itemTextColor, mTextColor);
         this.simplifiedTags = typeArray
                 .getBoolean(R.styleable.CollectionPicker_cp_simplified, false);
+        this.tf = Typeface.createFromAsset(this.getContext().getAssets(), "fonts/gt_medium.otf");
         typeArray.recycle();
 
         setOrientation(VERTICAL);
@@ -150,6 +153,9 @@ public class CollectionPicker extends LinearLayout {
 
 
             TextView itemTextView = (TextView) itemLayout.findViewById(R.id.item_text);
+            itemTextView.setAllCaps(true);
+            itemTextView.setTypeface(tf);
+            itemTextView.setTextSize(10);
             itemTextView.setText(item);
             itemTextView.setPadding(textPaddingLeft, textPaddingTop, textPaddingRight,
                     texPaddingBottom);
@@ -160,11 +166,11 @@ public class CollectionPicker extends LinearLayout {
 
             itemWidth += BaseUtils.dpToPx(getContext(), 30) + textPaddingLeft
                     + textPaddingRight;
-
-            if (mWidth <= (itemWidth + totalPadding)) {
+            if (mWidth <= (itemWidth + totalPadding + BaseUtils
+                    .dpToPx(this.getContext(), LAYOUT_WIDTH_OFFSET))) {
                 totalPadding = getPaddingLeft() + getPaddingRight();
                 indexFrontView = i;
-                addItemView(itemLayout, itemParams, true, i);
+                addItemView(itemLayout, itemParams, false, i);
             } else {
                 if (i != indexFrontView) {
                     itemParams.rightMargin = mItemMargin;
@@ -194,7 +200,8 @@ public class CollectionPicker extends LinearLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
         itemParams.bottomMargin = mItemMargin / 2;
-        itemParams.topMargin = mItemMargin / 2;
+        itemParams.topMargin = 0;
+        itemParams.rightMargin = mItemMargin;
 
         return itemParams;
     }
