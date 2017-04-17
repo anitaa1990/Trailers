@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.an.trailers"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -35,4 +35,5 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.sackcentury:shinebutton:0.1.7'
 }
