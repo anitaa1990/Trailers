@@ -57,6 +57,7 @@
                         app:font="gt_medium"/>
 
                     <RatingBar
+                        android:isIndicator="true"
                         android:layout_weight="0"
                         android:layout_gravity="center"
                         android:id="@+id/rating"
