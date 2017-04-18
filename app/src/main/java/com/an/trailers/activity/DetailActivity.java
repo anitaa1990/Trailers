@@ -1,5 +1,6 @@
 package com.an.trailers.activity;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
 import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.CollectionPicker;
+import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class DetailActivity extends FragmentActivity implements RESTListener, Constants {
+public class DetailActivity extends FragmentActivity implements RESTListener, View.OnClickListener, Constants {
 
     public static final String EXTRA_IMAGE_URL = "detailImageUrl";
     public static final String EXTRA_MAP = "map";
@@ -74,6 +76,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     private View imdbLayout;
     private Movie movie;
 
+    private View favView;
+    private ShineButton shineButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,13 +94,15 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
         movieTitle = (TextView) findViewById(R.id.movie_title);
         movieDesc = (TextView) findViewById(R.id.movie_desc);
-//        ratingBar = (RatingBar) findViewById(R.id.rating);
         listContainer = (LinearLayout) findViewById(R.id.detail_list_container);
         picker = (CollectionPicker) findViewById(R.id.collection_item_picker);
         movieStatusTxt = (CollectionPicker) findViewById(R.id.movie_status);
         runtimeTxt = (TextView) findViewById(R.id.txt_runtime);
         imdbLayout = findViewById(R.id.layout_imdb);
         imdbRatingTxt = (TextView) findViewById(R.id.imdbRating);
+        favView = findViewById(R.id.fav_view);
+        shineButton = (ShineButton) findViewById(R.id.po_image1);
+        shineButton.setOnClickListener(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -223,4 +230,12 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
             } else similarMoviesTitle.setVisibility(View.VISIBLE);
         }
     };
+
+    @Override
+    public void onClick(View view) {
+        if(view == shineButton) {
+            if(shineButton.isChecked()) favView.setBackgroundColor(Color.TRANSPARENT);
+            else favView.setBackgroundResource(R.drawable.ic_fav);
+        }
+    }
 }

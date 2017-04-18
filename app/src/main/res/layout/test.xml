@@ -117,7 +117,7 @@
                 android:layout_marginRight="@dimen/margin_large"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
+                app:cardElevation="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardPreventCornerOverlap="false">
@@ -258,21 +258,39 @@
 
                 </LinearLayout>
 
-
               </android.support.v7.widget.CardView>
 
-            <android.support.design.widget.FloatingActionButton
-                app:fabSize="mini"
-                app:paddingStart="@dimen/padding_small"
-                android:id="@+id/android_floating_action_button_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_xxxlarge"
-                android:clickable="true"
-                android:src="@drawable/ic_heart"
-                app:backgroundTint="#f64959"
-                app:elevation="10dp"
-                android:layout_gravity="right"/>
+           <LinearLayout
+               android:id="@+id/fav_view"
+               android:background="@drawable/ic_fav"
+               android:layout_gravity="right"
+               android:layout_marginRight="@dimen/margin_xxxlarge"
+               android:layout_width="@dimen/design_fab_size_mini"
+               android:layout_height="@dimen/design_fab_size_mini">
+
+               <com.sackcentury.shinebuttonlib.ShineButton
+                   android:layout_marginLeft="@dimen/margin"
+                   app:backgroundTint="#f64959"
+                   android:layout_gravity="center"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:layout_centerInParent="true"
+                   android:src="@android:color/white"
+                   android:id="@+id/po_image1"
+                   app:btn_color="@android:color/white"
+                   app:btn_fill_color="#FF6666"
+                   app:allow_random_color="false"
+                   app:enable_flashing="false"
+                   app:big_shine_color="#f64959"
+                   app:click_animation_duration="200"
+                   app:shine_animation_duration="1500"
+                   app:shine_turn_angle="10"
+                   app:small_shine_offset_angle="20"
+                   app:small_shine_color="#f64959"
+                   app:shine_count="10"
+                   app:siShape="@raw/ic_heart"/>
+
+           </LinearLayout>
 
         </FrameLayout>
 
