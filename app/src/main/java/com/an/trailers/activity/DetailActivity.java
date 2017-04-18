@@ -40,6 +40,8 @@ import com.an.trailers.views.CollectionPicker;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
+import net.cachapa.expandablelayout.ExpandableLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +60,6 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
     private TextView movieTitle, movieDesc;
     private ImageView imageView;
-    private RatingBar ratingBar;
 
     private CollectionPicker picker;
     private CollectionPicker movieStatusTxt;
@@ -78,6 +79,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
     private View favView;
     private ShineButton shineButton;
+
+    private TextView moreBtn;
+    private ExpandableLayout expandableLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +107,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         favView = findViewById(R.id.fav_view);
         shineButton = (ShineButton) findViewById(R.id.po_image1);
         shineButton.setOnClickListener(this);
+        moreBtn = (TextView) findViewById(R.id.expand_button);
+        moreBtn.setOnClickListener(this);
+        expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout_0);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -127,11 +134,12 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
             @Override
             public void run() {
                 loadSimilarMovies();
+                dealListView();
             }
         });
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE, String.valueOf(movie.getId()), this));
         RESTExecutorService.submit(new VolleyTask(this, METHOD_VIDEO, String.valueOf(movie.getId()), this));
-//        RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
+        RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
 
     }
@@ -153,28 +161,19 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
     }
 
     private void dealListView() {
-
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View childView = layoutInflater.inflate(R.layout.detail_list_item, null);
-
-        TextView releaseTxt = (TextView) childView.findViewById(R.id.txt_release);
-        releaseTxt.setText(BaseUtils.getFormattedDate(movie.getReleaseDate()));
-
-        castView = (RecyclerView) childView.findViewById(R.id.cast_list);
+        castView = (RecyclerView) findViewById(R.id.cast_list);
         castView.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         castView.setLayoutManager(linearLayoutManager1);
         castView.smoothScrollToPosition(1);
 
-        crewView = (RecyclerView) childView.findViewById(R.id.crew_list);
+        crewView = (RecyclerView) findViewById(R.id.crew_list);
         crewView.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this);
         linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         crewView.setLayoutManager(linearLayoutManager2);
         crewView.smoothScrollToPosition(1);
-
-        listContainer.addView(childView);
     }
 
     @Override
@@ -236,6 +235,15 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         if(view == shineButton) {
             if(shineButton.isChecked()) favView.setBackgroundColor(Color.TRANSPARENT);
             else favView.setBackgroundResource(R.drawable.ic_fav);
+
+        } else if(view == moreBtn) {
+            if (expandableLayout.isExpanded()) {
+                moreBtn.setText(getString(R.string.read_more));
+                expandableLayout.collapse();
+            } else {
+                moreBtn.setText(getString(R.string.read_less));
+                expandableLayout.expand();
+            }
         }
     }
 }

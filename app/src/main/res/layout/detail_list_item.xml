@@ -6,6 +6,14 @@
     android:orientation="vertical">
 
 
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_layout_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:el_duration="1000"
+        app:el_expanded="false">
+
+
     <!--<android.support.v7.widget.RecyclerView-->
         <!--android:layout_marginTop="@dimen/margin"-->
         <!--android:layout_marginLeft="@dimen/margin"-->
@@ -40,8 +48,9 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Cast"
+            android:textAllCaps="true"
             android:textColor="#111"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:font="gt_medium" />
 
         <View
@@ -78,8 +87,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Crew"
+                android:textAllCaps="true"
                 android:textColor="#111"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:font="gt_medium" />
 
             <View
@@ -105,77 +115,77 @@
             android:background="#cccccc" />
 
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="@dimen/margin_small"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
 
-        <com.an.trailers.views.CustomTextView
-            android:layout_gravity="top"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="left"
-            android:text="Release Date: "
-            android:textColor="#111"
-            android:textSize="16sp"
-            app:font="circular_medium" />
+        <!--<com.an.trailers.views.CustomTextView-->
+            <!--android:layout_gravity="top"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="2"-->
+            <!--android:gravity="left"-->
+            <!--android:text="Release Date: "-->
+            <!--android:textColor="#111"-->
+            <!--android:textSize="16sp"-->
+            <!--app:font="circular_medium" />-->
 
-        <com.an.trailers.views.CustomTextView
-            android:id="@+id/txt_release"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_weight="4.2"
-            android:gravity="left"
-            android:textColor="#7c7d88"
-            android:textSize="16sp"
-            app:font="circular_book"/>
+        <!--<com.an.trailers.views.CustomTextView-->
+            <!--android:id="@+id/txt_release"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="@dimen/margin_small"-->
+            <!--android:layout_weight="4.2"-->
+            <!--android:gravity="left"-->
+            <!--android:textColor="#7c7d88"-->
+            <!--android:textSize="16sp"-->
+            <!--app:font="circular_book"/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_marginTop="@dimen/margin_small"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
 
-            <com.an.trailers.views.CustomTextView
-                android:layout_gravity="top"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="left"
-                android:text="IMDB: "
-                android:textColor="#111"
-                android:textSize="16sp"
-                app:font="circular_medium" />
+            <!--<com.an.trailers.views.CustomTextView-->
+                <!--android:layout_gravity="top"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="2"-->
+                <!--android:gravity="left"-->
+                <!--android:text="IMDB: "-->
+                <!--android:textColor="#111"-->
+                <!--android:textSize="16sp"-->
+                <!--app:font="circular_medium" />-->
 
-            <com.an.trailers.views.CustomTextView
-                android:id="@+id/txt_imdb"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_weight="10"
-                android:gravity="left"
-                android:autoLink="web"
-                android:textColor="#aaa"
-                android:textSize="16sp"
-                app:font="circular_book"/>
+            <!--<com.an.trailers.views.CustomTextView-->
+                <!--android:id="@+id/txt_imdb"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="@dimen/margin_small"-->
+                <!--android:layout_weight="10"-->
+                <!--android:gravity="left"-->
+                <!--android:autoLink="web"-->
+                <!--android:textColor="#aaa"-->
+                <!--android:textSize="16sp"-->
+                <!--app:font="circular_book"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="@dimen/margin"
-        android:layout_marginBottom="@dimen/margin"
-        android:background="#cccccc" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:layout_marginTop="@dimen/margin"-->
+        <!--android:layout_marginBottom="@dimen/margin"-->
+        <!--android:background="#cccccc" />-->
 
-    </LinearLayout>
+    </LinearLayout></net.cachapa.expandablelayout.ExpandableLayout>
 
 </LinearLayout>
