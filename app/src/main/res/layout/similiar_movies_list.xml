@@ -13,6 +13,8 @@
             android:layout_height="wrap_content">
 
         <com.an.trailers.views.CustomTextView
+            android:visibility="gone"
+            android:id="@+id/movie_similar_title"
             android:layout_marginBottom="@dimen/margin_medium"
             android:layout_gravity="top"
             android:layout_width="match_parent"

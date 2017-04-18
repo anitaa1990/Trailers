@@ -65,6 +65,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
     private RecyclerView recyclerView;
 
     private RecyclerView similarMoviesView;
+    private TextView similarMoviesTitle;
 
     private RecyclerView castView, crewView;
     private TextView runtimeTxt;
@@ -138,6 +139,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         similarMoviesLayout.setOrientation(LinearLayoutManager.HORIZONTAL);
         similarMoviesView.setLayoutManager(similarMoviesLayout);
         similarMoviesView.smoothScrollToPosition(1);
+
+        similarMoviesTitle = (TextView) childView.findViewById(R.id.movie_similar_title);
 
         listContainer.addView(childView);
     }
@@ -215,6 +218,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
             MovieAdapter movieAdapter = new MovieAdapter(DetailActivity.this, movies);
             similarMoviesView.setAdapter(movieAdapter);
+            if(movies == null || movies.isEmpty()) {
+                similarMoviesTitle.setVisibility(View.GONE);
+            } else similarMoviesTitle.setVisibility(View.VISIBLE);
         }
     };
 }
