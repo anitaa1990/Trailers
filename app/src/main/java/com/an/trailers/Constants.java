@@ -18,6 +18,7 @@ public interface Constants {
     String METHOD_CAST = "movie_cast";
     String METHOD_SEARCH = "movie_search";
     String METHOD_RATING = "movie_rating";
+    String METHOD_MOVIE_SIMILAR = "movie_similar";
 
     String CREDIT_CAST = "cast";
     String CREDIT_CREW = "crew";
@@ -35,6 +36,7 @@ public interface Constants {
     String MOVIE_VIDEOS_PATH = "movie/%s/videos?api_key=%s";
     String MOVIE_CAST_PATH = "movie/%s/credits?api_key=%s";
     String MOVIE_SEARCH_PATH = "search/movie?api_key=%s&query=%s";
+    String MOVIE_SIMILAR_PATH = "movie/%s/similar?api_key=%s&page=1";
     String MOVIE_RATING_PATH = "http://www.omdbapi.com/?i=%s&tomatoes=true&r=json";
 
     List<String> genresList = Arrays.asList("#febf9b", "#f47f87", "#6ac68d", "#fbe0a5");

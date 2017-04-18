@@ -49,6 +49,8 @@ public class VolleyTask implements Runnable, Constants {
             VolleyService.getInstance().getSearchList(context, pageId, movieResponseListener);
         } else if(METHOD_RATING.equalsIgnoreCase(method)) {
             VolleyService.getInstance().getRatingForMovie(context, movieId, listener);
+        } else if(METHOD_MOVIE_SIMILAR.equalsIgnoreCase(method)) {
+            VolleyService.getInstance().getSimilarMovies(context, pageId, movieResponseListener);
         }
     }
 }

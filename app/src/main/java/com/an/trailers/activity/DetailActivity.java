@@ -2,9 +2,11 @@ package com.an.trailers.activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
@@ -20,7 +22,9 @@ import android.widget.TextView;
 import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.adapter.CreditAdapter;
+import com.an.trailers.adapter.MovieAdapter;
 import com.an.trailers.adapter.VideoAdapter;
+import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.callback.RESTListener;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
@@ -37,7 +41,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 public class DetailActivity extends FragmentActivity implements RESTListener, Constants {
@@ -60,13 +63,14 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
     private LinearLayout listContainer;
     private RecyclerView recyclerView;
+
+    private RecyclerView similarMoviesView;
+
     private RecyclerView castView, crewView;
     private TextView runtimeTxt;
-//    private TextView imdbTxt;
     private TextView imdbRatingTxt;
 
     private View imdbLayout;
-
     private Movie movie;
 
     @Override
@@ -102,10 +106,6 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         movie = (Movie) getIntent().getSerializableExtra(EXTRA_MAP);
         movieTitle.setText(movie.getTitle());
         movieDesc.setText(movie.getOverview());
-//        if(movie.getVoteAverage() != null) {
-//            Float value = (movie.getVoteAverage() / 10) * 5;
-//            ratingBar.setRating(value);
-//        }
 
         String imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
         Picasso.with(this).load(imageUrl).into(imageView);
@@ -115,11 +115,31 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         ViewCompat.setTransitionName(movieDesc, DESC_TRANSITION_NAME);
 //        ViewCompat.setTransitionName(ratingBar, RATINGBAR_TRANSITION_NAME);
 
-
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                loadSimilarMovies();
+            }
+        });
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE, String.valueOf(movie.getId()), this));
         RESTExecutorService.submit(new VolleyTask(this, METHOD_VIDEO, String.valueOf(movie.getId()), this));
 //        RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
-//        dealListView();
+        RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
+
+    }
+
+    private void loadSimilarMovies() {
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailActivity.this);
+        View childView = layoutInflater.inflate(R.layout.similiar_movies_list, null);
+
+        similarMoviesView = (RecyclerView) childView.findViewById(R.id.movies_list);
+        similarMoviesView.setNestedScrollingEnabled(false);
+        LinearLayoutManager similarMoviesLayout = new LinearLayoutManager(DetailActivity.this);
+        similarMoviesLayout.setOrientation(LinearLayoutManager.HORIZONTAL);
+        similarMoviesView.setLayoutManager(similarMoviesLayout);
+        similarMoviesView.smoothScrollToPosition(1);
+
+        listContainer.addView(childView);
     }
 
     private void dealListView() {
@@ -129,15 +149,6 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
 
         TextView releaseTxt = (TextView) childView.findViewById(R.id.txt_release);
         releaseTxt.setText(BaseUtils.getFormattedDate(movie.getReleaseDate()));
-
-//        imdbTxt = (TextView) childView.findViewById(R.id.txt_imdb);
-
-//        recyclerView = (RecyclerView) childView.findViewById(R.id.list);
-//        recyclerView.setNestedScrollingEnabled(false);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.smoothScrollToPosition(1);
 
         castView = (RecyclerView) childView.findViewById(R.id.cast_list);
         castView.setNestedScrollingEnabled(false);
@@ -198,4 +209,12 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
             imdbRatingTxt.setText(rating.getImdbRating());
         } else imdbLayout.setVisibility(View.GONE);
     }
+
+    private MovieResponseListener movieResponseListener = new MovieResponseListener() {
+        @Override
+        public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
+            MovieAdapter movieAdapter = new MovieAdapter(DetailActivity.this, movies);
+            similarMoviesView.setAdapter(movieAdapter);
+        }
+    };
 }

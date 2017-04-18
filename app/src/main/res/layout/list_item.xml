@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/movie_detail_card"
+        android:layout_marginRight="@dimen/margin_large"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardPreventCornerOverlap="false">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/item_img"
+        android:adjustViewBounds="true"
+        android:layout_width="145dp"
+        android:layout_height="185dp" />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
