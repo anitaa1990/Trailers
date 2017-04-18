@@ -32,12 +32,12 @@
         </FrameLayout>
 
     <RelativeLayout
-        android:layout_marginTop="158dp"
+        android:layout_marginTop="145dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.RecyclerView
-            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_xsmall"
             android:layout_marginLeft="@dimen/margin_large"
             android:id="@+id/list"
             android:layout_width="match_parent"
@@ -140,7 +140,6 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="The Boss Baby"
                         android:textColor="#292631"
                         android:textSize="17sp"
                         app:font="gt_medium"/>
@@ -176,7 +175,6 @@
                                 android:drawablePadding="@dimen/padding_small"
                                 android:paddingTop="2dp"
                                 android:textSize="11dp"
-                                android:text="3.2"
                                 android:id="@+id/imdbRating"
                                 android:textColor="@android:color/white"
                                 android:layout_width="wrap_content"
@@ -216,7 +214,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin"
                         android:layout_marginBottom="@dimen/margin_large"
-                        android:text="NO. 7911847"
                         android:lineSpacingExtra="5dp"
                         android:textColor="#68666e"
                         android:textSize="13sp"/>
@@ -224,7 +221,7 @@
 
                     <LinearLayout
                         android:layout_marginTop="@dimen/margin"
-                        android:paddingBottom="@dimen/margin_large"
+                        android:paddingBottom="@dimen/margin"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -274,7 +271,7 @@
                 android:clickable="true"
                 android:src="@drawable/ic_heart"
                 app:backgroundTint="#f64959"
-                app:elevation="2dp"
+                app:elevation="10dp"
                 android:layout_gravity="right"/>
 
         </FrameLayout>

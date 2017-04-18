@@ -50,6 +50,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
             @Override
             public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
                 youTubeThumbnailView.setVisibility(View.VISIBLE);
+                holder.vidFrame.setVisibility(View.VISIBLE);
                 holder.playBtn.setImageResource(R.drawable.ic_play);
             }
         };
@@ -78,6 +79,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
 
     public class VideoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private YouTubeThumbnailView youTubeThumbnailView;
+        private View vidFrame;
         private ImageView playBtn;
         private ImageView shareBtn;
 
@@ -85,6 +87,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
             super(itemView);
             youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail);
             youTubeThumbnailView.setOnClickListener(this);
+            vidFrame = itemView.findViewById(R.id.vid_frame);
             playBtn = (ImageView) itemView.findViewById(R.id.btnYoutube_player);
             shareBtn = (ImageView) itemView.findViewById(R.id.share_btn);
             shareBtn.setOnClickListener(this);

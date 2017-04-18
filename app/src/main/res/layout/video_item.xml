@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginRight="@dimen/margin_large">
+    android:layout_marginRight="@dimen/margin_xsmall">
 
-
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/vid_frame"
+        android:background="@drawable/shadow_12655"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,6 +48,6 @@
 
     </android.support.v7.widget.CardView>
 
-
+    </FrameLayout>
 
 </RelativeLayout>

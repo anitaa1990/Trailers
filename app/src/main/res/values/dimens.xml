@@ -24,6 +24,7 @@
     <dimen name="margin_xsmall">3dip</dimen>
     <dimen name="margin_small">5dip</dimen>
     <dimen name="margin_large">15dip</dimen>
+    <dimen name="margin_medium">12dip</dimen>
     <dimen name="margin_xlarge">20dip</dimen>
     <dimen name="margin_xxlarge">22dip</dimen>
     <dimen name="margin_xxxlarge">29dip</dimen>
