@@ -167,11 +167,9 @@ public class CollectionPicker extends LinearLayout {
             float itemWidth = itemTextView.getPaint().measureText(item) + textPaddingLeft
                     + textPaddingRight;
 
-            itemWidth += BaseUtils.dpToPx(getContext(), 30) + textPaddingLeft
+            itemWidth += BaseUtils.dpToPx(getContext(), 20) + textPaddingLeft
                     + textPaddingRight;
-
-            if (mWidth <= (itemWidth + totalPadding + BaseUtils
-                    .dpToPx(this.getContext(), LAYOUT_WIDTH_OFFSET))) {
+            if (mWidth <= (itemWidth + totalPadding)) {
                 totalPadding = getPaddingLeft() + getPaddingRight();
                 indexFrontView = i;
                 addItemView(itemLayout, itemParams, true, i);
