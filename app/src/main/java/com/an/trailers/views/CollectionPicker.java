@@ -169,11 +169,12 @@ public class CollectionPicker extends LinearLayout {
 
             itemWidth += BaseUtils.dpToPx(getContext(), 30) + textPaddingLeft
                     + textPaddingRight;
+
             if (mWidth <= (itemWidth + totalPadding + BaseUtils
                     .dpToPx(this.getContext(), LAYOUT_WIDTH_OFFSET))) {
                 totalPadding = getPaddingLeft() + getPaddingRight();
                 indexFrontView = i;
-                addItemView(itemLayout, itemParams, false, i);
+                addItemView(itemLayout, itemParams, true, i);
             } else {
                 if (i != indexFrontView) {
                     itemParams.rightMargin = mItemMargin;
