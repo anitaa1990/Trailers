@@ -1,5 +1,9 @@
 package com.an.trailers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public interface Constants {
 
     String IMAGE_URL = "https://image.tmdb.org/t/p/w500%s";
@@ -32,4 +36,6 @@ public interface Constants {
     String MOVIE_CAST_PATH = "movie/%s/credits?api_key=%s";
     String MOVIE_SEARCH_PATH = "search/movie?api_key=%s&query=%s";
     String MOVIE_RATING_PATH = "http://www.omdbapi.com/?i=%s&tomatoes=true&r=json";
+
+    List<String> genresList = Arrays.asList("#febf9b", "#f47f87", "#6ac68d", "#fbe0a5");
 }

@@ -3,6 +3,7 @@ package com.an.trailers.views;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -16,12 +17,14 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.utils.BaseUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class CollectionPicker extends LinearLayout {
 
@@ -50,7 +53,7 @@ public class CollectionPicker extends LinearLayout {
     private Typeface tf;
 
     private boolean simplifiedTags;
-
+    private boolean useRandomColor;
 
     public CollectionPicker(Context context) {
         this(context, null);
@@ -249,6 +252,8 @@ public class CollectionPicker extends LinearLayout {
         states.addState(new int[]{android.R.attr.state_pressed}, gradientDrawable);
 
         gradientDrawable = new GradientDrawable();
+        int index = new Random().nextInt(Constants.genresList.size());
+        if(useRandomColor) mLayoutBackgroundColorNormal = Color.parseColor(Constants.genresList.get(index));
         gradientDrawable.setColor(mLayoutBackgroundColorNormal);
         gradientDrawable.setCornerRadius(mRadius);
 
@@ -260,6 +265,14 @@ public class CollectionPicker extends LinearLayout {
     public void setSelector(int colorCode) {
         this.mLayoutBackgroundColorNormal = colorCode;
         getSelectorNormal();
+    }
+
+    public boolean isUseRandomColor() {
+        return useRandomColor;
+    }
+
+    public void setUseRandomColor(boolean useRandomColor) {
+        this.useRandomColor = useRandomColor;
     }
 
     private StateListDrawable getSelectorSelected() {

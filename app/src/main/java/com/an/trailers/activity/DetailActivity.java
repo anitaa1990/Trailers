@@ -179,6 +179,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Co
         for(Genre genre : genres) {
             genreNames.add(genre.getName());
         }
+        picker.setUseRandomColor(true);
         picker.setItems(genreNames);
     }
 
