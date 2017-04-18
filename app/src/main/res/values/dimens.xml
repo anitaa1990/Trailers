@@ -10,6 +10,10 @@
     <dimen name="design_fab_size_mini">45dp</dimen>
 
 
+    <dimen name="youtube_thumbnail_width">220dp</dimen>
+    <dimen name="youtube_thumbnail_height">120dp</dimen>
+
+
     <dimen name="padding">10dip</dimen>
     <dimen name="padding_large">15dip</dimen>
     <dimen name="padding_xlarge">22dip</dimen>

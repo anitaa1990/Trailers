@@ -5,10 +5,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Pair;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
@@ -55,6 +60,38 @@ public class BaseUtils {
     public static int dpToPx(Context context, int dp) {
         float density = context.getResources().getDisplayMetrics().density;
         return Math.round((float) dp * density);
+    }
+
+    public static int getScreenWidth(Context mContext) {
+        boolean width = false;
+        WindowManager wm = (WindowManager)mContext.getSystemService("window");
+        Display display = wm.getDefaultDisplay();
+        int width1;
+        if(Build.VERSION.SDK_INT > 12) {
+            Point size = new Point();
+            display.getSize(size);
+            width1 = size.x;
+        } else {
+            width1 = display.getWidth();
+        }
+
+        return width1;
+    }
+
+    public static int getScreenHeight(Context mContext) {
+        boolean height = false;
+        WindowManager wm = (WindowManager)mContext.getSystemService("window");
+        Display display = wm.getDefaultDisplay();
+        int height1;
+        if(Build.VERSION.SDK_INT > 12) {
+            Point size = new Point();
+            display.getSize(size);
+            height1 = size.y;
+        } else {
+            height1 = display.getHeight();
+        }
+
+        return height1;
     }
 
     public static String getFormattedDate(String dateString) {

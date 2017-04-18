@@ -24,8 +24,8 @@
         <com.google.android.youtube.player.YouTubeThumbnailView
             android:layout_centerVertical="true"
             android:id="@+id/youtube_thumbnail"
-            android:layout_width="220dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/youtube_thumbnail_width"
+            android:layout_height="@dimen/youtube_thumbnail_height"
             android:scaleType="fitXY"/>
 
         <ImageView

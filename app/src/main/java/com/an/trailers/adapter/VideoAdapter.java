@@ -2,9 +2,9 @@ package com.an.trailers.adapter;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +23,17 @@ import java.util.List;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder> {
 
-    List<Video> feedItems;
+    private List<Video> feedItems;
     private Activity ctx;
-
+    private int screenWidth;
+    private int screenHeight;
+    private final double ASPECT_RATIO_WIDTH = 61.1;
+    private final double ASPECT_RATIO_HEIGHT = 20.27;
     public VideoAdapter(Activity context, List<Video> feedItems) {
         this.ctx = context;
         this.feedItems = feedItems;
+        this.screenWidth = BaseUtils.getScreenWidth(context);
+        this.screenHeight = BaseUtils.getScreenHeight(context);
     }
 
     @Override
@@ -91,6 +96,14 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
             playBtn = (ImageView) itemView.findViewById(R.id.btnYoutube_player);
             shareBtn = (ImageView) itemView.findViewById(R.id.share_btn);
             shareBtn.setOnClickListener(this);
+
+            ViewGroup.LayoutParams lp = youTubeThumbnailView.getLayoutParams();
+
+            Double width = Math.ceil((ASPECT_RATIO_WIDTH * screenWidth)/100);
+            Double height = Math.ceil((ASPECT_RATIO_HEIGHT * screenHeight)/100);
+            lp.width = width.intValue();
+            lp.height = height.intValue();
+            youTubeThumbnailView.setLayoutParams(lp);
         }
 
         @Override
