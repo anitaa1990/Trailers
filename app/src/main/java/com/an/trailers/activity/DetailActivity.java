@@ -1,6 +1,7 @@
 package com.an.trailers.activity;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -109,6 +110,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         shineButton = (ShineButton) findViewById(R.id.po_image1);
         shineButton.setOnClickListener(this);
         moreBtn = (TextView) findViewById(R.id.expand_button);
+        moreBtn.setPaintFlags(moreBtn.getPaintFlags() |  Paint.UNDERLINE_TEXT_FLAG);
         moreBtn.setOnClickListener(this);
         expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout_0);
 
