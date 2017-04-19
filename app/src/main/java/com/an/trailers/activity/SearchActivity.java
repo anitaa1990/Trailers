@@ -41,6 +41,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
 
     private SearchView searchView;
     private View searchIcon;
+    private View favIcon;
 
     private int currentPage = 1;
     private long totalPages;
@@ -65,6 +66,8 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
         overlayView = findViewById(R.id.overlay);
         searchIcon = findViewById(R.id.search_icon);
         searchIcon.setVisibility(View.GONE);
+        favIcon = findViewById(R.id.fav_icon);
+        favIcon.setVisibility(View.GONE);
         searchView = (SearchView) findViewById(R.id.search);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));

@@ -4,20 +4,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.view.WindowManager;
+
 import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.adapter.CommonPagerAdapter;
-import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.fragment.CommonFragment;
 import com.an.trailers.model.Movie;
-import com.an.trailers.model.MovieDb;
-import com.an.trailers.service.RESTExecutorService;
-import com.an.trailers.service.VolleyTask;
+import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.CustPagerTransformer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -26,8 +24,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class HomeActivity extends BaseActivity implements MovieResponseListener, View.OnClickListener, Constants {
+public class FavActivity extends BaseActivity implements Constants, View.OnClickListener {
 
     private View positionView;
     private ViewPager viewPager;
@@ -39,11 +36,6 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
     private SearchView searchView;
     private View searchIcon;
     private View favIcon;
-
-    private int currentPage = 1;
-    private long totalPages;
-    private List<CommonFragment> fragments = new ArrayList<>();
-    private List<Movie> movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +58,12 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         searchView = (SearchView) findViewById(R.id.search);
         searchView.setVisibility(View.GONE);
         favIcon = findViewById(R.id.fav_icon);
-        favIcon.setOnClickListener(this);
+        favIcon.setVisibility(View.GONE);
 
         dealStatusBar(positionView);
         fillViewPager();
-
-        RESTExecutorService.submit(new VolleyTask(this, String.valueOf(currentPage), this));
     }
+
 
     private void fillViewPager() {
         containerView = findViewById(R.id.fr_container);
@@ -80,30 +71,35 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         viewPagerBackground = (ViewPager) findViewById(R.id.viewPagerBackground);
 
         viewPager.setPageTransformer(false, new CustPagerTransformer(this));
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            private int index = 0;
-            private int pos = 0;
 
+        List<CommonFragment> fragments = new ArrayList<>();
+        final List<Movie> movies = BaseUtils.getFavMovies();
+
+        for (Movie movie : movies) {
+            if(movie.getPosterPath() != null)
+                fragments.add(CommonFragment.newInstance(movie));
+        }
+        adapter = new CommonPagerAdapter(getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            private int index = 0;
             @Override
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
                 if(movies.isEmpty()) return;
-                if(pos > 0) return;
-                    String imageUrl = String.format(Constants.IMAGE_URL, movies.get(position).getPosterPath());
-                    Glide.with(HomeActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
-                            bindImage(loadedImage, containerView, overlayView);
-                            pos++;
-                        }
-                    });
+                String imageUrl = String.format(Constants.IMAGE_URL, movies.get(position).getPosterPath());
+                Glide.with(FavActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
+                        bindImage(loadedImage, containerView, overlayView);
+                    }
+                });
             }
 
             @Override
             public void onPageSelected(int position) {
                 index = position;
-                if(currentPage <= totalPages && (position+2) == adapter.getCount()) {
-                    RESTExecutorService.submit(new VolleyTask(HomeActivity.this, String.valueOf(currentPage), HomeActivity.this));
-                }
             }
 
             @Override
@@ -116,31 +112,8 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
     }
 
     @Override
-    public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
-        searchIcon.setVisibility(View.VISIBLE);
-        this.movies.addAll(movies);
-        this.totalPages = totalPages;
-        this.currentPage = currentPage + 1;
-        if(this.movies.size() == movies.size()) {
-            handleFirstMovieResponse();
-        } else handleMovieRepsonse(movies);
-    }
-
-    private void handleFirstMovieResponse() {
-        for (Movie movie : movies) {
-            if(movie.getPosterPath() != null)
-                fragments.add(CommonFragment.newInstance(movie));
-        }
-        adapter = new CommonPagerAdapter(getSupportFragmentManager(), fragments);
-        viewPager.setAdapter(adapter);
-    }
-
-    private void handleMovieRepsonse(List<Movie> movieList) {
-        for (Movie movie : movieList) {
-            if(movie.getPosterPath() != null)
-                adapter.addFragment(CommonFragment.newInstance(movie));
-        }
-        adapter.notifyDataSetChanged();
+    public void onBindImage(Bitmap bm) {
+        bindImage(bm, containerView, overlayView);
     }
 
     @Override
@@ -148,16 +121,6 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         if(view == searchIcon) {
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
-
-        } else if(view == favIcon) {
-            Intent intent = new Intent(getApplicationContext(), FavActivity.class);
-            startActivity(intent);
         }
-    }
-
-
-    @Override
-    public void onBindImage(Bitmap bm) {
-        bindImage(bm, containerView, overlayView);
     }
 }

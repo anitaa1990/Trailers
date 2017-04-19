@@ -20,6 +20,7 @@ import com.an.trailers.R;
 import com.an.trailers.model.APIResponse;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
+import com.an.trailers.model.MovieDb;
 import com.an.trailers.model.MovieResponse;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.Rating;
@@ -36,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -172,6 +174,17 @@ public class BaseUtils {
             }
         }
         return null;
+    }
+
+    public static List<Movie> getFavMovies() {
+        List<Movie> movies = new ArrayList<>();
+        Map<Long, Movie> favMovieMap = MovieDb.getInstance().getFavMovies();
+        Iterator<Map.Entry<Long,Movie>> iterator = favMovieMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Long,Movie> entry = iterator.next();
+            movies.add(entry.getValue());
+        }
+        return movies;
     }
 
     /* You can use this method to store the
