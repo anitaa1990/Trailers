@@ -108,13 +108,15 @@
                 <!--android:layout_centerInParent="true"-->
                 <!--android:textColor="#ffffff" />-->
 
-            <!--<View-->
-                <!--android:layout_width="28dp"-->
-                <!--android:layout_height="28dp"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginRight="15dp"-->
-                <!--android:background="@drawable/close" />-->
+            <View
+                android:id="@+id/fav_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginRight="@dimen/margin_large"
+                android:background="@drawable/ic_favorite_border_white_24dp" />
 
         </RelativeLayout>
 

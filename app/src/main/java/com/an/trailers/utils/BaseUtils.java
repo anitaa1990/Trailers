@@ -39,6 +39,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static com.an.trailers.Constants.LOCALE_CACHE_PATH;
+
 public class BaseUtils {
 
     private static String getJSONStringFromRaw(Context context, int rawId) {
@@ -170,5 +172,24 @@ public class BaseUtils {
             }
         }
         return null;
+    }
+
+    /* You can use this method to store the
+ * request response from your local cache  */
+    public static void writeObjectToDisk(final Object object) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ObjectUtil objDataStream = new ObjectUtil();
+                objDataStream.writeObjects(object, LOCALE_CACHE_PATH);
+            }
+        }).start();
+    }
+
+    /* You can use this method to retrieve the
+     * request response from your local cache  */
+    public static Object readObjectFromDisk() {
+        ObjectUtil objDataStream = new ObjectUtil();
+        return objDataStream.readObjects(LOCALE_CACHE_PATH);
     }
 }

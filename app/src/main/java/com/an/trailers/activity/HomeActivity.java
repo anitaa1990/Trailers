@@ -15,6 +15,7 @@ import com.an.trailers.adapter.CommonPagerAdapter;
 import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.fragment.CommonFragment;
 import com.an.trailers.model.Movie;
+import com.an.trailers.model.MovieDb;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
 import com.an.trailers.views.CustPagerTransformer;
@@ -37,6 +38,7 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
 
     private SearchView searchView;
     private View searchIcon;
+    private View favIcon;
 
     private int currentPage = 1;
     private long totalPages;
@@ -63,6 +65,8 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         searchIcon.setOnClickListener(this);
         searchView = (SearchView) findViewById(R.id.search);
         searchView.setVisibility(View.GONE);
+        favIcon = findViewById(R.id.fav_icon);
+        favIcon.setOnClickListener(this);
 
         dealStatusBar(positionView);
         fillViewPager();
@@ -144,6 +148,9 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         if(view == searchIcon) {
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
+
+        } else if(view == favIcon) {
+            System.out.println("#######" + MovieDb.getInstance().getFavMovies());
         }
     }
 

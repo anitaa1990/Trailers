@@ -1,6 +1,5 @@
 package com.an.trailers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,6 +7,7 @@ public interface Constants {
 
     String IMAGE_URL = "https://image.tmdb.org/t/p/w500%s";
     String IMDB_MOVIE_LINK = "http://www.imdb.com/title/%s";
+    String LOCALE_CACHE_PATH = "/data/data/com.an.trailers/trailers.dat";
 
     String YOUTUBE_API_KEY = "AIzaSyCZY8Vnw_6GcJcESL-NilTZDMSvg9ViLt8";
     String TMDB_API_KEY = "5e74ee79280d770dc8ed5a2fbdda955a";

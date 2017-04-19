@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
@@ -17,7 +16,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.an.trailers.Constants;
@@ -31,6 +29,7 @@ import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
 import com.an.trailers.model.Genre;
 import com.an.trailers.model.Movie;
+import com.an.trailers.model.MovieDb;
 import com.an.trailers.model.Rating;
 import com.an.trailers.model.Video;
 import com.an.trailers.service.RESTExecutorService;
@@ -83,6 +82,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
     private TextView moreBtn;
     private ExpandableLayout expandableLayout;
 
+    private boolean isFavourite;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,13 +129,15 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         ViewCompat.setTransitionName(imageView, IMAGE_TRANSITION_NAME);
         ViewCompat.setTransitionName(movieTitle, TITLE_TRANSITION_NAME);
         ViewCompat.setTransitionName(movieDesc, DESC_TRANSITION_NAME);
-//        ViewCompat.setTransitionName(ratingBar, RATINGBAR_TRANSITION_NAME);
 
         new Handler().post(new Runnable() {
             @Override
             public void run() {
                 loadSimilarMovies();
                 dealListView();
+                isFavourite = MovieDb.getInstance().isFavourite(movie.getId());
+                shineButton.setChecked(isFavourite);
+                handleFavUI();
             }
         });
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE, String.valueOf(movie.getId()), this));
@@ -233,8 +236,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
     @Override
     public void onClick(View view) {
         if(view == shineButton) {
-            if(shineButton.isChecked()) favView.setBackgroundColor(Color.TRANSPARENT);
-            else favView.setBackgroundResource(R.drawable.ic_fav);
+            handleFavUI();
 
         } else if(view == moreBtn) {
             if (expandableLayout.isExpanded()) {
@@ -244,6 +246,17 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
                 moreBtn.setText(getString(R.string.read_less));
                 expandableLayout.expand();
             }
+        }
+    }
+
+    private void handleFavUI() {
+        if(shineButton.isChecked()) {
+            favView.setBackgroundColor(Color.TRANSPARENT);
+            MovieDb.getInstance().addToFavMovies(movie);
+        }
+        else {
+            favView.setBackgroundResource(R.drawable.ic_fav);
+            MovieDb.getInstance().removeFromFavMovies(movie);
         }
     }
 }
