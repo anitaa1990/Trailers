@@ -67,6 +67,7 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         searchView.setVisibility(View.GONE);
         favIcon = findViewById(R.id.fav_icon);
         favIcon.setOnClickListener(this);
+        favIcon.setVisibility(View.GONE);
 
         dealStatusBar(positionView);
         fillViewPager();
@@ -118,6 +119,7 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
         searchIcon.setVisibility(View.VISIBLE);
+        favIcon.setVisibility(View.VISIBLE);
         this.movies.addAll(movies);
         this.totalPages = totalPages;
         this.currentPage = currentPage + 1;

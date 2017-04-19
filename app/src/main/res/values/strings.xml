@@ -3,4 +3,6 @@
     <string name="read_less">READ LESS</string>
     <string name="read_more">READ MORE</string>
     <string name="player_error">Error initializing YouTube player: %s</string>
+    <string name="empty_fav">No movies in the list</string>
+    <string name="empty_search">No movies found</string>
 </resources>

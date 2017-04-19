@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
@@ -43,6 +44,9 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     private View searchIcon;
     private View favIcon;
 
+    private View emptyContainer;
+    private TextView emptyText;
+
     private int currentPage = 1;
     private long totalPages;
     private int pos = 0;
@@ -62,6 +66,8 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             }
         }
+        emptyContainer = findViewById(R.id.emptyContainer);
+        emptyText = (TextView) findViewById(R.id.fav_display_text);
         positionView = findViewById(R.id.position_view);
         overlayView = findViewById(R.id.overlay);
         searchIcon = findViewById(R.id.search_icon);
@@ -144,6 +150,15 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
+        if(movies.isEmpty()) {
+            emptyContainer.setVisibility(View.VISIBLE);
+            emptyText.setText(getString(R.string.empty_search));
+            viewPager.setVisibility(View.GONE);
+            return;
+        }
+
+        emptyContainer.setVisibility(View.GONE);
+        viewPager.setVisibility(View.VISIBLE);
         this.movies.addAll(movies);
         this.totalPages = totalPages;
         this.currentPage = currentPage + 1;

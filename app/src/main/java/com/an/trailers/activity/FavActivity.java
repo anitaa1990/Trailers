@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
@@ -37,6 +38,8 @@ public class FavActivity extends BaseActivity implements Constants, View.OnClick
     private View searchIcon;
     private View favIcon;
 
+    private View emptyContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,7 @@ public class FavActivity extends BaseActivity implements Constants, View.OnClick
         searchView.setVisibility(View.GONE);
         favIcon = findViewById(R.id.fav_icon);
         favIcon.setVisibility(View.GONE);
+        emptyContainer = findViewById(R.id.emptyContainer);
 
         dealStatusBar(positionView);
         fillViewPager();
@@ -74,6 +78,11 @@ public class FavActivity extends BaseActivity implements Constants, View.OnClick
 
         List<CommonFragment> fragments = new ArrayList<>();
         final List<Movie> movies = BaseUtils.getFavMovies();
+        if(movies.isEmpty()) {
+            emptyContainer.setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.GONE);
+            return;
+        }
 
         for (Movie movie : movies) {
             if(movie.getPosterPath() != null)
