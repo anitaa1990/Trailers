@@ -164,7 +164,7 @@
 
                                     <ImageView
                                         android:layout_gravity="center_vertical"
-                                        android:src="@drawable/ic_imdb_2"
+                                        android:src="@drawable/ic_imdb"
                                         android:adjustViewBounds="true"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" />
