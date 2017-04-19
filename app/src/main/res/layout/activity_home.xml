@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fr_container"
-    android:background="@drawable/container_bg">
+    android:background="#292631">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerBackground"

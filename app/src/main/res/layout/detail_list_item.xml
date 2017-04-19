@@ -22,7 +22,6 @@
         <!--android:layout_height="wrap_content" />-->
 
     <LinearLayout
-        android:paddingLeft="@dimen/padding"
         android:paddingRight="@dimen/padding"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -50,7 +49,7 @@
             android:text="Cast"
             android:textAllCaps="true"
             android:textColor="#111"
-            android:textSize="14sp"
+            android:textSize="13sp"
             app:font="gt_medium" />
 
         <View
@@ -89,7 +88,7 @@
                 android:text="Crew"
                 android:textAllCaps="true"
                 android:textColor="#111"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 app:font="gt_medium" />
 
             <View

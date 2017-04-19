@@ -125,7 +125,6 @@
 
                 <LinearLayout
                     android:paddingTop="@dimen/padding_large"
-                    android:paddingBottom="@dimen/padding_large"
                     android:paddingLeft="@dimen/padding_medium"
                     android:layout_marginLeft="@dimen/margin_large"
                     android:orientation="vertical"
@@ -257,6 +256,9 @@
                     </LinearLayout>
 
                     <com.an.trailers.views.CustomTextView
+                        android:paddingLeft="@dimen/padding"
+                        android:paddingRight="@dimen/padding"
+                        android:paddingBottom="@dimen/padding"
                         android:text="READ MORE"
                         android:layout_gravity="right|center_vertical"
                         android:gravity="right|center_vertical"
