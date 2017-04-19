@@ -87,7 +87,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_detail);
 
         imageView = (ImageView) findViewById(R.id.image);
         recyclerView = (RecyclerView) findViewById(R.id.list);
