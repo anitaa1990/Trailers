@@ -31,7 +31,7 @@ public interface Constants {
 
     String BASE_URL = "https://api.themoviedb.org/3/";
 
-    String MOVIES_LIST_PATH = "movie/upcoming?api_key=%s&language=en-US&page=%s";
+    String MOVIES_LIST_PATH = "movie/upcoming?api_key=%s&language=en-US&region=US&page=%s";
     String MOVIE_DETAIL_PATH = "movie/%s?api_key=%s";
     String MOVIE_VIDEOS_PATH = "movie/%s/videos?api_key=%s";
     String MOVIE_CAST_PATH = "movie/%s/credits?api_key=%s";

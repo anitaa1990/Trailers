@@ -2,27 +2,29 @@ package com.an.trailers.model;
 
 import com.an.trailers.utils.BaseUtils;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MovieDb implements Serializable {
 
     private static MovieDb instance;
     public static MovieDb getInstance() {
-        if(instance == null) instance = new MovieDb();
+        if(instance == null) readFromDisk();
         return instance;
     }
 
-    private MovieDb genieDb;
-    public MovieDb() {
-        if(genieDb == null) genieDb = (MovieDb) BaseUtils.readObjectFromDisk();
+    private static void readFromDisk() {
+        instance = (MovieDb) BaseUtils.readObjectFromDisk();
+        if (instance == null) {
+            instance = new MovieDb();
+            saveToDisk();
+        }
     }
 
-    private void saveToDisk() {
-        BaseUtils.writeObjectToDisk(genieDb);
+    private static void saveToDisk() {
+        BaseUtils.writeObjectToDisk(instance);
     }
+
 
     private Map<Long, Movie> favMovies;
 
@@ -39,6 +41,7 @@ public class MovieDb implements Serializable {
     public void addToFavMovies(Movie movie) {
         Map<Long, Movie> faves = getFavMovies();
         faves.put(movie.getId(), movie);
+        setFavMovies(faves);
     }
 
     public void removeFromFavMovies(Movie movie) {
