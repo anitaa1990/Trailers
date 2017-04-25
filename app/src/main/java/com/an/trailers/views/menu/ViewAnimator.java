@@ -5,11 +5,15 @@ import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.an.trailers.R;
+import com.an.trailers.utils.BaseUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,9 @@ import java.util.List;
 public class ViewAnimator<T extends ViewAnimator.Resourceable> {
     private final int ANIMATION_DURATION = 175;
     public static final int CIRCULAR_REVEAL_ANIMATION_DURATION = 500;
+
+    private final double ASPECT_RATIO_WIDTH = 11.1;
+    private final double ASPECT_RATIO_HEIGHT = 6.756;
 
     private AppCompatActivity appCompatActivity;
 
@@ -28,6 +35,8 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
     private DrawerLayout drawerLayout;
     private ViewAnimatorListener animatorListener;
 
+    private int screenWidth;
+    private int screenHeight;
 
     public ViewAnimator(AppCompatActivity activity,
                         List<T> items,
@@ -40,6 +49,8 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
         this.screenShotable = screenShotable;
         this.drawerLayout = drawerLayout;
         this.animatorListener = animatorListener;
+        this.screenWidth = BaseUtils.getScreenWidth(activity);
+        this.screenHeight = BaseUtils.getScreenHeight(activity);
     }
 
 
@@ -48,7 +59,7 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
         viewList.clear();
         double size = list.size();
         for (int i = 0; i < size; i++) {
-            View viewMenu = appCompatActivity.getLayoutInflater().inflate(R.layout.menu_list_item, null);
+            final View viewMenu = appCompatActivity.getLayoutInflater().inflate(R.layout.menu_list_item, null);
 
             final int finalI = i;
             viewMenu.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +70,17 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
                     switchItem(list.get(finalI), location[1] + v.getHeight() / 2);
                 }
             });
-            ((ImageView) viewMenu.findViewById(R.id.menu_item_image)).setImageResource(list.get(i).getImageRes());
+
+            ImageView iv = ((ImageView) viewMenu.findViewById(R.id.menu_item_image));
+
+            ViewGroup.LayoutParams lp = iv.getLayoutParams();
+            Double width = Math.ceil((ASPECT_RATIO_WIDTH * screenWidth)/100);
+            Double height = Math.ceil((ASPECT_RATIO_HEIGHT * screenHeight)/100);
+            lp.width = width.intValue();
+            lp.height = height.intValue();
+            iv.setLayoutParams(lp);
+
+            iv.setImageResource(list.get(i).getImageRes());
             viewMenu.setVisibility(View.GONE);
             viewMenu.setEnabled(true);
             viewList.add(viewMenu);

@@ -125,7 +125,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
             this.currentPage = currentPage + 1;
             if (this.movies.size() == movies.size()) {
                 handleFirstMovieResponse();
-            } else handleMovieRepsonse(movies);
+            } else handleMovieResponse(movies);
         }
     }
 
@@ -138,7 +138,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
         viewPager.setAdapter(adapter);
     }
 
-    private void handleMovieRepsonse(List<Movie> movieList) {
+    private void handleMovieResponse(List<Movie> movieList) {
         for (Movie movie : movieList) {
             if(movie.getPosterPath() != null)
                 adapter.addFragment(CommonFragment.newInstance(movie));
