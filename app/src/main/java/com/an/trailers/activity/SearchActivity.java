@@ -50,6 +50,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     private int currentPage = 1;
     private long totalPages;
     private int pos = 0;
+    private String queryTxt;
     private List<CommonFragment> fragments = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
 
@@ -90,7 +91,8 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
                 if(!movies.isEmpty()) movies.clear();
                 if(adapter != null) adapter.removeFragments();
                 pos = 0;
-                RESTExecutorService.submit(new VolleyTask(SearchActivity.this, METHOD_SEARCH, query, SearchActivity.this));
+                queryTxt = query;
+                RESTExecutorService.submit(new VolleyTask(SearchActivity.this, METHOD_SEARCH, String.valueOf(currentPage), query, SearchActivity.this));
                 return true;
             }
 
@@ -132,7 +134,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
             public void onPageSelected(int position) {
                 index = position;
                 if(currentPage <= totalPages && (position+2) == adapter.getCount()) {
-//                    RESTExecutorService.submit(new VolleyTask(SearchActivity.this, String.valueOf(currentPage), SearchActivity.this));
+                    RESTExecutorService.submit(new VolleyTask(SearchActivity.this, METHOD_SEARCH, String.valueOf(currentPage), queryTxt, SearchActivity.this));
                 }
             }
 

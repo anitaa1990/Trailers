@@ -37,7 +37,7 @@ public interface Constants {
     String MOVIE_DETAIL_PATH = "movie/%s?api_key=%s";
     String MOVIE_VIDEOS_PATH = "movie/%s/videos?api_key=%s";
     String MOVIE_CAST_PATH = "movie/%s/credits?api_key=%s";
-    String MOVIE_SEARCH_PATH = "search/movie?api_key=%s&query=%s";
+    String MOVIE_SEARCH_PATH = "search/movie?api_key=%s&query=%s&page=%s";
     String MOVIE_SIMILAR_PATH = "movie/%s/similar?api_key=%s&page=1";
     String MOVIE_RATING_PATH = "http://www.omdbapi.com/?i=%s&tomatoes=true&r=json";
 

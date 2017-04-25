@@ -105,11 +105,11 @@ public class VolleyService implements Constants {
         MyVolley.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    public void getSearchList(Context context, String searchTxt, final MovieResponseListener listener) {
+    public void getSearchList(Context context, String searchTxt, String pageId, final MovieResponseListener listener) {
         try {
             String finalQueryTxt = URLEncoder.encode(searchTxt, "UTF-8");
             CacheRequest stringRequest = new CacheRequest(Request.Method.GET,
-                    String.format(BASE_URL + MOVIE_SEARCH_PATH, TMDB_API_KEY, finalQueryTxt),
+                    String.format(BASE_URL + MOVIE_SEARCH_PATH, TMDB_API_KEY, finalQueryTxt, pageId),
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
