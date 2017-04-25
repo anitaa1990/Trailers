@@ -5,4 +5,32 @@
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="empty_fav">No movies in the list</string>
     <string name="empty_search">No movies found</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="upcoming">upcoming</string>
+    <string name="now_playing">now_playing</string>
+    <string name="top_rated">top_rated</string>
+    <string name="dvd">dvd</string>
+    <string name="favourites">favourites</string>
+
+
+    <string-array name="menu_names">
+        <item>@string/drawer_close</item>
+        <item>@string/upcoming</item>
+        <item>@string/now_playing</item>
+        <item>@string/top_rated</item>
+        <item>@string/dvd</item>
+        <item>@string/favourites</item>
+    </string-array>
+
+    <integer-array name="menu_icons">
+        <item>@drawable/icn_close</item>
+        <item>@drawable/ic_m_upcoming</item>
+        <item>@drawable/ic_m_now_play</item>
+        <item>@drawable/ic_m_toprated</item>
+        <item>@drawable/ic_m_dvd</item>
+        <item>@drawable/ic_m_fav</item>
+    </integer-array>
 </resources>

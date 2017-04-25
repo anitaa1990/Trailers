@@ -72,7 +72,7 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
         dealStatusBar(positionView);
         fillViewPager();
 
-        RESTExecutorService.submit(new VolleyTask(this, String.valueOf(currentPage), this));
+//        RESTExecutorService.submit(new VolleyTask(this, String.valueOf(currentPage), this));
     }
 
     private void fillViewPager() {
@@ -103,7 +103,7 @@ public class HomeActivity extends BaseActivity implements MovieResponseListener,
             public void onPageSelected(int position) {
                 index = position;
                 if(currentPage <= totalPages && (position+2) == adapter.getCount()) {
-                    RESTExecutorService.submit(new VolleyTask(HomeActivity.this, String.valueOf(currentPage), HomeActivity.this));
+//                    RESTExecutorService.submit(new VolleyTask(HomeActivity.this, String.valueOf(currentPage), HomeActivity.this));
                 }
             }
 

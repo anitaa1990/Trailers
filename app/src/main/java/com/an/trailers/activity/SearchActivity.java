@@ -132,7 +132,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
             public void onPageSelected(int position) {
                 index = position;
                 if(currentPage <= totalPages && (position+2) == adapter.getCount()) {
-                    RESTExecutorService.submit(new VolleyTask(SearchActivity.this, String.valueOf(currentPage), SearchActivity.this));
+//                    RESTExecutorService.submit(new VolleyTask(SearchActivity.this, String.valueOf(currentPage), SearchActivity.this));
                 }
             }
 

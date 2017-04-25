@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.an.trailers"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -39,4 +39,12 @@ dependencies {
 
     compile 'com.sackcentury:shinebutton:0.1.7'
     compile 'net.cachapa.expandablelayout:expandablelayout:2.8'
+    compile 'com.github.ozodrukh:CircularReveal:1.0.4'
+}
+
+
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
 }

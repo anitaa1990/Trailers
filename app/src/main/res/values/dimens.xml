@@ -34,4 +34,5 @@
     <dimen name="margin_xxxlarge">29dip</dimen>
     <dimen name="margin_xxxxlarge">30dip</dimen>
 
+    <dimen name="sliding_menu_width">80dp</dimen>
 </resources>

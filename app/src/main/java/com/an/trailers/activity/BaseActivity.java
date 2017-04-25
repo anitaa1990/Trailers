@@ -7,13 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.reflect.Field;
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void onBindImage(Bitmap bm);
 
@@ -22,7 +23,7 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
     }
 
-    protected void dealStatusBar(View positionView) {
+    public void dealStatusBar(View positionView) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int statusBarHeight = getStatusBarHeight();
             ViewGroup.LayoutParams lp = positionView.getLayoutParams();
@@ -48,7 +49,7 @@ public abstract class BaseActivity extends FragmentActivity {
         return statusBarHeight;
     }
 
-    protected void bindImage(Bitmap loadedImage, View containerView, final View overlayView) {
+    public void bindImage(Bitmap loadedImage, View containerView, final View overlayView) {
         containerView.setBackground(new BitmapDrawable(getResources(), loadedImage));
         Palette.from(loadedImage).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette p) {

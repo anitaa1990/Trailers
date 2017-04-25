@@ -86,9 +86,9 @@ public class VolleyService implements Constants {
     }
 
 
-    public void getMoviesList(Context context, String pageId, final MovieResponseListener listener) {
+    public void getMoviesList(Context context, String pageId, String url, final MovieResponseListener listener) {
         CacheRequest stringRequest = new CacheRequest(Request.Method.GET,
-                String.format(BASE_URL + MOVIES_LIST_PATH, TMDB_API_KEY, pageId),
+                String.format(BASE_URL + url, TMDB_API_KEY, pageId),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_item_container"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:clickable="true"
+    android:background="@drawable/menu_item_selector">
+
+    <ImageView
+        android:id="@+id/menu_item_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>
