@@ -26,6 +26,9 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
     private final double ASPECT_RATIO_WIDTH = 11.1;
     private final double ASPECT_RATIO_HEIGHT = 6.756;
 
+    private final double ASPECT_RATIO_CONTAINER_WIDTH = 25.8889;
+    private final double ASPECT_RATIO_CONTAINER_HEIGHT = 15.9;
+
     private AppCompatActivity appCompatActivity;
 
     private List<T> list;
@@ -81,6 +84,16 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
             iv.setLayoutParams(lp);
 
             iv.setImageResource(list.get(i).getImageRes());
+
+            View container = viewMenu.findViewById(R.id.menu_item_container);
+            ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            container.setLayoutParams(layoutParams);
+//            Double containerWidth = Math.ceil((ASPECT_RATIO_CONTAINER_WIDTH * screenWidth)/100);
+            Double containerHeight = Math.ceil((ASPECT_RATIO_CONTAINER_HEIGHT * screenHeight)/100);
+//            layoutParams.width = containerWidth.intValue();
+            layoutParams.height = containerHeight.intValue();
+            container.setLayoutParams(layoutParams);
+
             viewMenu.setVisibility(View.GONE);
             viewMenu.setEnabled(true);
             viewList.add(viewMenu);
