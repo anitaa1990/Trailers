@@ -20,9 +20,12 @@ public class VolleyTask implements Runnable, Constants {
     }
 
     private String pageId;
+    private String url;
     private MovieResponseListener movieResponseListener;
-    public VolleyTask(Context context, String pageId, MovieResponseListener movieResponseListener) {
+    public VolleyTask(Context context, String method, String pageId, String url, MovieResponseListener movieResponseListener) {
         this.context = context;
+        this.method = method;
+        this.url = url;
         this.pageId = pageId;
         this.movieResponseListener = movieResponseListener;
     }
@@ -37,7 +40,7 @@ public class VolleyTask implements Runnable, Constants {
     @Override
     public void run() {
         if(method == null) {
-            VolleyService.getInstance().getMoviesList(context, pageId, movieResponseListener);
+            VolleyService.getInstance().getMoviesList(context, pageId, url, movieResponseListener);
         }
         else if(METHOD_MOVIE.equalsIgnoreCase(method)) {
             VolleyService.getInstance().getMovieDetails(context, movieId, listener);
