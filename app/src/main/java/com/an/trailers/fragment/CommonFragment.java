@@ -123,6 +123,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
     public void onClick(View view) {
         if(view == playBtn) {
             Intent intent = new Intent(activity, VideoActivity.class);
+            if(movie.getTrailerCode() != null) intent.putExtra("video_key", movie.getTrailerCode());
             intent.putExtra("movieId", String.valueOf(movie.getId()));
             startActivity(intent);
         }
