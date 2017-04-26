@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         searchIcon.setOnClickListener(this);
         searchView = (SearchView) findViewById(R.id.search);
         searchView.setVisibility(View.GONE);
+        slideItem = getString(R.string.upcoming);
 
         setActionBar();
         createMenuList();
@@ -157,13 +158,13 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
     }
 
 
-    private int pos = -1;
+    private String slideItem;
     @Override
     public ViewAnimator.ScreenShotable onSwitch(ViewAnimator.Resourceable slideMenuItem,
                                                 ViewAnimator.ScreenShotable screenShotable,
                                                 int position) {
-        if(this.pos == position) return screenShotable;
-        this.pos = position;
+        if(slideMenuItem.getName().equalsIgnoreCase(slideItem)) return screenShotable;
+        this.slideItem = slideMenuItem.getName();
         if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.drawer_close))) {
             return screenShotable;
         } else if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.upcoming))) {
