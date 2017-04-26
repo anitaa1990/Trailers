@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,14 +32,14 @@ import io.codetail.animation.ViewAnimationUtils;
 
 public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnimatorListener, View.OnClickListener {
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
+    public ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
     private BaseFragment fragment;
     private ViewAnimator viewAnimator;
     private LinearLayout linearLayout;
 
     private SearchView searchView;
-    private View searchIcon;
+    public View searchIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -61,6 +61,11 @@ public class BaseUtils {
         return Math.round((float) dp * density);
     }
 
+    public static float dip2px(Context context, float dpValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return dpValue * scale;
+    }
+
     public static int getScreenWidth(Context mContext) {
         boolean width = false;
         WindowManager wm = (WindowManager)mContext.getSystemService("window");

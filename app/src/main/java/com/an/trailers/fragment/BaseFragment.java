@@ -12,17 +12,17 @@ import android.support.v7.graphics.Palette;
 import android.view.View;
 
 import com.an.trailers.Constants;
-import com.an.trailers.activity.BaseActivity;
+import com.an.trailers.activity.MainActivity;
 import com.an.trailers.views.menu.ViewAnimator;
 
 public abstract class BaseFragment extends Fragment implements ViewAnimator.ScreenShotable, Constants {
 
-    protected BaseActivity activity;
+    protected MainActivity activity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.activity = (BaseActivity) context;
+        this.activity = (MainActivity) context;
     }
 
     @Override

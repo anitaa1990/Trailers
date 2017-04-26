@@ -43,4 +43,14 @@
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
 
+
+    <declare-styleable name="LoadingView">
+        <attr name="loading_renderer">
+            <enum name="SwapLoadingRenderer" value="4"/>
+            <enum name="GuardLoadingRenderer" value="5"/>
+            <enum name="DanceLoadingRenderer" value="6"/>
+            <enum name="CollisionLoadingRenderer" value="7"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

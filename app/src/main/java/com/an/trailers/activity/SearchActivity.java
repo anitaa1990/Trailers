@@ -25,6 +25,7 @@ import com.an.trailers.model.Movie;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
 import com.an.trailers.views.CustPagerTransformer;
+import com.an.trailers.views.progress.LoadingView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -45,6 +46,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
 
     private View emptyContainer;
     private TextView emptyText;
+    private LoadingView loadingView;
 
     private int currentPage = 1;
     private long totalPages;
@@ -67,6 +69,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
             }
         }
         emptyContainer = findViewById(R.id.emptyContainer);
+        loadingView = (LoadingView) findViewById(R.id.progress_view);
         emptyText = (TextView) findViewById(R.id.fav_display_text);
         positionView = findViewById(R.id.position_view);
         overlayView = findViewById(R.id.overlay);
@@ -89,6 +92,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
                 if(adapter != null) adapter.removeFragments();
                 pos = 0;
                 queryTxt = query;
+                loadingView.setVisibility(View.VISIBLE);
                 RESTExecutorService.submit(new VolleyTask(SearchActivity.this, METHOD_SEARCH, String.valueOf(currentPage), query, SearchActivity.this));
                 return true;
             }
@@ -146,6 +150,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
 
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
+        loadingView.setVisibility(View.GONE);
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 

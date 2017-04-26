@@ -5,6 +5,15 @@
     android:id="@+id/fr_container"
     android:background="#292631">
 
+    <com.an.trailers.views.progress.LoadingView
+        android:visibility="gone"
+        android:id="@+id/progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        app:loading_renderer="SwapLoadingRenderer"/>
+
     <LinearLayout
         android:id="@+id/emptyContainer"
         android:layout_width="wrap_content"

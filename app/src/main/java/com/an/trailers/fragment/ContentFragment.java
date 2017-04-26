@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.adapter.CommonPagerAdapter;
 import com.an.trailers.callback.MovieResponseListener;
@@ -16,6 +15,7 @@ import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
 import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.CustPagerTransformer;
+import com.an.trailers.views.progress.LoadingView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -40,6 +40,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     private List<Movie> movies = new ArrayList<>();
 
     private View emptyContainer;
+    private LoadingView loadingView;
 
     public static ContentFragment newInstance(String url, String method) {
         ContentFragment contentFragment = new ContentFragment();
@@ -80,13 +81,18 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         viewPagerBackground = (ViewPager) rootView.findViewById(R.id.viewPagerBackground);
         emptyContainer = rootView.findViewById(R.id.emptyContainer);
+        loadingView = (LoadingView) rootView.findViewById(R.id.progress_view);
 
         fillViewPager();
 
         if(url == null) fetchFavMovies();
         else if(getString(R.string.dvd).equalsIgnoreCase(method)) {
+            loadProgressView();
             RESTExecutorService.submit(new VolleyTask(activity, METHOD_DVD, String.valueOf(currentPage), this));
-        } else RESTExecutorService.submit(new VolleyTask(activity, null, String.valueOf(currentPage), url, this));
+        } else {
+            loadProgressView();
+            RESTExecutorService.submit(new VolleyTask(activity, null, String.valueOf(currentPage), url, this));
+        }
 
         return rootView;
     }
@@ -130,6 +136,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
 
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
+        hideProgressView();
         if(movies == null || movies.isEmpty()) {
             handleEmptyResponse();
         } else {
@@ -172,6 +179,18 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
         if(movies == null || movies.isEmpty()) {
             handleEmptyResponse();
         } else handleFirstMovieResponse();
+    }
+
+    private void loadProgressView() {
+        activity.drawerToggle.setDrawerIndicatorEnabled(false);
+        activity.searchIcon.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressView() {
+        loadingView.setVisibility(View.GONE);
+        activity.searchIcon.setVisibility(View.VISIBLE);
+        activity.drawerToggle.setDrawerIndicatorEnabled(true);
     }
 
     @Override
