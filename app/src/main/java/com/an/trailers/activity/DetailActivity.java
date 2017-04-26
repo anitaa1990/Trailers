@@ -132,21 +132,27 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                loadSimilarMovies();
+                List<Video> videos = movie.getTrailers();
+
+                if(!videos.isEmpty()) {
+                    moreBtn.setVisibility(View.GONE);
+                    onVideoResponse(videos);
+                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
+                }
+                else {
+                    loadSimilarMovies();
+                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_MOVIE, String.valueOf(movie.getId()), DetailActivity.this));
+                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_VIDEO, String.valueOf(movie.getId()), DetailActivity.this));
+                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_CAST, String.valueOf(movie.getId()), DetailActivity.this));
+                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
+                }
+
                 dealListView();
                 isFavourite = MovieDb.getInstance().isFavourite(movie.getId());
                 shineButton.setChecked(isFavourite);
                 handleFavUI();
-                List<Video> videos = movie.getTrailers();
-                if(!videos.isEmpty()) onVideoResponse(videos);
-                else RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_VIDEO, String.valueOf(movie.getId()), DetailActivity.this));
             }
         });
-
-        RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE, String.valueOf(movie.getId()), this));
-        RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
-        RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
-
     }
 
     private void loadSimilarMovies() {
@@ -213,7 +219,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
     @Override
     public void onRatingsResponse(Rating rating) {
-        if(rating != null && MOVIE_STATUS_RELEASED.equalsIgnoreCase(movie.getStatus())) {
+        if(movie.getStatus() == null || (rating != null && MOVIE_STATUS_RELEASED.equalsIgnoreCase(movie.getStatus()))) {
             imdbLayout.setVisibility(View.VISIBLE);
             imdbRatingTxt.setText(rating.getImdbRating());
         } else imdbLayout.setVisibility(View.GONE);
