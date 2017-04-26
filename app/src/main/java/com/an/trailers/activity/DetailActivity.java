@@ -137,10 +137,13 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
                 isFavourite = MovieDb.getInstance().isFavourite(movie.getId());
                 shineButton.setChecked(isFavourite);
                 handleFavUI();
+                List<Video> videos = movie.getTrailers();
+                if(!videos.isEmpty()) onVideoResponse(videos);
+                else RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_VIDEO, String.valueOf(movie.getId()), DetailActivity.this));
             }
         });
+
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE, String.valueOf(movie.getId()), this));
-        RESTExecutorService.submit(new VolleyTask(this, METHOD_VIDEO, String.valueOf(movie.getId()), this));
         RESTExecutorService.submit(new VolleyTask(this, METHOD_CAST, String.valueOf(movie.getId()), this));
         RESTExecutorService.submit(new VolleyTask(this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
 

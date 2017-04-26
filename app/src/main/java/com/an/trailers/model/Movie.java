@@ -5,6 +5,7 @@ import com.an.trailers.utils.BaseUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie implements Serializable {
@@ -242,5 +243,15 @@ public class Movie implements Serializable {
 
     public List<String> getGenreNames() {
         return BaseUtils.getGenres(getGenres());
+    }
+
+    public List<Video> getTrailers() {
+        List<Video> videos = new ArrayList<>();
+        if(getTrailerCode() != null) {
+            Video video = new Video();
+            video.setKey(getTrailerCode());
+            videos.add(video);
+        }
+        return videos;
     }
 }
