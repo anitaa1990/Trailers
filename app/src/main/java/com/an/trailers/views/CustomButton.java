@@ -58,16 +58,7 @@ public class CustomButton extends Button {
     public void setTypeFace(int fontValue) {
         Typeface myTypeFace;
 
-        if (fontValue == 1) {
-            myTypeFace = Typeface.createFromAsset(this.getContext().getAssets(), "fonts/circular_medium.ttf");
-            this.setTypeface(myTypeFace);
-        } else if (fontValue == 2) {
-            myTypeFace = Typeface.createFromAsset(this.getContext().getAssets(), "fonts/circular_bold.ttf");
-            this.setTypeface(myTypeFace);
-        } else if (fontValue == 3) {
-            myTypeFace = Typeface.createFromAsset(this.getContext().getAssets(), "fonts/circular_book.ttf");
-            this.setTypeface(myTypeFace);
-        } else if (fontValue == 4) {
+        if (fontValue == 4) {
             myTypeFace = Typeface.createFromAsset(this.getContext().getAssets(), "fonts/gt_medium.otf");
             this.setTypeface(myTypeFace);
         }

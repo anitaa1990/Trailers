@@ -42,7 +42,6 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
 
     private SearchView searchView;
     private View searchIcon;
-    private View favIcon;
 
     private View emptyContainer;
     private TextView emptyText;
@@ -57,7 +56,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_search);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -73,8 +72,6 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
         overlayView = findViewById(R.id.overlay);
         searchIcon = findViewById(R.id.search_icon);
         searchIcon.setVisibility(View.GONE);
-        favIcon = findViewById(R.id.fav_icon);
-        favIcon.setVisibility(View.GONE);
         searchView = (SearchView) findViewById(R.id.search);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));

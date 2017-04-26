@@ -7,9 +7,6 @@
     </declare-styleable>
 
     <attr name="font">
-        <enum name="circular_medium" value="1" />
-        <enum name="circular_bold" value="2" />
-        <enum name="circular_book" value="3" />
         <enum name="gt_medium" value="4" />
     </attr>
 

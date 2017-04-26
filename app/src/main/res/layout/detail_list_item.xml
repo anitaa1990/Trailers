@@ -13,178 +13,100 @@
         app:el_duration="1000"
         app:el_expanded="false">
 
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:layout_marginTop="@dimen/margin"-->
-        <!--android:layout_marginLeft="@dimen/margin"-->
-        <!--android:id="@+id/list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-
-    <LinearLayout
-        android:paddingRight="@dimen/padding"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:background="#cccccc" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <com.an.trailers.views.CustomTextView
-            android:layout_gravity="top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Cast"
-            android:textAllCaps="true"
-            android:textColor="#111"
-            android:textSize="13sp"
-            app:font="gt_medium" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin"
-            android:background="#cccccc" />
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="@dimen/margin_small"
-            android:id="@+id/cast_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:background="#cccccc" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="@dimen/padding">
 
-            <com.an.trailers.views.CustomTextView
-                android:layout_gravity="top"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="#cccccc" />
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="Crew"
-                android:textAllCaps="true"
-                android:textColor="#111"
-                android:textSize="13sp"
-                app:font="gt_medium" />
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.an.trailers.views.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="left"
+                    android:text="Cast"
+                    android:textAllCaps="true"
+                    android:textColor="#111"
+                    android:textSize="13sp"
+                    app:font="gt_medium" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="#cccccc" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/cast_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="#cccccc" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.an.trailers.views.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="left"
+                    android:text="Crew"
+                    android:textAllCaps="true"
+                    android:textColor="#111"
+                    android:textSize="13sp"
+                    app:font="gt_medium" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="#cccccc" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/crew_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
                 android:background="#cccccc" />
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="@dimen/margin_small"
-                android:id="@+id/crew_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:background="#cccccc" />
-
-
-    <!--<LinearLayout-->
-        <!--android:layout_marginTop="@dimen/margin_small"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<com.an.trailers.views.CustomTextView-->
-            <!--android:layout_gravity="top"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="2"-->
-            <!--android:gravity="left"-->
-            <!--android:text="Release Date: "-->
-            <!--android:textColor="#111"-->
-            <!--android:textSize="16sp"-->
-            <!--app:font="circular_medium" />-->
-
-        <!--<com.an.trailers.views.CustomTextView-->
-            <!--android:id="@+id/txt_release"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="@dimen/margin_small"-->
-            <!--android:layout_weight="4.2"-->
-            <!--android:gravity="left"-->
-            <!--android:textColor="#7c7d88"-->
-            <!--android:textSize="16sp"-->
-            <!--app:font="circular_book"/>-->
-
-    <!--</LinearLayout>-->
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_marginTop="@dimen/margin_small"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<com.an.trailers.views.CustomTextView-->
-                <!--android:layout_gravity="top"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="2"-->
-                <!--android:gravity="left"-->
-                <!--android:text="IMDB: "-->
-                <!--android:textColor="#111"-->
-                <!--android:textSize="16sp"-->
-                <!--app:font="circular_medium" />-->
-
-            <!--<com.an.trailers.views.CustomTextView-->
-                <!--android:id="@+id/txt_imdb"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="@dimen/margin_small"-->
-                <!--android:layout_weight="10"-->
-                <!--android:gravity="left"-->
-                <!--android:autoLink="web"-->
-                <!--android:textColor="#aaa"-->
-                <!--android:textSize="16sp"-->
-                <!--app:font="circular_book"/>-->
-
-        <!--</LinearLayout>-->
-
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1px"-->
-        <!--android:layout_marginTop="@dimen/margin"-->
-        <!--android:layout_marginBottom="@dimen/margin"-->
-        <!--android:background="#cccccc" />-->
-
-    </LinearLayout></net.cachapa.expandablelayout.ExpandableLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
 
 </LinearLayout>
