@@ -4,19 +4,13 @@ package com.an.trailers.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.Display;
 import android.view.WindowManager;
 
 import com.an.trailers.Constants;
-import com.an.trailers.R;
 import com.an.trailers.model.APIResponse;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
@@ -40,6 +34,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.an.trailers.Constants.LOCALE_CACHE_PATH;
 
@@ -153,6 +148,16 @@ public class BaseUtils {
         Type listType = new TypeToken<Rating>() {}.getType();
         Rating rating = new Gson().fromJson(jsonString, listType);
         return rating;
+    }
+
+    public static List<String> getGenres(List<Object> genres) {
+        List<String> genreNames = new ArrayList<>(genres.size());
+        for(Object obj : genres) {
+            if(obj instanceof String)
+                genreNames.add(Objects.toString(obj, null));
+            else genreNames.add(String.valueOf(((Map)obj).get("name")));
+        }
+        return genreNames;
     }
 
     public static void shareMovie(Activity activity,

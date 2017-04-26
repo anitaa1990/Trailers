@@ -59,7 +59,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             this.movie = (Movie) getArguments().getSerializable("movie");
-            this.imageUrl = String.format(Constants.IMAGE_URL, movie.getPosterPath());
+            this.imageUrl =  movie.getPosterPath();
         }
     }
 
@@ -79,7 +79,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
         playBtn.setOnClickListener(this);
         if(movie != null) {
             movieTitle.setText(movie.getTitle());
-            movieDesc.setText(movie.getOverview());
+            movieDesc.setText(movie.getDescription());
             if(movie.getVoteAverage() != null) {
                 Float value = (movie.getVoteAverage() / 10) * 5;
                 ratingBar.setRating(value);

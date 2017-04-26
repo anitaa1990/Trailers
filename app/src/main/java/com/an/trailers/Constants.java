@@ -14,6 +14,7 @@ public interface Constants {
 
     String MOVIE_STATUS_RELEASED = "Released";
     String METHOD_MOVIE = "movie_detail";
+    String METHOD_DVD = "movie_dvd";
     String METHOD_VIDEO = "movie_video";
     String METHOD_CAST = "movie_cast";
     String METHOD_SEARCH = "movie_search";
@@ -40,6 +41,7 @@ public interface Constants {
     String MOVIE_SEARCH_PATH = "search/movie?api_key=%s&query=%s&page=%s";
     String MOVIE_SIMILAR_PATH = "movie/%s/similar?api_key=%s&page=1";
     String MOVIE_RATING_PATH = "http://www.omdbapi.com/?i=%s&tomatoes=true&r=json";
+    String MOVIE_DVD_PATH = "https://yts.ag/api/v2/list_movies.json?limit=50&with_rt_ratings=true&page=%s&order_by=desc";
 
     List<String> genresList = Arrays.asList("#febf9b", "#f47f87", "#6ac68d", "#fbe0a5");
 }

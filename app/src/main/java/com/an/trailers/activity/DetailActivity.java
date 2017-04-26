@@ -28,7 +28,6 @@ import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.callback.RESTListener;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
-import com.an.trailers.model.Genre;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.MovieDb;
 import com.an.trailers.model.Rating;
@@ -41,8 +40,6 @@ import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -123,7 +120,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
         movie = (Movie) getIntent().getSerializableExtra(EXTRA_MAP);
         movieTitle.setText(movie.getTitle());
-        movieDesc.setText(movie.getOverview());
+        movieDesc.setText(movie.getDescription());
 
         String imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
         Picasso.with(this).load(imageUrl).into(imageView);
@@ -199,13 +196,8 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
                 BaseUtils.getFormattedDate(movie.getReleaseDate());
         runtimeTxt.setText(runTxt);
 
-        List<Genre> genres = movie.getGenres();
-        List<String> genreNames = new ArrayList<>();
-        for(Genre genre : genres) {
-            genreNames.add(genre.getName());
-        }
         picker.setUseRandomColor(true);
-        picker.setItems(genreNames);
+        picker.setItems(movie.getGenreNames());
     }
 
     @Override

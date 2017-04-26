@@ -120,7 +120,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
-                String imageUrl = String.format(Constants.IMAGE_URL, movies.get(position).getPosterPath());
+                String imageUrl = movies.get(position).getPosterPath();
                 Glide.with(SearchActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {

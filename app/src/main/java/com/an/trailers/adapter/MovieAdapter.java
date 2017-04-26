@@ -36,7 +36,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movie movie = movies.get(position);
-        String imageUrl = String.format(Constants.IMAGE_URL, movie.getPosterPath());
+        String imageUrl = movie.getPosterPath();
         Glide.with(context).load(imageUrl).into(holder.imageView);
     }
 
@@ -58,7 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public void onClick(View view) {
             Movie movie = movies.get(getLayoutPosition());
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra(DetailActivity.EXTRA_IMAGE_URL, String.format(Constants.IMAGE_URL, movie.getPosterPath()));
+            intent.putExtra(DetailActivity.EXTRA_IMAGE_URL, movie.getPosterPath());
             intent.putExtra(DetailActivity.EXTRA_MAP, movie);
             context.startActivity(intent);
         }

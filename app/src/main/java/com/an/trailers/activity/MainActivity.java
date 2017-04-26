@@ -144,7 +144,8 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         return super.onOptionsItemSelected(item);
     }
 
-    private ViewAnimator.ScreenShotable replaceFragment(String url, int topPosition) {
+    private ViewAnimator.ScreenShotable replaceFragment(ViewAnimator.Resourceable slideMenuItem,
+                                                        String url, int topPosition) {
         View view = findViewById(R.id.content_frame);
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
@@ -152,7 +153,7 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
 
         animator.start();
-        fragment = ContentFragment.newInstance(url);
+        fragment = ContentFragment.newInstance(url, slideMenuItem.getName());
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
         return fragment;
     }
@@ -168,13 +169,15 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.drawer_close))) {
             return screenShotable;
         } else if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.upcoming))) {
-            return replaceFragment(Constants.MOVIES_UPCOMING_PATH, position);
+            return replaceFragment(slideMenuItem, Constants.MOVIES_UPCOMING_PATH, position);
         } else if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.now_playing))) {
-            return replaceFragment(Constants.MOVIES_NOW_PLAYING_PATH, position);
+            return replaceFragment(slideMenuItem, Constants.MOVIES_NOW_PLAYING_PATH, position);
         } else if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.top_rated))) {
-            return replaceFragment(Constants.MOVIES_TOP_RATED_PATH, position);
+            return replaceFragment(slideMenuItem, Constants.MOVIES_TOP_RATED_PATH, position);
+        } else if(slideMenuItem.getName().equalsIgnoreCase(getString(R.string.dvd))) {
+            return replaceFragment(slideMenuItem, Constants.MOVIE_DVD_PATH, position);
         } else {
-            return replaceFragment(null, position);
+            return replaceFragment(slideMenuItem, null, position);
         }
     }
 

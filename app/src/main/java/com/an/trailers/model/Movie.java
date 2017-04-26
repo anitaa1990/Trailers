@@ -1,5 +1,7 @@
 package com.an.trailers.model;
 
+import com.an.trailers.Constants;
+import com.an.trailers.utils.BaseUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -13,12 +15,13 @@ public class Movie implements Serializable {
     private String backdropPath;
 
     private Double budget;
-    private List<Genre> genres;
+
+    private List<Object> genres;
 
     private String homepage;
     private long id;
 
-    @SerializedName("imdb_id")
+    @SerializedName(value="imdbId", alternate={"imdb_id", "imdb_code"})
     private String imdbId;
 
     @SerializedName("original_language")
@@ -27,11 +30,12 @@ public class Movie implements Serializable {
     @SerializedName("original_title")
     private String originalTitle;
 
-    private String overview;
+    @SerializedName(value="description", alternate={"overview", "synopsis"})
+    private String description;
 
     private Double popularity;
 
-    @SerializedName("poster_path")
+    @SerializedName(value="posterPath", alternate={"poster_path", "large_cover_image"})
     private String posterPath;
 
     @SerializedName("release_date")
@@ -45,7 +49,7 @@ public class Movie implements Serializable {
     private String tagline;
     private String title;
 
-    @SerializedName("vote_average")
+    @SerializedName(value="voteAverage", alternate={"vote_average", "rating"})
     private Float voteAverage;
 
     @SerializedName("vote_count")
@@ -53,6 +57,9 @@ public class Movie implements Serializable {
 
     @SerializedName("genre_ids")
     private List<Integer> genreIds;
+
+    @SerializedName("yt_trailer_code")
+    private String trailerCode;
 
     public boolean isAdult() {
         return adult;
@@ -76,14 +83,6 @@ public class Movie implements Serializable {
 
     public void setBudget(Double budget) {
         this.budget = budget;
-    }
-
-    public List<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
     }
 
     public String getHomepage() {
@@ -126,12 +125,12 @@ public class Movie implements Serializable {
         this.originalTitle = originalTitle;
     }
 
-    public String getOverview() {
-        return overview;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPopularity() {
@@ -143,6 +142,9 @@ public class Movie implements Serializable {
     }
 
     public String getPosterPath() {
+        if(posterPath != null && !posterPath.startsWith("http")) {
+            posterPath = String.format(Constants.IMAGE_URL, posterPath);
+        }
         return posterPath;
     }
 
@@ -220,5 +222,25 @@ public class Movie implements Serializable {
 
     public void setGenreIds(List<Integer> genreIds) {
         this.genreIds = genreIds;
+    }
+
+    public String getTrailerCode() {
+        return trailerCode;
+    }
+
+    public void setTrailerCode(String trailerCode) {
+        this.trailerCode = trailerCode;
+    }
+
+    public List<Object> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Object> genres) {
+        this.genres = genres;
+    }
+
+    public List<String> getGenreNames() {
+        return BaseUtils.getGenres(getGenres());
     }
 }

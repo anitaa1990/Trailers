@@ -30,11 +30,6 @@
             android:theme="@style/AppTheme">
         </activity>
 
-        <activity
-            android:name=".activity.FavActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
 
         <activity android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"

@@ -154,6 +154,31 @@ public class VolleyService implements Constants {
         }
     }
 
+
+    public void getDvdMovies(Context context, String pageId, final MovieResponseListener listener) {
+        try {
+            CacheRequest stringRequest = new CacheRequest(Request.Method.GET,
+                    String.format(MOVIE_DVD_PATH, pageId),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            MovieResponse movieResponse = BaseUtils.getMovieList(response);
+                            List<Movie> movies = movieResponse.getData().getMovies();
+                            listener.onMoviesResponse(movies, movieResponse.getData().getPageNumber(), movieResponse.getData().getLimit());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                        }
+                    });
+            MyVolley.getInstance(context).addToRequestQueue(stringRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void getRatingForMovie(Context context, String tmdbId, final RESTListener listener) {
         CacheRequest stringRequest = new CacheRequest(Request.Method.GET,
                 String.format(MOVIE_RATING_PATH, tmdbId),

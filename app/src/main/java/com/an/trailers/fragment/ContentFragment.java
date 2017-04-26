@@ -33,6 +33,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     private CommonPagerAdapter adapter;
 
     private String url;
+    private String method;
     private int currentPage = 1;
     private long totalPages;
     private List<CommonFragment> fragments = new ArrayList<>();
@@ -40,10 +41,19 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
 
     private View emptyContainer;
 
-    public static ContentFragment newInstance(String method) {
+    public static ContentFragment newInstance(String url, String method) {
         ContentFragment contentFragment = new ContentFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(String.class.getName(), method);
+        bundle.putString(String.class.getName(), url);
+        bundle.putString("method", method);
+        contentFragment.setArguments(bundle);
+        return contentFragment;
+    }
+
+    public static ContentFragment newInstance(String url) {
+        ContentFragment contentFragment = new ContentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(String.class.getName(), url);
         contentFragment.setArguments(bundle);
         return contentFragment;
     }
@@ -57,6 +67,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.url = getArguments().getString(String.class.getName());
+        this.method = getArguments().getString("method");
     }
 
     @Override
@@ -73,7 +84,9 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
         fillViewPager();
 
         if(url == null) fetchFavMovies();
-        else RESTExecutorService.submit(new VolleyTask(activity, null, String.valueOf(currentPage), url, this));
+        else if(getString(R.string.dvd).equalsIgnoreCase(method)) {
+            RESTExecutorService.submit(new VolleyTask(activity, METHOD_DVD, String.valueOf(currentPage), this));
+        } else RESTExecutorService.submit(new VolleyTask(activity, null, String.valueOf(currentPage), url, this));
 
         return rootView;
     }
@@ -88,7 +101,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
-                String imageUrl = String.format(Constants.IMAGE_URL, movies.get(position).getPosterPath());
+                String imageUrl = movies.get(position).getPosterPath();
                 Glide.with(activity).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -120,6 +133,9 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
         if(movies == null || movies.isEmpty()) {
             handleEmptyResponse();
         } else {
+            emptyContainer.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
+
             this.movies.addAll(movies);
             this.totalPages = totalPages;
             this.currentPage = currentPage + 1;
