@@ -14,22 +14,24 @@ import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.activity.BaseActivity;
 import com.an.trailers.activity.DetailActivity;
 import com.an.trailers.activity.VideoActivity;
 import com.an.trailers.model.Movie;
+import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.DragLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
 
 public class CommonFragment extends Fragment implements DragLayout.GotoDetailListener, View.OnClickListener {
+    private final double CONTAINER_ASPECT_RATIO = 54.05;
+
     private ImageView imageView;
     private TextView movieTitle, movieDesc;
     private ImageView playBtn;
@@ -39,6 +41,9 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
 
     private Context context;
     private BaseActivity activity;
+
+    private View frameContainer;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -72,6 +77,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
         imageView = (ImageView) dragLayout.findViewById(R.id.image);
         Glide.with(context).load(imageUrl).into(imageView);
 
+        frameContainer = dragLayout.findViewById(R.id.frame_container);
         movieTitle = (TextView) dragLayout.findViewById(R.id.movie_title);
         movieDesc = (TextView) dragLayout.findViewById(R.id.movie_desc);
         ratingBar = (RatingBar) dragLayout.findViewById(R.id.rating);
@@ -85,6 +91,11 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
                 ratingBar.setRating(value);
             }
         }
+
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) frameContainer.getLayoutParams();
+        Double height = Math.ceil(((CONTAINER_ASPECT_RATIO * BaseUtils.getScreenHeight(activity))/100));
+        lp.height = height.intValue();
+        frameContainer.setLayoutParams(lp);
 
         dragLayout.setGotoDetailListener(this);
         return rootView;

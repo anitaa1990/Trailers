@@ -12,6 +12,7 @@
         app:bottomDragVisibleHeight="@dimen/card_bottom_info_height">
 
         <FrameLayout
+            android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:layout_gravity="center_vertical"
@@ -101,7 +102,6 @@
 
         </FrameLayout>
 
-        <!--2. 頂層可滑动的View-->
 
         <com.an.trailers.views.AspectRatioCardView
             android:layout_width="match_parent"
