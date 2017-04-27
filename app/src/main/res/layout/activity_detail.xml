@@ -145,7 +145,6 @@
 
 
                             <LinearLayout
-                                android:id="@+id/layout_imdb"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/margin"
@@ -153,6 +152,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
+                                    android:id="@+id/layout_imdb"
                                     android:paddingRight="@dimen/padding_small"
                                     android:paddingTop="2dp"
                                     android:paddingBottom="2dp"

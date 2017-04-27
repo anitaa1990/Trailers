@@ -12,7 +12,10 @@ import android.support.v7.graphics.Palette;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.an.trailers.fragment.CommonFragment;
+
 import java.lang.reflect.Field;
+import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -57,5 +60,19 @@ public abstract class BaseActivity extends AppCompatActivity {
                 overlayView.setBackgroundColor(p.getDominantColor(Color.parseColor("#B07986CB")));
             }
         });
+    }
+
+    public void animateDragLayout(List<CommonFragment> fragments,
+                                  int position) {
+        CommonFragment fragment = fragments.get(position);
+        fragment.dragLayout.setStateExpanded();
+        if(position > 0) {
+            CommonFragment leftFragment = fragments.get(position-1);
+            leftFragment.dragLayout.setStateClose();
+        }
+        if(position+1 != fragments.size()) {
+            CommonFragment rightFragment = fragments.get(position+1);
+            rightFragment.dragLayout.setStateClose();
+        }
     }
 }

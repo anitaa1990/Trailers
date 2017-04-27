@@ -106,7 +106,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
 
             @Override
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
-                animateDragLayout(position);
+                activity.animateDragLayout(fragments, position);
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
                 String imageUrl = movies.get(position).getPosterPath();
@@ -134,19 +134,6 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
                 }
             }
         });
-    }
-
-    private void animateDragLayout(int position) {
-        CommonFragment fragment = fragments.get(position);
-        fragment.dragLayout.setStateExpanded();
-        if(position > 0) {
-            CommonFragment leftFragment = fragments.get(position-1);
-            leftFragment.dragLayout.setStateClose();
-        }
-        if(position+1 != fragments.size()) {
-            CommonFragment rightFragment = fragments.get(position+1);
-            rightFragment.dragLayout.setStateClose();
-        }
     }
 
     @Override

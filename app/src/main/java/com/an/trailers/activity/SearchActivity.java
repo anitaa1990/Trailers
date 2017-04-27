@@ -93,6 +93,10 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
                 pos = 0;
                 queryTxt = query;
                 loadingView.setVisibility(View.VISIBLE);
+
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
                 RESTExecutorService.submit(new VolleyTask(SearchActivity.this, METHOD_SEARCH, String.valueOf(currentPage), query, SearchActivity.this));
                 return true;
             }
@@ -119,6 +123,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
 
             @Override
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
+                animateDragLayout(fragments, position);
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
                 String imageUrl = movies.get(position).getPosterPath();
@@ -151,8 +156,6 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     @Override
     public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
         loadingView.setVisibility(View.GONE);
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
         if(movies.isEmpty()) {
             emptyContainer.setVisibility(View.VISIBLE);

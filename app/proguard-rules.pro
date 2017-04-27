@@ -64,3 +64,4 @@
 -dontwarn com.squareup.okhttp.**
 
 -keep class com.an.trailers.model.** { *; }
+-keep class com.an.trailers.views.progress.** { *; }
