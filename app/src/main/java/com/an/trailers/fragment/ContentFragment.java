@@ -42,6 +42,8 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     private View emptyContainer;
     private LoadingView loadingView;
 
+    public static int index = 0;
+
     public static ContentFragment newInstance(String url, String method) {
         ContentFragment contentFragment = new ContentFragment();
         Bundle bundle = new Bundle();
@@ -100,11 +102,11 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     private void fillViewPager() {
         viewPager.setPageTransformer(false, new CustPagerTransformer(activity));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            private int index = 0;
             private int pos = 0;
 
             @Override
             public void onPageScrolled(final int position, float positionOffset, int positionOffsetPixels) {
+                animateDragLayout(position);
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
                 String imageUrl = movies.get(position).getPosterPath();
@@ -132,6 +134,19 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
                 }
             }
         });
+    }
+
+    private void animateDragLayout(int position) {
+        CommonFragment fragment = fragments.get(position);
+        fragment.dragLayout.setStateExpanded();
+        if(position > 0) {
+            CommonFragment leftFragment = fragments.get(position-1);
+            leftFragment.dragLayout.setStateClose();
+        }
+        if(position+1 != fragments.size()) {
+            CommonFragment rightFragment = fragments.get(position+1);
+            rightFragment.dragLayout.setStateClose();
+        }
     }
 
     @Override

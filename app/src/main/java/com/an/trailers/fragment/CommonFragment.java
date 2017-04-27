@@ -43,6 +43,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
     private BaseActivity activity;
 
     private View frameContainer;
+    public DragLayout dragLayout;
 
     @Override
     public void onAttach(Context context) {
@@ -72,7 +73,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_common, null);
-        DragLayout dragLayout = (DragLayout) rootView.findViewById(R.id.drag_layout);
+        dragLayout = (DragLayout) rootView.findViewById(R.id.drag_layout);
 
         imageView = (ImageView) dragLayout.findViewById(R.id.image);
         Glide.with(context).load(imageUrl).into(imageView);
@@ -99,6 +100,11 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
 
         dragLayout.setGotoDetailListener(this);
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

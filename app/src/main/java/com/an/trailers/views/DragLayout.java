@@ -26,8 +26,8 @@ public class DragLayout extends FrameLayout {
     private static final float MIN_SCALE_RATIO = 0.5f;
     private static final float MAX_SCALE_RATIO = 1.0f;
 
-    private static final int STATE_CLOSE = 1;
-    private static final int STATE_EXPANDED = 2;
+    public static final int STATE_CLOSE = 1;
+    public static final int STATE_EXPANDED = 2;
     private int downState;
 
     private final ViewDragHelper mDragHelper;
@@ -75,10 +75,7 @@ public class DragLayout extends FrameLayout {
             public void onClick(View v) {
                 int state = getCurrentState();
                 if (state == STATE_CLOSE) {
-
-                    if (mDragHelper.smoothSlideViewTo(topView, originX, dragTopDest)) {
-                        ViewCompat.postInvalidateOnAnimation(DragLayout.this);
-                    }
+                    setStateExpanded(topView, originX, dragTopDest);
                 } else {
                     gotoDetailActivity();
                 }
@@ -86,6 +83,19 @@ public class DragLayout extends FrameLayout {
         });
     }
 
+    private void setStateExpanded(View child, int finalLeft, int finalTop) {
+        if (mDragHelper.smoothSlideViewTo(child, finalLeft, finalTop)) {
+            ViewCompat.postInvalidateOnAnimation(DragLayout.this);
+        }
+    }
+
+    public void setStateExpanded() {
+        setStateExpanded(topView, originX, dragTopDest);
+    }
+
+    public void setStateClose() {
+        setStateExpanded(topView, originX, originY);
+    }
 
     private void gotoDetailActivity() {
         if (null != gotoDetailListener) {
@@ -170,10 +180,7 @@ public class DragLayout extends FrameLayout {
                     }
                 }
             }
-
-            if (mDragHelper.smoothSlideViewTo(releasedChild, originX, finalY)) {
-                ViewCompat.postInvalidateOnAnimation(DragLayout.this);
-            }
+            setStateExpanded(releasedChild, originX, finalY);
         }
     }
 
