@@ -15,6 +15,10 @@
     <string name="dvd">dvd</string>
     <string name="favourites">favourites</string>
 
+    <string name="download_first_txt">Click &#160;</string>
+    <string name="download_second_txt">here</string>
+    <string name="download_third_txt">&#160;to watch the full movie</string>
+
 
     <string-array name="menu_names">
         <item>@string/drawer_close</item>

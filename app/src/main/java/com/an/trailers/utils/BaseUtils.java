@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Pair;
 import android.view.Display;
@@ -214,5 +215,19 @@ public class BaseUtils {
     public static Object readObjectFromDisk() {
         ObjectUtil objDataStream = new ObjectUtil();
         return objDataStream.readObjects(LOCALE_CACHE_PATH);
+    }
+
+    public static void loadExternalBrowser(Activity activity, String url) {
+        try {
+            if (!url.startsWith("https://") && !url.startsWith("http://")) {
+                url = "http://" + url;
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            activity.startActivity(intent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

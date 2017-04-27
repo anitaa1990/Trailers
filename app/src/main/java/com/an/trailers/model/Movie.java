@@ -20,6 +20,7 @@ public class Movie implements Serializable {
     private List<Object> genres;
 
     private String homepage;
+    private String url;
     private long id;
 
     @SerializedName(value="imdbId", alternate={"imdb_id", "imdb_code"})
@@ -231,6 +232,14 @@ public class Movie implements Serializable {
 
     public void setTrailerCode(String trailerCode) {
         this.trailerCode = trailerCode;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public List<Object> getGenres() {

@@ -273,6 +273,22 @@
                                 android:layout_height="wrap_content"
                                 app:font="gt_medium"/>
 
+                            <com.an.trailers.views.CustomTextView
+                                android:visibility="gone"
+                                android:paddingLeft="@dimen/padding"
+                                android:paddingRight="@dimen/padding"
+                                android:paddingBottom="@dimen/padding"
+                                android:layout_gravity="right|center_vertical"
+                                android:gravity="right|center_vertical"
+                                android:textColor="@android:color/black"
+                                android:textSize="13dp"
+                                android:layout_marginRight="@dimen/margin_large"
+                                android:layout_marginTop="-10dp"
+                                android:id="@+id/download_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:font="gt_medium"/>
+
                             <include layout="@layout/detail_list_item"/>
 
                         </LinearLayout>

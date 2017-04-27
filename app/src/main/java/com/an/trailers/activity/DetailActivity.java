@@ -1,7 +1,9 @@
 package com.an.trailers.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +12,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +86,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
     private TextView moreBtn;
     private ExpandableLayout expandableLayout;
 
+    private TextView downloadBtn;
     private boolean isFavourite;
 
     @Override
@@ -110,6 +117,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         moreBtn.setPaintFlags(moreBtn.getPaintFlags() |  Paint.UNDERLINE_TEXT_FLAG);
         moreBtn.setOnClickListener(this);
         expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout_0);
+        downloadBtn = (TextView) findViewById(R.id.download_btn);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -136,6 +144,16 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
                 if(!videos.isEmpty()) {
                     moreBtn.setVisibility(View.GONE);
+                    if(movie.getUrl() != null) {
+                        downloadBtn.setVisibility(View.VISIBLE);
+                        String s = getString(R.string.download_first_txt).concat(getString(R.string.download_second_txt)).concat(getString(R.string.download_third_txt));
+                        SpannableString ss = new SpannableString(s);
+                        ss.setSpan(clickableSpan, getString(R.string.download_first_txt).length(),
+                                getString(R.string.download_first_txt).concat(getString(R.string.download_second_txt))
+                                        .length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        downloadBtn.setText(ss);
+                        downloadBtn.setMovementMethod(LinkMovementMethod.getInstance());
+                    }
                     onVideoResponse(videos);
                     RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
                 }
@@ -262,4 +280,11 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
             MovieDb.getInstance().removeFromFavMovies(movie);
         }
     }
+
+    private ClickableSpan clickableSpan = new ClickableSpan() {
+        @Override
+        public void onClick(View textView) {
+            BaseUtils.loadExternalBrowser(DetailActivity.this, movie.getUrl());
+        }
+    };
 }
