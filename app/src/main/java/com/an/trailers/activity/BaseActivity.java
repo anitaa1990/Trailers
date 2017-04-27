@@ -65,14 +65,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void animateDragLayout(List<CommonFragment> fragments,
                                   int position) {
         CommonFragment fragment = fragments.get(position);
-        fragment.dragLayout.setStateExpanded();
+        if(fragment.dragLayout != null)
+            fragment.dragLayout.setStateExpanded();
         if(position > 0) {
             CommonFragment leftFragment = fragments.get(position-1);
-            leftFragment.dragLayout.setStateClose();
+            if(leftFragment.dragLayout != null)
+                leftFragment.dragLayout.setStateClose();
         }
-        if(position+1 != fragments.size()) {
+        if((position+1) != fragments.size()) {
             CommonFragment rightFragment = fragments.get(position+1);
-            rightFragment.dragLayout.setStateClose();
+            if(rightFragment.dragLayout != null)
+                rightFragment.dragLayout.setStateClose();
         }
     }
 }
