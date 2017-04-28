@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trailers</string>
+    <string name="app_name">Movinch</string>
     <string name="read_less">READ LESS</string>
     <string name="read_more">READ MORE</string>
     <string name="player_error">Error initializing YouTube player: %s</string>
