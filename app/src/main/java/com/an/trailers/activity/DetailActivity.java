@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
-import com.an.trailers.adapter.CreditAdapter;
-import com.an.trailers.adapter.MovieAdapter;
+import com.an.trailers.adapter.CreditListAdapter;
+import com.an.trailers.adapter.SimilarMoviesListAdapter;
 import com.an.trailers.adapter.VideoListAdapter;
 import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.callback.RESTListener;
@@ -217,9 +217,9 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
     @Override
     public void onCreditsResponse(Pair<List<Cast>, List<Crew>> creditPair) {
-        CreditAdapter creditAdapter = new CreditAdapter(this, CREDIT_CAST, creditPair.first, null);
-        castView.setAdapter(creditAdapter);
-        CreditAdapter crewAdapter = new CreditAdapter(this, CREDIT_CREW, null, creditPair.second);
+        CreditListAdapter creditListAdapter = new CreditListAdapter(this, CREDIT_CAST, creditPair.first, null);
+        castView.setAdapter(creditListAdapter);
+        CreditListAdapter crewAdapter = new CreditListAdapter(this, CREDIT_CREW, null, creditPair.second);
         crewView.setAdapter(crewAdapter);
     }
 
@@ -234,7 +234,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
     private MovieResponseListener movieResponseListener = new MovieResponseListener() {
         @Override
         public void onMoviesResponse(List<Movie> movies, int currentPage, long totalPages) {
-            MovieAdapter movieAdapter = new MovieAdapter(DetailActivity.this, movies);
+            SimilarMoviesListAdapter movieAdapter = new SimilarMoviesListAdapter(DetailActivity.this, movies);
             similarMoviesView.setAdapter(movieAdapter);
             if(movies == null || movies.isEmpty()) {
                 similarMoviesTitle.setVisibility(View.GONE);
