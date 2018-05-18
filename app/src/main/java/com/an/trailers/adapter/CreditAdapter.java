@@ -12,7 +12,6 @@ import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.credits_list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_credits, parent, false);
         return new ViewHolder(itemView);
     }
 

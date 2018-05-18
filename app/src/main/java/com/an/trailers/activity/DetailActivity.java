@@ -1,24 +1,15 @@
 package com.an.trailers.activity;
 
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,7 +33,7 @@ import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.collectionpicker.CollectionPicker;
 import com.an.trailers.views.expandablelayout.ExpandableLayout;
 import com.sackcentury.shinebuttonlib.ShineButton;
-import com.squareup.picasso.Picasso;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -172,7 +163,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
     private void loadSimilarMovies() {
         LayoutInflater layoutInflater = LayoutInflater.from(DetailActivity.this);
-        View childView = layoutInflater.inflate(R.layout.similiar_movies_list, null);
+        View childView = layoutInflater.inflate(R.layout.view_similiar_movies_list, null);
 
         similarMoviesView = (RecyclerView) childView.findViewById(R.id.movies_list);
         similarMoviesView.setNestedScrollingEnabled(false);

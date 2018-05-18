@@ -10,7 +10,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.an.trailers.R;
 import com.an.trailers.utils.BaseUtils;
@@ -62,7 +61,7 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
         viewList.clear();
         double size = list.size();
         for (int i = 0; i < size; i++) {
-            final View viewMenu = appCompatActivity.getLayoutInflater().inflate(R.layout.menu_list_item, null);
+            final View viewMenu = appCompatActivity.getLayoutInflater().inflate(R.layout.list_item_menu, null);
 
             final int finalI = i;
             viewMenu.setOnClickListener(new View.OnClickListener() {

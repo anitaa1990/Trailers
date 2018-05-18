@@ -167,7 +167,7 @@ public class CollectionPicker extends LinearLayout {
     }
 
     private View createItemView(String s) {
-        View view = mInflater.inflate(R.layout.genre_item, this, false);
+        View view = mInflater.inflate(R.layout.list_item_genre, this, false);
         if (isJellyBeanAndAbove()) {
             view.setBackground(getSelector(s));
         } else {

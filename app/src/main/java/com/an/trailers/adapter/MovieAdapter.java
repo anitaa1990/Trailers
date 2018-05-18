@@ -2,17 +2,14 @@ package com.an.trailers.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.activity.DetailActivity;
-import com.an.trailers.activity.VideoActivity;
 import com.an.trailers.model.Movie;
 import com.bumptech.glide.Glide;
 
@@ -29,7 +26,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_similar_movies, parent, false);
         return new ViewHolder(itemView);
     }
 
