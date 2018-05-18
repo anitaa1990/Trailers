@@ -20,6 +20,13 @@ android {
 }
 
 
+android {
+    dataBinding {
+        enabled = true
+    }
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:recyclerview-v7:27.0.2'

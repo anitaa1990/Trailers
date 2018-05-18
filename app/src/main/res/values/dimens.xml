@@ -21,6 +21,7 @@
     <dimen name="padding_xxxlarge">29dip</dimen>
     <dimen name="padding_xxxxlarge">35dip</dimen>
     <dimen name="padding_megalarge">40dip</dimen>
+    <dimen name="padding_xxxxxlarge">48dip</dimen>
     <dimen name="padding_small">5dip</dimen>
     <dimen name="padding_medium">8dip</dimen>
     <dimen name="padding_xsmall">4dip</dimen>
@@ -68,4 +69,17 @@
     <dimen name="video_item_share_size">80dp</dimen>
     <dimen name="video_item_image_size">80dp</dimen>
     <dimen name="profile_item_image_size">70dp</dimen>
+    <dimen name="video_play_image_size">20dp</dimen>
+
+
+    <dimen name="activity_search_fav_icon_size">125dp</dimen>
+    <dimen name="shine_icon_size">25dp</dimen>
+    <dimen name="search_icon_size">45dp</dimen>
+    <dimen name="menu_icon_size">40dp</dimen>
+    <dimen name="search_bottom_layout_height">55dp</dimen>
+
+    <dimen name="list_item_similar_movies_icon_width">145dp</dimen>
+    <dimen name="list_item_similar_movies_icon_height">185dp</dimen>
+
+    <dimen name="fragment_container_height">320dp</dimen>
 </resources>

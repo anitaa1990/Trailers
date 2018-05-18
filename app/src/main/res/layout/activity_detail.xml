@@ -341,8 +341,8 @@
 
                     <com.sackcentury.shinebuttonlib.ShineButton
                         android:id="@+id/shineButton"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/shine_icon_size"
+                        android:layout_height="@dimen/shine_icon_size"
                         android:src="@android:color/white"
                         app:allow_random_color="false"
                         app:backgroundTint="@color/btn_shine"

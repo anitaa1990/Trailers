@@ -1,146 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/fr_container"
-    android:background="#292631">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.an.trailers.views.progress.LoadingView
-        android:visibility="gone"
-        android:id="@+id/progress_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        app:loading_renderer="SwapLoadingRenderer"/>
-
-    <LinearLayout
-        android:id="@+id/emptyContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/fav_image"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_gravity="center"
-            android:src="@drawable/placeholder_empty" />
-
-        <com.an.customfontview.CustomTextView
-            android:textSize="15dp"
-            android:id="@+id/fav_display_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xxxxlarge"
-            android:text="@string/empty_fav"
-            android:textColor="@android:color/white"
-            app:textFontPath="fonts/gt_medium.otf" />
-
-    </LinearLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center" />
-
-    <View
-        android:id="@+id/overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#26000000" />
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:clipToPadding="false"
-        android:paddingEnd="48dp"
-        android:paddingLeft="48dp"
-        android:paddingRight="48dp"
-        android:paddingStart="48dp">
-
-    </android.support.v4.view.ViewPager>
+    <data class="SearchActivityBinding" />
 
     <RelativeLayout
-        android:id="@+id/bottom_layout"
+        android:id="@+id/fr_container"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="match_parent"
+        android:background="@color/bg_activity_detail">
 
-        <!--<ImageView-->
-            <!--android:layout_width="38dp"-->
-            <!--android:layout_height="38dp"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:src="@drawable/icon1" />-->
+        <com.an.trailers.views.progress.LoadingView
+            android:id="@+id/progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            app:loading_renderer="SwapLoadingRenderer" />
 
-        <!--<ImageView-->
-            <!--android:layout_width="38dp"-->
-            <!--android:layout_height="38dp"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:src="@drawable/icon2" />-->
+        <LinearLayout
+            android:id="@+id/emptyContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <!--<ImageView-->
-            <!--android:layout_width="38dp"-->
-            <!--android:layout_height="38dp"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:src="@drawable/icon3" />-->
+            <ImageView
+                android:id="@+id/fav_image"
+                android:layout_width="@dimen/activity_search_fav_icon_size"
+                android:layout_height="@dimen/activity_search_fav_icon_size"
+                android:layout_gravity="center"
+                android:src="@drawable/placeholder_empty" />
 
-    </RelativeLayout>
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/fav_display_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xxxxlarge"
+                android:text="@string/empty_fav"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_medium"
+                app:textFontPath="fonts/gt_medium.otf" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
 
         <View
-            android:id="@+id/position_view"
-            android:layout_width="1px"
-            android:layout_height="1px" />
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/search_overlay" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:clipToPadding="false"
+            android:paddingEnd="48dp"
+            android:paddingLeft="48dp"
+            android:paddingRight="48dp"
+            android:paddingStart="48dp">
+
+        </android.support.v4.view.ViewPager>
 
         <RelativeLayout
+            android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.SearchView
-
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_small"
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:searchIcon="@drawable/search"
-                app:goIcon="@drawable/search"
-                app:searchHintIcon="@drawable/search"
-                app:closeIcon="@drawable/close"
-                style="@style/SearchViewTheme"
-                app:queryHint="Search Movies..."
-                />
-
-            <View
-                android:id="@+id/search_icon"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginLeft="@dimen/margin_large"
-                android:layout_centerVertical="true"
-                android:background="@drawable/search"
-                android:layout_width="45dp"
-                android:layout_height="45dp"/>
+            android:layout_height="@dimen/search_bottom_layout_height"
+            android:layout_alignParentBottom="true">
 
 
         </RelativeLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</RelativeLayout>
+            <View
+                android:id="@+id/position_view"
+                android:layout_width="1px"
+                android:layout_height="1px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_bottom_layout_height"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.SearchView
+
+                    android:id="@+id/search"
+                    style="@style/SearchViewTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    app:closeIcon="@drawable/close"
+                    app:goIcon="@drawable/search"
+                    app:queryHint="@string/search_query_hint"
+                    app:searchHintIcon="@drawable/search"
+                    app:searchIcon="@drawable/search" />
+
+                <View
+                    android:id="@+id/search_icon"
+                    android:layout_width="@dimen/search_icon_size"
+                    android:layout_height="@dimen/search_icon_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@drawable/search" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

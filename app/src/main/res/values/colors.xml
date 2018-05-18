@@ -26,4 +26,7 @@
     <color name="detail_list_item_view">#cccccc</color>
     <color name="detail_list_item_text">#111</color>
 
+    <color name="search_overlay">#26000000</color>
+    <color name="fragment_common_view">#f0f0f0</color>
+
 </resources>

@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/movie_detail_card"
-        android:layout_marginRight="@dimen/margin_large"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardPreventCornerOverlap="false">
+    <data class="SimilarMoviesListItemBinding" />
 
-    <ImageView
-        android:scaleType="fitXY"
-        android:id="@+id/item_img"
-        android:adjustViewBounds="true"
-        android:layout_width="145dp"
-        android:layout_height="185dp" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/movie_detail_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_large"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="8dp"
+            app:cardPreventCornerOverlap="false">
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/item_img"
+                android:layout_width="@dimen/list_item_similar_movies_icon_width"
+                android:layout_height="@dimen/list_item_similar_movies_icon_height"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY" />
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

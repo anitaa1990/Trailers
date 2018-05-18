@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@android:color/transparent">
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:minHeight="?attr/actionBarSize">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -25,30 +24,29 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.SearchView
-                android:layout_centerVertical="true"
                 android:id="@+id/search"
+                style="@style/SearchViewTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:searchIcon="@drawable/search"
-                app:goIcon="@drawable/search"
-                app:searchHintIcon="@drawable/search"
+                android:layout_centerVertical="true"
                 app:closeIcon="@drawable/close"
-                style="@style/SearchViewTheme"
-                app:queryHint="Search Movies..."
-                />
+                app:goIcon="@drawable/search"
+                app:queryHint="@string/search_query_hint"
+                app:searchHintIcon="@drawable/search"
+                app:searchIcon="@drawable/search" />
 
             <View
                 android:id="@+id/search_icon"
-                android:layout_marginRight="@dimen/margin_large"
+                android:layout_width="@dimen/search_icon_size"
+                android:layout_height="@dimen/search_icon_size"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/search"
-                android:layout_width="45dp"
-                android:layout_height="45dp"/>
+                android:layout_marginRight="@dimen/margin_large"
+                android:background="@drawable/search" />
 
 
         </RelativeLayout>
 
     </LinearLayout>
 
-     </android.support.v7.widget.Toolbar>
+</android.support.v7.widget.Toolbar>

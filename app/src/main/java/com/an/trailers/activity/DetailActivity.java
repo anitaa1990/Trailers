@@ -18,7 +18,7 @@ import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.adapter.CreditAdapter;
 import com.an.trailers.adapter.MovieAdapter;
-import com.an.trailers.adapter.VideoAdapter;
+import com.an.trailers.adapter.VideoListAdapter;
 import com.an.trailers.callback.MovieResponseListener;
 import com.an.trailers.callback.RESTListener;
 import com.an.trailers.model.Cast;
@@ -195,7 +195,7 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
 
     @Override
     public void onVideoResponse(List<Video> videos) {
-        VideoAdapter adapter = new VideoAdapter(DetailActivity.this, videos);
+        VideoListAdapter adapter = new VideoListAdapter(DetailActivity.this, videos);
         recyclerView.setAdapter(adapter);
     }
 
