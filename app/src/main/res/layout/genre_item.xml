@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <com.an.trailers.views.CustomTextView
+    <com.an.customfontview.CustomTextView
         android:id="@+id/item_text"
         android:textSize="14dp"
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_marginRight="@dimen/margin_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:font="gt_medium"
+        app:textFontPath="fonts/gt_medium.otf"
         android:textColor="@android:color/white" />
 
 

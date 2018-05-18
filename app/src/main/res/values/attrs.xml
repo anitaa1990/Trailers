@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <declare-styleable name="app">
         <attr name="bottomDragVisibleHeight" format="dimension" />
         <attr name="bototmExtraIndicatorHeight" format="dimension" />
     </declare-styleable>
 
-    <attr name="font">
-        <enum name="gt_medium" value="4" />
-    </attr>
 
-    <declare-styleable name="CustomEditText">
-        <attr name="font" />
-    </declare-styleable>
-    <declare-styleable name="CustomButton">
-        <attr name="font" />
-    </declare-styleable>
-    <declare-styleable name="CustomTextView">
-        <attr name="font" />
-    </declare-styleable>
 
     <declare-styleable name="CollectionPicker">
         <attr name="cp_itemRadius" format="dimension" />
@@ -36,12 +25,15 @@
         <attr name="cp_simplified" format="boolean" />
     </declare-styleable>
 
+
+
     <declare-styleable name="CircleImageView">
         <attr name="civ_border_width" format="dimension" />
         <attr name="civ_border_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
 
 
     <declare-styleable name="LoadingView">
@@ -51,6 +43,15 @@
             <enum name="DanceLoadingRenderer" value="6"/>
             <enum name="CollisionLoadingRenderer" value="7"/>
         </attr>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="ExpandableLayout">
+        <attr name="el_duration" format="integer" />
+        <attr name="el_expanded" format="boolean" />
+        <attr name="el_parallax" format="float" />
+        <attr name="android:orientation"/>
     </declare-styleable>
 
 </resources>

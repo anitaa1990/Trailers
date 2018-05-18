@@ -39,12 +39,12 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         if(isCast()) {
             Cast cast = casts.get(position);
-            Glide.with(context).load(String.format(Constants.IMAGE_URL, cast.getProfilePath())).error(R.drawable.profile_placeholder).into(holder.imageView);
+//            Glide.with(context).load(String.format(Constants.IMAGE_URL, cast.getProfilePath())).error(R.drawable.profile_placeholder).into(holder.imageView);
             holder.nameTxt.setText(cast.getName());
             holder.infoTxt.setText(cast.getCharacter());
         } else {
             Crew crew = crews.get(position);
-            Glide.with(context).load(String.format(Constants.IMAGE_URL, crew.getProfilePath())).error(R.drawable.profile_placeholder).into(holder.imageView);
+//            Glide.with(context).load(String.format(Constants.IMAGE_URL, crew.getProfilePath())).error(R.drawable.profile_placeholder).into(holder.imageView);
             holder.nameTxt.setText(crew.getName());
             holder.infoTxt.setText(crew.getJob());
         }

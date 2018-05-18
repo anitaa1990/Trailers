@@ -1,10 +1,8 @@
 package com.an.trailers.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -41,11 +39,10 @@ import com.an.trailers.model.Video;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
 import com.an.trailers.utils.BaseUtils;
-import com.an.trailers.views.CollectionPicker;
+import com.an.trailers.views.collectionpicker.CollectionPicker;
+import com.an.trailers.views.expandablelayout.ExpandableLayout;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
-
-import net.cachapa.expandablelayout.ExpandableLayout;
 import java.util.Arrays;
 import java.util.List;
 
@@ -94,83 +91,83 @@ public class DetailActivity extends FragmentActivity implements RESTListener, Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        imageView = (ImageView) findViewById(R.id.image);
-        recyclerView = (RecyclerView) findViewById(R.id.list);
-        recyclerView.setNestedScrollingEnabled(false);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.smoothScrollToPosition(1);
-
-        movieTitle = (TextView) findViewById(R.id.movie_title);
-        movieDesc = (TextView) findViewById(R.id.movie_desc);
-        listContainer = (LinearLayout) findViewById(R.id.detail_list_container);
-        picker = (CollectionPicker) findViewById(R.id.collection_item_picker);
-        movieStatusTxt = (CollectionPicker) findViewById(R.id.movie_status);
-        runtimeTxt = (TextView) findViewById(R.id.txt_runtime);
-        imdbLayout = findViewById(R.id.layout_imdb);
-        imdbRatingTxt = (TextView) findViewById(R.id.imdbRating);
-        favView = findViewById(R.id.fav_view);
-        shineButton = (ShineButton) findViewById(R.id.po_image1);
-        shineButton.setOnClickListener(this);
-        moreBtn = (TextView) findViewById(R.id.expand_button);
-        moreBtn.setPaintFlags(moreBtn.getPaintFlags() |  Paint.UNDERLINE_TEXT_FLAG);
-        moreBtn.setOnClickListener(this);
-        expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout_0);
-        downloadBtn = (TextView) findViewById(R.id.download_btn);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            window.setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        movie = (Movie) getIntent().getSerializableExtra(EXTRA_MAP);
-        movieTitle.setText(movie.getTitle());
-        movieDesc.setText(movie.getDescription());
-
-        String imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
-        Picasso.with(this).load(imageUrl).into(imageView);
-
-        ViewCompat.setTransitionName(imageView, IMAGE_TRANSITION_NAME);
-        ViewCompat.setTransitionName(movieTitle, TITLE_TRANSITION_NAME);
-        ViewCompat.setTransitionName(movieDesc, DESC_TRANSITION_NAME);
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                List<Video> videos = movie.getTrailers();
-
-                if(!videos.isEmpty()) {
-                    moreBtn.setVisibility(View.GONE);
-                    if(movie.getUrl() != null) {
-                        downloadBtn.setVisibility(View.VISIBLE);
-                        String s = getString(R.string.download_first_txt).concat(getString(R.string.download_second_txt)).concat(getString(R.string.download_third_txt));
-                        SpannableString ss = new SpannableString(s);
-                        ss.setSpan(clickableSpan, getString(R.string.download_first_txt).length(),
-                                getString(R.string.download_first_txt).concat(getString(R.string.download_second_txt))
-                                        .length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        downloadBtn.setText(ss);
-                        downloadBtn.setMovementMethod(LinkMovementMethod.getInstance());
-                    }
-                    onVideoResponse(videos);
-                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
-                }
-                else {
-                    loadSimilarMovies();
-                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_MOVIE, String.valueOf(movie.getId()), DetailActivity.this));
-                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_VIDEO, String.valueOf(movie.getId()), DetailActivity.this));
-                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_CAST, String.valueOf(movie.getId()), DetailActivity.this));
-                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
-                }
-
-                dealListView();
-                isFavourite = MovieDb.getInstance().isFavourite(movie.getId());
-                shineButton.setChecked(isFavourite);
-                handleFavUI();
-            }
-        });
+//        imageView = (ImageView) findViewById(R.id.image);
+//        recyclerView = (RecyclerView) findViewById(R.id.list);
+//        recyclerView.setNestedScrollingEnabled(false);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.smoothScrollToPosition(1);
+//
+//        movieTitle = (TextView) findViewById(R.id.movie_title);
+//        movieDesc = (TextView) findViewById(R.id.movie_desc);
+//        listContainer = (LinearLayout) findViewById(R.id.detail_list_container);
+//        picker = (CollectionPicker) findViewById(R.id.collection_item_picker);
+//        movieStatusTxt = (CollectionPicker) findViewById(R.id.movie_status);
+//        runtimeTxt = (TextView) findViewById(R.id.txt_runtime);
+//        imdbLayout = findViewById(R.id.layout_imdb);
+//        imdbRatingTxt = (TextView) findViewById(R.id.imdbRating);
+//        favView = findViewById(R.id.fav_view);
+//        shineButton = (ShineButton) findViewById(R.id.po_image1);
+//        shineButton.setOnClickListener(this);
+//        moreBtn = (TextView) findViewById(R.id.expand_button);
+//        moreBtn.setPaintFlags(moreBtn.getPaintFlags() |  Paint.UNDERLINE_TEXT_FLAG);
+//        moreBtn.setOnClickListener(this);
+//        expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout_0);
+//        downloadBtn = (TextView) findViewById(R.id.download_btn);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            Window window = getWindow();
+//            window.setFlags(
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+//
+//        movie = (Movie) getIntent().getSerializableExtra(EXTRA_MAP);
+//        movieTitle.setText(movie.getTitle());
+//        movieDesc.setText(movie.getDescription());
+//
+//        String imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
+//        Picasso.with(this).load(imageUrl).into(imageView);
+//
+//        ViewCompat.setTransitionName(imageView, IMAGE_TRANSITION_NAME);
+//        ViewCompat.setTransitionName(movieTitle, TITLE_TRANSITION_NAME);
+//        ViewCompat.setTransitionName(movieDesc, DESC_TRANSITION_NAME);
+//
+//        new Handler().post(new Runnable() {
+//            @Override
+//            public void run() {
+//                List<Video> videos = movie.getTrailers();
+//
+//                if(!videos.isEmpty()) {
+//                    moreBtn.setVisibility(View.GONE);
+//                    if(movie.getUrl() != null) {
+//                        downloadBtn.setVisibility(View.VISIBLE);
+//                        String s = getString(R.string.download_first_txt).concat(getString(R.string.download_second_txt)).concat(getString(R.string.download_third_txt));
+//                        SpannableString ss = new SpannableString(s);
+//                        ss.setSpan(clickableSpan, getString(R.string.download_first_txt).length(),
+//                                getString(R.string.download_first_txt).concat(getString(R.string.download_second_txt))
+//                                        .length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                        downloadBtn.setText(ss);
+//                        downloadBtn.setMovementMethod(LinkMovementMethod.getInstance());
+//                    }
+//                    onVideoResponse(videos);
+//                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_RATING, movie.getImdbId(), DetailActivity.this));
+//                }
+//                else {
+//                    loadSimilarMovies();
+//                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_MOVIE, String.valueOf(movie.getId()), DetailActivity.this));
+//                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_VIDEO, String.valueOf(movie.getId()), DetailActivity.this));
+//                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_CAST, String.valueOf(movie.getId()), DetailActivity.this));
+//                    RESTExecutorService.submit(new VolleyTask(DetailActivity.this, METHOD_MOVIE_SIMILAR, String.valueOf(movie.getId()), movieResponseListener));
+//                }
+//
+//                dealListView();
+//                isFavourite = MovieDb.getInstance().isFavourite(movie.getId());
+//                shineButton.setChecked(isFavourite);
+//                handleFavUI();
+//            }
+//        });
     }
 
     private void loadSimilarMovies() {

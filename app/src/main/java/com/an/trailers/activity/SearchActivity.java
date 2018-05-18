@@ -27,7 +27,6 @@ import com.an.trailers.service.VolleyTask;
 import com.an.trailers.views.CustPagerTransformer;
 import com.an.trailers.views.progress.LoadingView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,14 +125,14 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
                 animateDragLayout(fragments, position);
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
-                String imageUrl = movies.get(position).getPosterPath();
-                Glide.with(SearchActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
-                        bindImage(loadedImage, containerView, overlayView);
-                        pos++;
-                    }
-                });
+//                String imageUrl = movies.get(position).getPosterPath();
+//                Glide.with(SearchActivity.this).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
+//                        bindImage(loadedImage, containerView, overlayView);
+//                        pos++;
+//                    }
+//                });
             }
 
             @Override

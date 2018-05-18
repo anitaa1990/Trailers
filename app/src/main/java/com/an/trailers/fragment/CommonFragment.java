@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -26,7 +27,6 @@ import com.an.trailers.model.Movie;
 import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.DragLayout;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
 
 public class CommonFragment extends Fragment implements DragLayout.GotoDetailListener, View.OnClickListener {
@@ -114,7 +114,7 @@ public class CommonFragment extends Fragment implements DragLayout.GotoDetailLis
             @Override
             public void run() {
                 if(imageView.getDrawable() != null) {
-                    Bitmap bm = ((GlideBitmapDrawable) imageView.getDrawable()).getBitmap();
+                    Bitmap bm = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                     activity.onBindImage(bm);
                 }
             }

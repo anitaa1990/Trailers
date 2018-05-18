@@ -2,6 +2,7 @@ package com.an.trailers.fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -17,8 +18,8 @@ import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.views.CustPagerTransformer;
 import com.an.trailers.views.progress.LoadingView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,13 +111,13 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
                 if(movies.isEmpty()) return;
                 if(pos > 0) return;
                 String imageUrl = movies.get(position).getPosterPath();
-                Glide.with(activity).load(imageUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap loadedImage, GlideAnimation<? super Bitmap> glideAnimation) {
-                        bindBackgroundImage(loadedImage, containerView, overlayView);
-                        pos++;
-                    }
-                });
+//                Glide.with(activity).load(imageUrl).into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        bindBackgroundImage(resource, containerView, overlayView);
+//                        pos++;
+//                    }
+//                });
             }
 
             @Override

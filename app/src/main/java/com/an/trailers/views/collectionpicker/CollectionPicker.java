@@ -1,6 +1,7 @@
-package com.an.trailers.views;
+package com.an.trailers.views.collectionpicker;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -17,18 +18,18 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.utils.BaseUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class CollectionPicker extends LinearLayout {
 
-    public static final int LAYOUT_WIDTH_OFFSET = 0;
+    private List<String> genresList = Arrays.asList("#febf9b", "#f47f87", "#6ac68d", "#fbe0a5");
 
     private ViewTreeObserver mViewTreeObserver;
     private LayoutInflater mInflater;
@@ -64,44 +65,24 @@ public class CollectionPicker extends LinearLayout {
     }
 
 
+    @SuppressLint("ResourceAsColor")
     public CollectionPicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        TypedArray typeArray = context
-                .obtainStyledAttributes(attrs, R.styleable.CollectionPicker);
-        this.mItemMargin = (int) typeArray
-                .getDimension(R.styleable.CollectionPicker_cp_itemMargin,
-                        BaseUtils.dpToPx(this.getContext(), mItemMargin));
-        this.textPaddingLeft = (int) typeArray
-                .getDimension(R.styleable.CollectionPicker_cp_textPaddingLeft,
-                        BaseUtils.dpToPx(this.getContext(), textPaddingLeft));
-        this.textPaddingRight = (int) typeArray
-                .getDimension(R.styleable.CollectionPicker_cp_textPaddingRight,
-                        BaseUtils.dpToPx(this.getContext(),
-                                textPaddingRight));
-        this.textPaddingTop = (int) typeArray
-                .getDimension(R.styleable.CollectionPicker_cp_textPaddingTop,
-                        BaseUtils.dpToPx(this.getContext(), textPaddingTop));
-        this.texPaddingBottom = (int) typeArray
-                .getDimension(R.styleable.CollectionPicker_cp_textPaddingBottom,
-                        BaseUtils.dpToPx(this.getContext(),
-                                texPaddingBottom));
+        TypedArray typeArray = context.obtainStyledAttributes(attrs, R.styleable.CollectionPicker);
+        this.mItemMargin = (int) typeArray.getDimension(R.styleable.CollectionPicker_cp_itemMargin, BaseUtils.dpToPx(this.getContext(), mItemMargin));
+        this.textPaddingLeft = (int) typeArray.getDimension(R.styleable.CollectionPicker_cp_textPaddingLeft, BaseUtils.dpToPx(this.getContext(), textPaddingLeft));
+        this.textPaddingRight = (int) typeArray.getDimension(R.styleable.CollectionPicker_cp_textPaddingRight, BaseUtils.dpToPx(this.getContext(), textPaddingRight));
+        this.textPaddingTop = (int) typeArray.getDimension(R.styleable.CollectionPicker_cp_textPaddingTop, BaseUtils.dpToPx(this.getContext(), textPaddingTop));
+        this.texPaddingBottom = (int) typeArray.getDimension(R.styleable.CollectionPicker_cp_textPaddingBottom, BaseUtils.dpToPx(this.getContext(), texPaddingBottom));
         this.mAddIcon = typeArray.getResourceId(R.styleable.CollectionPicker_cp_addIcon, mAddIcon);
-        this.mCancelIcon = typeArray.getResourceId(R.styleable.CollectionPicker_cp_cancelIcon,
-                mCancelIcon);
-        this.mLayoutBackgroundColorNormal = typeArray.getColor(
-                R.styleable.CollectionPicker_cp_itemBackgroundNormal,
-                mLayoutBackgroundColorNormal);
-        this.mLayoutBackgroundColorPressed = typeArray.getColor(
-                R.styleable.CollectionPicker_cp_itemBackgroundPressed,
-                mLayoutBackgroundColorPressed);
-        this.mRadius = (int) typeArray
-                .getDimension(R.styleable.CollectionPicker_cp_itemRadius, mRadius);
-        this.mTextColor = typeArray
-                .getColor(R.styleable.CollectionPicker_cp_itemTextColor, mTextColor);
-        this.simplifiedTags = typeArray
-                .getBoolean(R.styleable.CollectionPicker_cp_simplified, false);
+        this.mCancelIcon = typeArray.getResourceId(R.styleable.CollectionPicker_cp_cancelIcon, mCancelIcon);
+        this.mLayoutBackgroundColorNormal = typeArray.getColor(R.styleable.CollectionPicker_cp_itemBackgroundNormal, mLayoutBackgroundColorNormal);
+        this.mLayoutBackgroundColorPressed = typeArray.getColor(R.styleable.CollectionPicker_cp_itemBackgroundPressed, mLayoutBackgroundColorPressed);
+        this.mRadius = (int) typeArray.getDimension(R.styleable.CollectionPicker_cp_itemRadius, mRadius);
+        this.mTextColor = typeArray.getColor(R.styleable.CollectionPicker_cp_itemTextColor, mTextColor);
+        this.simplifiedTags = typeArray.getBoolean(R.styleable.CollectionPicker_cp_simplified, false);
         this.tf = Typeface.createFromAsset(this.getContext().getAssets(), "fonts/gt_medium.otf");
         typeArray.recycle();
 
@@ -241,6 +222,8 @@ public class CollectionPicker extends LinearLayout {
         return getSelectorNormal();
     }
 
+
+    @SuppressLint("ResourceAsColor")
     private StateListDrawable getSelectorNormal() {
         StateListDrawable states = new StateListDrawable();
 
@@ -251,8 +234,8 @@ public class CollectionPicker extends LinearLayout {
         states.addState(new int[]{android.R.attr.state_pressed}, gradientDrawable);
 
         gradientDrawable = new GradientDrawable();
-        int index = new Random().nextInt(Constants.genresList.size());
-        if(useRandomColor) mLayoutBackgroundColorNormal = Color.parseColor(Constants.genresList.get(index));
+        int index = new Random().nextInt(genresList.size());
+        if (useRandomColor) mLayoutBackgroundColorNormal = Color.parseColor(genresList.get(index));
         gradientDrawable.setColor(mLayoutBackgroundColorNormal);
         gradientDrawable.setCornerRadius(mRadius);
 
@@ -274,6 +257,8 @@ public class CollectionPicker extends LinearLayout {
         this.useRandomColor = useRandomColor;
     }
 
+
+    @SuppressLint("ResourceAsColor")
     private StateListDrawable getSelectorSelected() {
         StateListDrawable states = new StateListDrawable();
         GradientDrawable gradientDrawable = new GradientDrawable();

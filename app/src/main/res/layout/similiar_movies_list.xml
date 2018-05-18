@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-        <LinearLayout
-            android:layout_marginLeft="@dimen/margin_large"
-            android:orientation="vertical"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <com.an.trailers.views.CustomTextView
-            android:visibility="gone"
-            android:id="@+id/movie_similar_title"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_gravity="top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Similar Movies"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            app:font="gt_medium" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/margin_small"
-            android:paddingBottom="@dimen/padding_large"
-            android:id="@+id/movies_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:background="@android:color/transparent"
+            android:paddingBottom="@dimen/padding_large">
 
-        </LinearLayout>
 
-</FrameLayout>
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/movie_similar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:text="@string/title_similar_movies"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_medium"
+                    app:textFontPath="fonts/gt_medium.otf" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/movies_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:paddingTop="@dimen/margin_small"
+                    app:layout_constraintTop_toBottomOf="@+id/movie_similar_title" />
+
+        </android.support.constraint.ConstraintLayout>
+</layout>

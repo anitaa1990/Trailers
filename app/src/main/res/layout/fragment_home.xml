@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:src="@drawable/placeholder_empty" />
 
-        <com.an.trailers.views.CustomTextView
+        <com.an.customfontview.CustomTextView
             android:textSize="15dp"
             android:id="@+id/fav_display_text"
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_marginTop="@dimen/margin_xxxxlarge"
             android:text="@string/empty_fav"
             android:textColor="@android:color/white"
-            app:font="gt_medium" />
+            app:textFontPath="fonts/gt_medium.otf" />
 
     </LinearLayout>
 

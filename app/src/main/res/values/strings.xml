@@ -5,6 +5,7 @@
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="empty_fav">No movies in the list</string>
     <string name="empty_search">No movies found</string>
+    <string name="search_hint">Search...</string>
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
@@ -37,4 +38,17 @@
         <item>@drawable/ic_m_dvd</item>
         <item>@drawable/ic_m_fav</item>
     </integer-array>
+
+
+    <string name="text_read_more">READ MORE</string>
+    <string name="title_similar_movies">Similar Movies</string>
+    <string name="title_cast">Cast</string>
+    <string name="title_crew">Crew</string>
+
+    <string name="placeholder">Placeholder</string>s
+
+
+    <string name="btn_without_constraint">Checkout view implemented without using constraint layout</string>s
+    <string name="btn_with_constraint">Checkout view implemented using constraint layout</string>
+
 </resources>
