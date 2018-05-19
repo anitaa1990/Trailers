@@ -16,6 +16,8 @@ import com.an.trailers.utils.BaseUtils;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
+
+import java.util.Collections;
 import java.util.List;
 
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.CustomViewHolder> {
@@ -27,9 +29,16 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
 
     private Context context;
     private List<Video> videoList;
-    public VideoListAdapter(Activity context, List<Video> videoList) {
+    public VideoListAdapter(Context context, List<Video> videoList) {
         this.context = context;
         this.videoList = videoList;
+        this.screenWidth = BaseUtils.getScreenWidth(context);
+        this.screenHeight = BaseUtils.getScreenHeight(context);
+    }
+
+    public VideoListAdapter(Context context) {
+        this.context = context;
+        this.videoList = Collections.emptyList();
         this.screenWidth = BaseUtils.getScreenWidth(context);
         this.screenHeight = BaseUtils.getScreenHeight(context);
     }
@@ -83,6 +92,12 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
     public Video getItem(int position) {
         return videoList.get(position);
     }
+
+    public void setVideos(List<Video> videos) {
+        this.videoList = videos;
+        notifyDataSetChanged();
+    }
+
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 

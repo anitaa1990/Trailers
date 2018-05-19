@@ -12,6 +12,7 @@ import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CreditListAdapter extends RecyclerView.Adapter<CreditListAdapter.CustomViewHolder> {
@@ -26,6 +27,15 @@ public class CreditListAdapter extends RecyclerView.Adapter<CreditListAdapter.Cu
         this.casts = casts;
         this.crews = crews;
     }
+
+
+    public CreditListAdapter(Context context, String type) {
+        this.type = type;
+        this.context = context;
+        this.casts = Collections.emptyList();
+        this.crews = Collections.emptyList();
+    }
+
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -70,6 +80,18 @@ public class CreditListAdapter extends RecyclerView.Adapter<CreditListAdapter.Cu
     public Crew getCrewItem(int position) {
         return crews.get(position);
     }
+
+
+    public void setCasts(List<Cast> casts) {
+        this.casts = casts;
+        notifyDataSetChanged();
+    }
+
+    public void setCrews(List<Crew> crews) {
+        this.crews = crews;
+        notifyDataSetChanged();
+    }
+
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         private CreditListWithItemBinding binding;

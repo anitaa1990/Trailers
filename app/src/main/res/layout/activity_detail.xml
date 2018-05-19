@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data class="DetailWithConstraintActivityBinding">
+    <data class="DetailActivityBinding">
 
         <variable
             name="movie"
@@ -35,7 +35,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintDimensionRatio="H,16:8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -303,6 +303,7 @@
                             android:layout_marginRight="@dimen/margin_large"
                             android:autoLink="all"
                             android:gravity="right|center_vertical"
+                            android:onClick="handleExpandAction"
                             android:paddingBottom="@dimen/padding"
                             android:paddingLeft="@dimen/padding"
                             android:paddingRight="@dimen/padding"
@@ -341,8 +342,8 @@
 
                     <com.sackcentury.shinebuttonlib.ShineButton
                         android:id="@+id/shineButton"
-                        android:layout_width="@dimen/shine_icon_size"
-                        android:layout_height="@dimen/shine_icon_size"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:src="@android:color/white"
                         app:allow_random_color="false"
                         app:backgroundTint="@color/btn_shine"

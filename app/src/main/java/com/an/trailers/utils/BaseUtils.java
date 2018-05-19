@@ -41,7 +41,7 @@ import static com.an.trailers.Constants.LOCALE_CACHE_PATH;
 
 public class BaseUtils {
 
-    private static String getJSONStringFromRaw(Context context, int rawId) {
+    public static String getJSONStringFromRaw(Context context, int rawId) {
 
         InputStream content = context.getResources().openRawResource(rawId);
         BufferedReader buffer = new BufferedReader(new InputStreamReader(content));

@@ -8,6 +8,7 @@ import com.an.trailers.databinding.SimilarMoviesListItemBinding;
 import com.an.trailers.model.Movie;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMoviesListAdapter.CustomViewHolder> {
@@ -17,6 +18,11 @@ public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMovies
     public SimilarMoviesListAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
+    }
+
+    public SimilarMoviesListAdapter(Context context) {
+        this.context = context;
+        this.movies = Collections.emptyList();
     }
 
     @Override
@@ -41,6 +47,11 @@ public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMovies
 
     public Movie getItem(int position) {
         return movies.get(position);
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+        notifyDataSetChanged();
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {

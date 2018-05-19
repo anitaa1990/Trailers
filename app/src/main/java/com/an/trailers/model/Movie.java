@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.an.trailers.Constants.MOVIE_STATUS_RELEASED;
+
 public class Movie implements Serializable {
 
     private boolean adult;
@@ -262,5 +264,14 @@ public class Movie implements Serializable {
             videos.add(video);
         }
         return videos;
+    }
+
+    public String getFormattedRuntime() {
+        return BaseUtils.getFormattedDate(getReleaseDate());
+    }
+
+    public String getRuntimeInMins() {
+        return getStatus().equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? String.format("%s mins", String.valueOf(getRuntime())) :
+                BaseUtils.getFormattedDate(getReleaseDate());
     }
 }
