@@ -18,6 +18,12 @@ public class CommonPagerAdapter extends FragmentStatePagerAdapter {
     }
 
 
+    public CommonPagerAdapter(FragmentManager fm, List<CommonFragment> fragments) {
+        super(fm);
+        this.fragments = fragments;
+    }
+
+
     @Override
     public Fragment getItem(int position) {
         CommonFragment fragment = fragments.get(position);

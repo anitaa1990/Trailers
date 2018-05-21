@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.an.trailers.activity.NavigationBarActivity;
 import com.an.trailers.adapter.CommonPagerAdapter;
 import com.an.trailers.callback.OnPageSelectedListener;
 import com.an.trailers.databinding.HomeFragmentBinding;
-import com.an.trailers.views.CustomViewPager;
 import com.an.trailers.views.CustomerPagerTransformer;
 import java.util.List;
 import java.util.Observable;
@@ -67,8 +65,6 @@ public class MovieListFragment extends BaseFragment implements Observer, OnPageS
 
     private void setUpViewPager() {
         homeFragmentBinding.includedSimilarLayout.viewpager.setPageTransformer(false, new CustomerPagerTransformer(mActivity));
-        CommonPagerAdapter commonPagerAdapter = new CommonPagerAdapter(getChildFragmentManager());
-        homeFragmentBinding.includedSimilarLayout.viewpager.setAdapter(commonPagerAdapter);
     }
 
 
@@ -102,18 +98,18 @@ public class MovieListFragment extends BaseFragment implements Observer, OnPageS
         if(o instanceof List<?>) {
             List<CommonFragment> fragments = (List<CommonFragment>) o;
             CommonPagerAdapter commonPagerAdapter = (CommonPagerAdapter) homeFragmentBinding.includedSimilarLayout.viewpager.getAdapter();
+            if(commonPagerAdapter == null) {
+                commonPagerAdapter = new CommonPagerAdapter(getChildFragmentManager(), fragments);
+                homeFragmentBinding.includedSimilarLayout.viewpager.setAdapter(commonPagerAdapter);
+                homeFragmentBinding.includedSimilarLayout.viewpager.addOnPageSelectedListener(this);
+                homeFragmentBinding.includedSimilarLayout.viewpager.addOnBackgroundSwitchView(homeFragmentBinding.includedSimilarLayout.overlay);
 
-            if(fragments.size() == 0 && commonPagerAdapter.getCount() == 0) {
+            } else if(fragments.size() == 0 && commonPagerAdapter.getCount() == 0) {
                 homeFragmentBinding.includedSimilarLayout.emptyContainer.setVisibility(View.VISIBLE);
                 homeFragmentBinding.includedSimilarLayout.viewpager.setVisibility(View.GONE);
 
             } else {
-                int count = commonPagerAdapter.getCount();
                 commonPagerAdapter.setFragments(fragments);
-                if(count == 0) {
-                    homeFragmentBinding.includedSimilarLayout.viewpager.addOnPageSelectedListener(this);
-                    homeFragmentBinding.includedSimilarLayout.viewpager.addOnBackgroundSwitchView(homeFragmentBinding.includedSimilarLayout.overlay);
-                }
             }
         }
     }

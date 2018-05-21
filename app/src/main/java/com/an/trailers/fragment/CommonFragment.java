@@ -1,11 +1,9 @@
 package com.an.trailers.fragment;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
@@ -15,8 +13,6 @@ import android.widget.FrameLayout;
 
 import com.an.trailers.R;
 import com.an.trailers.activity.DetailActivity;
-import com.an.trailers.activity.MovieDetailActivity;
-import com.an.trailers.activity.VideoActivity;
 import com.an.trailers.databinding.FragmentCommonBinding;
 import com.an.trailers.model.Movie;
 import com.an.trailers.utils.BaseUtils;
