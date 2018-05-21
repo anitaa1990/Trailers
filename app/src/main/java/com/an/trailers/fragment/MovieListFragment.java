@@ -98,15 +98,15 @@ public class MovieListFragment extends BaseFragment implements Observer, OnPageS
         if(o instanceof List<?>) {
             List<CommonFragment> fragments = (List<CommonFragment>) o;
             CommonPagerAdapter commonPagerAdapter = (CommonPagerAdapter) homeFragmentBinding.includedSimilarLayout.viewpager.getAdapter();
-            if(commonPagerAdapter == null) {
+            if(fragments.size() == 0 && (commonPagerAdapter == null || commonPagerAdapter.getCount() == 0)) {
+                homeFragmentBinding.includedSimilarLayout.emptyContainer.setVisibility(View.VISIBLE);
+                homeFragmentBinding.includedSimilarLayout.viewpager.setVisibility(View.GONE);
+
+            } else if(commonPagerAdapter == null) {
                 commonPagerAdapter = new CommonPagerAdapter(getChildFragmentManager(), fragments);
                 homeFragmentBinding.includedSimilarLayout.viewpager.setAdapter(commonPagerAdapter);
                 homeFragmentBinding.includedSimilarLayout.viewpager.addOnPageSelectedListener(this);
                 homeFragmentBinding.includedSimilarLayout.viewpager.addOnBackgroundSwitchView(homeFragmentBinding.includedSimilarLayout.overlay);
-
-            } else if(fragments.size() == 0 && commonPagerAdapter.getCount() == 0) {
-                homeFragmentBinding.includedSimilarLayout.emptyContainer.setVisibility(View.VISIBLE);
-                homeFragmentBinding.includedSimilarLayout.viewpager.setVisibility(View.GONE);
 
             } else {
                 commonPagerAdapter.setFragments(fragments);
