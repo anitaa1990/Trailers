@@ -93,7 +93,6 @@ public class MovieListViewModel extends AbstractViewModel implements Constants {
             this.totalPages = movieResponse.getTotalPages();
             this.movies.addAll(movieResponse.getResults());
             refreshView(BaseUtils.getFragments(movies));
-            System.out.println("@@##@@" + movies.size());
             this.movies.clear();
         }
     }
