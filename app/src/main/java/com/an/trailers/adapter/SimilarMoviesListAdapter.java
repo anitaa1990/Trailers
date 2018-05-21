@@ -1,17 +1,12 @@
 package com.an.trailers.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.an.trailers.activity.DetailActivity;
-import com.an.trailers.activity.MovieDetailActivity;
 import com.an.trailers.databinding.SimilarMoviesListItemBinding;
 import com.an.trailers.model.Movie;
 import com.an.trailers.utils.NavigationUtils;
@@ -19,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
+
+import static com.an.trailers.Constants.TRANSITION_IMAGE_NAME;
 
 public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMoviesListAdapter.CustomViewHolder> {
 
@@ -76,7 +73,7 @@ public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMovies
         public void onClick(View view) {
             Movie movie = movies.get(getLayoutPosition());
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-                    new Pair(binding.itemImg, DetailActivity.IMAGE_TRANSITION_NAME));
+                    new Pair(binding.itemImg, TRANSITION_IMAGE_NAME));
             NavigationUtils.redirectToDetailScreen(activity, movie, options);
         }
     }

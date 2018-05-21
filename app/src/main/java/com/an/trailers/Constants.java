@@ -28,6 +28,11 @@ public interface Constants {
     String INTENT_VIDEO_KEY = "intent_video_key";
 
 
+    String TRANSITION_IMAGE_NAME = "image";
+    String TRANSITION_TITLE_NAME = "title";
+    String TRANSITION_DESC_NAME = "desc";
+
+
     String CREDIT_CAST = "cast";
     String CREDIT_CREW = "crew";
 

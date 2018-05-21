@@ -31,9 +31,9 @@ import java.util.Observer;
 import static com.an.trailers.Constants.CREDIT_CAST;
 import static com.an.trailers.Constants.CREDIT_CREW;
 import static com.an.trailers.Constants.MOVIE_STATUS_RELEASED;
-import static com.an.trailers.activity.DetailActivity.DESC_TRANSITION_NAME;
-import static com.an.trailers.activity.DetailActivity.IMAGE_TRANSITION_NAME;
-import static com.an.trailers.activity.DetailActivity.TITLE_TRANSITION_NAME;
+import static com.an.trailers.Constants.TRANSITION_DESC_NAME;
+import static com.an.trailers.Constants.TRANSITION_IMAGE_NAME;
+import static com.an.trailers.Constants.TRANSITION_TITLE_NAME;
 
 
 public class MovieDetailActivity extends AppCompatActivity implements Observer, View.OnClickListener {
@@ -56,9 +56,9 @@ public class MovieDetailActivity extends AppCompatActivity implements Observer, 
 
 
     private void initializeView() {
-        ViewCompat.setTransitionName(detailActivityBinding.image, IMAGE_TRANSITION_NAME);
-        ViewCompat.setTransitionName(detailActivityBinding.movieTitle, TITLE_TRANSITION_NAME);
-        ViewCompat.setTransitionName(detailActivityBinding.movieDesc, DESC_TRANSITION_NAME);
+        ViewCompat.setTransitionName(detailActivityBinding.image, TRANSITION_IMAGE_NAME);
+        ViewCompat.setTransitionName(detailActivityBinding.movieTitle, TRANSITION_TITLE_NAME);
+        ViewCompat.setTransitionName(detailActivityBinding.movieDesc, TRANSITION_DESC_NAME);
         detailActivityBinding.expandButton.setPaintFlags(detailActivityBinding.expandButton.getPaintFlags() |  Paint.UNDERLINE_TEXT_FLAG);
     }
 

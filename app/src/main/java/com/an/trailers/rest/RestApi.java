@@ -42,6 +42,12 @@ public interface RestApi {
                                                  @Query("page") String page);
 
 
+    @GET("/3/search/movie")
+    Observable<MovieResponse> searchMovies(@Query("api_key") String apiKey,
+                                           @Query("query") String query,
+                                           @Query("page") String page);
+
+
     @GET
     Observable<Rating> getRatingForMovie(@Url String url);
 

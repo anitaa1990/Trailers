@@ -115,8 +115,9 @@ public class CustomViewPager extends ViewPager {
         this.currentPosition = currentPosition;
     }
 
+
     private void updateData(int position) {
-        if(onPageSelectedListener == null || backgroundSwitcherView == null) {
+        if(onPageSelectedListener == null || backgroundSwitcherView == null || getAdapter() == null || getAdapter().getCount() == 0) {
             return;
         }
 
@@ -125,5 +126,9 @@ public class CustomViewPager extends ViewPager {
             setCurrentItem(finalPosition);
             onPageChangeListener.onPageSelected(finalPosition);
         },500);
+    }
+
+    public void clearBackground() {
+        backgroundSwitcherView.clearImage();
     }
 }

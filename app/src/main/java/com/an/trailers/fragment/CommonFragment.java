@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.an.trailers.R;
-import com.an.trailers.activity.DetailActivity;
 import com.an.trailers.databinding.FragmentCommonBinding;
 import com.an.trailers.model.Movie;
 import com.an.trailers.utils.BaseUtils;
@@ -74,9 +73,9 @@ public class CommonFragment extends BaseFragment implements DragLayout.GotoDetai
     @Override
     public void gotoDetail() {
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,
-                new Pair(fragmentCommonBinding.image, DetailActivity.IMAGE_TRANSITION_NAME),
-                new Pair(fragmentCommonBinding.movieTitle, DetailActivity.TITLE_TRANSITION_NAME),
-                new Pair(fragmentCommonBinding.movieDesc, DetailActivity.DESC_TRANSITION_NAME)
+                new Pair(fragmentCommonBinding.image, TRANSITION_IMAGE_NAME),
+                new Pair(fragmentCommonBinding.movieTitle, TRANSITION_TITLE_NAME),
+                new Pair(fragmentCommonBinding.movieDesc, TRANSITION_DESC_NAME)
         );
         NavigationUtils.redirectToDetailScreen(mActivity, getMovie(), options);
     }

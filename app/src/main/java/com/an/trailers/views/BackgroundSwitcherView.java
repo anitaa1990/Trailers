@@ -117,6 +117,8 @@ public class BackgroundSwitcherView extends ImageSwitcher {
         image.setImageDrawable(null);
         showNext();
 
+        if(imageUrl == null) return;
+
         Picasso.get()
                 .load(imageUrl)
                 .noFade()
@@ -148,7 +150,17 @@ public class BackgroundSwitcherView extends ImageSwitcher {
 
         List<CommonFragment> commonFragments = ((CommonPagerAdapter)pager.getAdapter()).getFragments();
         CommonFragment currentFragment = commonFragments.get(position);
-        return currentFragment.getMovie().getPosterPath();
+        if(currentFragment != null && currentFragment.getMovie() != null) {
+            return currentFragment.getMovie().getPosterPath();
+        }
+        return null;
+    }
+
+
+    public void clearImage() {
+        ImageView image = (ImageView) this.getNextView();
+        image.setImageDrawable(null);
+        showNext();
     }
 
 
