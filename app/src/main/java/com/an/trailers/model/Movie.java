@@ -271,7 +271,7 @@ public class Movie implements Serializable {
     }
 
     public String getRuntimeInMins() {
-        return getStatus().equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? String.format("%s mins", String.valueOf(getRuntime())) :
+        return (getStatus().equalsIgnoreCase(MOVIE_STATUS_RELEASED) && getRuntime() != null) ? String.format("%s mins", String.valueOf(getRuntime())) :
                 BaseUtils.getFormattedDate(getReleaseDate());
     }
 
