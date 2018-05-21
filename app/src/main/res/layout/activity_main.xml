@@ -26,7 +26,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical" />
 
-            <include layout="@layout/view_toolbar" />
+            <include layout="@layout/view_toolbar"
+                android:id="@+id/included_layout" />
 
         </io.codetail.widget.RevealFrameLayout>
 
@@ -43,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:divider="@android:color/transparent"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:onClick="handleLeftDrawerAction" />
         </ScrollView>
     </android.support.v4.widget.DrawerLayout>
 

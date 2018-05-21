@@ -1,11 +1,20 @@
 package com.an.trailers.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.an.trailers.activity.DetailActivity;
+import com.an.trailers.activity.MovieDetailActivity;
 import com.an.trailers.databinding.SimilarMoviesListItemBinding;
 import com.an.trailers.model.Movie;
+import com.an.trailers.utils.NavigationUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -13,15 +22,15 @@ import java.util.List;
 
 public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMoviesListAdapter.CustomViewHolder> {
 
-    private Context context;
+    private Activity activity;
     private List<Movie> movies;
-    public SimilarMoviesListAdapter(Context context, List<Movie> movies) {
-        this.context = context;
+    public SimilarMoviesListAdapter(Activity activity, List<Movie> movies) {
+        this.activity = activity;
         this.movies = movies;
     }
 
-    public SimilarMoviesListAdapter(Context context) {
-        this.context = context;
+    public SimilarMoviesListAdapter(Activity activity) {
+        this.activity = activity;
         this.movies = Collections.emptyList();
     }
 
@@ -54,12 +63,21 @@ public class SimilarMoviesListAdapter extends RecyclerView.Adapter<SimilarMovies
         notifyDataSetChanged();
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private SimilarMoviesListItemBinding binding;
 
         public CustomViewHolder(SimilarMoviesListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            this.binding.itemImg.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Movie movie = movies.get(getLayoutPosition());
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                    new Pair(binding.itemImg, DetailActivity.IMAGE_TRANSITION_NAME));
+            NavigationUtils.redirectToDetailScreen(activity, movie, options);
         }
     }
 }

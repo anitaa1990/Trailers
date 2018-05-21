@@ -69,7 +69,7 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
                 public void onClick(View v) {
                     int[] location = {0, 0};
                     v.getLocationOnScreen(location);
-                    switchItem(list.get(finalI), location[1] + v.getHeight() / 2);
+                    switchItem(finalI, location[1] + v.getHeight() / 2);
                 }
             });
 
@@ -193,29 +193,24 @@ public class ViewAnimator<T extends ViewAnimator.Resourceable> {
         view.startAnimation(rotation);
     }
 
-    private void switchItem(Resourceable slideMenuItem, int topPosition) {
-        this.screenShotable = animatorListener.onSwitch(slideMenuItem, screenShotable, topPosition);
+    private void switchItem(int selectedPosition, int topPosition) {
+        this.screenShotable = animatorListener.onSwitch(selectedPosition, screenShotable, topPosition);
         hideMenuContent();
     }
 
     public interface ViewAnimatorListener {
-
-        public ScreenShotable onSwitch(Resourceable slideMenuItem, ScreenShotable screenShotable, int position);
-
-        public void disableHomeButton();
-
-        public void enableHomeButton();
-
-        public void addViewToContainer(View view);
-
+        ScreenShotable onSwitch(int selectedPosition, ScreenShotable screenShotable, int position);
+        void disableHomeButton();
+        void enableHomeButton();
+        void addViewToContainer(View view);
     }
 
     public interface ScreenShotable {
-        public void bindImage(Bitmap loadedImage);
+        void bindImage(Bitmap loadedImage);
     }
 
     public interface Resourceable {
-        public int getImageRes();
-        public String getName();
+        int getImageRes();
+        String getName();
     }
 }

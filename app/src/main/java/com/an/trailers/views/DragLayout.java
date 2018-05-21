@@ -54,8 +54,7 @@ public class DragLayout extends FrameLayout {
         bototmExtraIndicatorHeight = (int) a.getDimension(R.styleable.app_bototmExtraIndicatorHeight, 0);
         a.recycle();
 
-        mDragHelper = ViewDragHelper
-                .create(this, 10f, new DragHelperCallback());
+        mDragHelper = ViewDragHelper.create(this, 10f, new DragHelperCallback());
         mDragHelper.setEdgeTrackingEnabled(ViewDragHelper.EDGE_TOP);
         moveDetector = new GestureDetectorCompat(context, new MoveDetector());
         moveDetector.setIsLongpressEnabled(false);
@@ -69,16 +68,15 @@ public class DragLayout extends FrameLayout {
         super.onFinishInflate();
         bottomView = getChildAt(0);
         topView = getChildAt(1);
+        setStateExpanded(topView, originX, dragTopDest);
 
-        topView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int state = getCurrentState();
-                if (state == STATE_CLOSE) {
-                    setStateExpanded(topView, originX, dragTopDest);
-                } else {
-                    gotoDetailActivity();
-                }
+
+        topView.setOnClickListener(v -> {
+            int state = getCurrentState();
+            if (state == STATE_CLOSE) {
+                setStateExpanded(topView, originX, dragTopDest);
+            } else {
+                gotoDetailActivity();
             }
         });
     }
@@ -186,12 +184,7 @@ public class DragLayout extends FrameLayout {
 
 
     private void postResetPosition() {
-        this.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                topView.offsetTopAndBottom(dragTopDest - topView.getTop());
-            }
-        }, 500);
+        this.postDelayed(() -> topView.offsetTopAndBottom(dragTopDest - topView.getTop()), 500);
     }
 
 
@@ -300,6 +293,6 @@ public class DragLayout extends FrameLayout {
     }
 
     public interface GotoDetailListener {
-        public void gotoDetail();
+        void gotoDetail();
     }
 }

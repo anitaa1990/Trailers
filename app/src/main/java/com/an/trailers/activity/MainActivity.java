@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
 
 
     private String slideItem;
-    @Override
+
     public ViewAnimator.ScreenShotable onSwitch(ViewAnimator.Resourceable slideMenuItem,
                                                 ViewAnimator.ScreenShotable screenShotable,
                                                 int position) {
@@ -178,6 +178,11 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         } else {
             return replaceFragment(slideMenuItem, null, position);
         }
+    }
+
+    @Override
+    public ViewAnimator.ScreenShotable onSwitch(int selectedPosition, ViewAnimator.ScreenShotable screenShotable, int position) {
+        return null;
     }
 
     @Override

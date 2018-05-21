@@ -13,6 +13,7 @@ import com.an.trailers.R;
 import com.an.trailers.databinding.VideoListItemBinding;
 import com.an.trailers.model.Video;
 import com.an.trailers.utils.BaseUtils;
+import com.an.trailers.utils.NavigationUtils;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
@@ -54,19 +55,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
     @Override
     public void onBindViewHolder(final CustomViewHolder holder, final int position) {
 
-        final YouTubeThumbnailLoader.OnThumbnailLoadedListener  onThumbnailLoadedListener = new YouTubeThumbnailLoader.OnThumbnailLoadedListener(){
-            @Override
-            public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-
-            }
-
-            @Override
-            public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-                youTubeThumbnailView.setVisibility(View.VISIBLE);
-                holder.binding.vidFrame.setVisibility(View.VISIBLE);
-                holder.binding.btnPlay.setImageResource(R.drawable.ic_play);
-            }
-        };
 
         holder.binding.youtubeThumbnail.initialize(Constants.YOUTUBE_API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
             @Override
@@ -74,7 +62,22 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
                 final Video item = getItem(position);
                 youTubeThumbnailLoader.setVideo(item.getKey());
                 youTubeThumbnailView.setImageBitmap(null);
-                youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
+
+
+                youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+                    @Override
+                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+                        youTubeThumbnailView.setVisibility(View.VISIBLE);
+                        holder.binding.vidFrame.setVisibility(View.VISIBLE);
+                        holder.binding.btnPlay.setImageResource(R.drawable.ic_play);
+                        youTubeThumbnailLoader.release();
+                    }
+
+                    @Override
+                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+
+                    }
+                });
             }
 
             @Override
@@ -99,7 +102,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
     }
 
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final VideoListItemBinding binding;
         public CustomViewHolder(VideoListItemBinding binding) {
@@ -113,6 +116,13 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Cust
             lp.width = width.intValue();
             lp.height = height.intValue();
             binding.youtubeThumbnail.setLayoutParams(lp);
+
+            binding.youtubeThumbnail.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            NavigationUtils.redirectToVideoScreen(context, getItem(getLayoutPosition()).getKey());
         }
     }
 }

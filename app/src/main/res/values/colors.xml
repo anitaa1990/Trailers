@@ -28,5 +28,6 @@
 
     <color name="search_overlay">#26000000</color>
     <color name="fragment_common_view">#f0f0f0</color>
+    <color name="fragment_overlay_view">#B07986CB</color>
 
 </resources>

@@ -20,14 +20,13 @@ import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.adapter.CommonPagerAdapter;
 import com.an.trailers.callback.MovieResponseListener;
-import com.an.trailers.fragment.CommonFragment;
+import com.an.trailers.fragment.CommonTestFragment;
 import com.an.trailers.model.Movie;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
-import com.an.trailers.views.CustPagerTransformer;
+import com.an.trailers.views.CustomerPagerTransformer;
 import com.an.trailers.views.progress.LoadingView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     private long totalPages;
     private int pos = 0;
     private String queryTxt;
-    private List<CommonFragment> fragments = new ArrayList<>();
+    private List<CommonTestFragment> fragments = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
 
     @Override
@@ -114,9 +113,9 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     private void fillViewPager() {
         containerView = findViewById(R.id.fr_container);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPagerBackground = (ViewPager) findViewById(R.id.viewPagerBackground);
+//        viewPagerBackground = (ViewPager) findViewById(R.id.viewPagerBackground);
 
-        viewPager.setPageTransformer(false, new CustPagerTransformer(this));
+        viewPager.setPageTransformer(false, new CustomerPagerTransformer(this));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int index = 0;
 
@@ -174,19 +173,19 @@ public class SearchActivity extends BaseActivity implements MovieResponseListene
     }
 
     private void handleFirstMovieResponse() {
-        for (Movie movie : movies) {
-            if(movie.getPosterPath() != null)
-                fragments.add(CommonFragment.newInstance(movie));
-        }
-        adapter = new CommonPagerAdapter(getSupportFragmentManager(), fragments);
+//        for (Movie movie : movies) {
+//            if(movie.getPosterPath() != null)
+//                fragments.add(CommonTestFragment.newInstance(movie));
+//        }
+//        adapter = new CommonPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
     }
 
     private void handleMovieRepsonse(List<Movie> movieList) {
-        for (Movie movie : movieList) {
-            if(movie.getPosterPath() != null)
-                adapter.addFragment(CommonFragment.newInstance(movie));
-        }
+//        for (Movie movie : movieList) {
+//            if(movie.getPosterPath() != null)
+//                adapter.addFragment(CommonTestFragment.newInstance(movie));
+//        }
         adapter.notifyDataSetChanged();
     }
 

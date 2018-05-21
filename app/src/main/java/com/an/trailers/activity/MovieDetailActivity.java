@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.an.trailers.Constants;
 import com.an.trailers.R;
 import com.an.trailers.adapter.CreditListAdapter;
 import com.an.trailers.adapter.SimilarMoviesListAdapter;
@@ -20,7 +21,6 @@ import com.an.trailers.model.APIResponse;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.MovieResponse;
 import com.an.trailers.model.Rating;
-import com.an.trailers.utils.BaseUtils;
 import com.an.trailers.viewmodel.MovieDetailViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +32,6 @@ import static com.an.trailers.Constants.CREDIT_CAST;
 import static com.an.trailers.Constants.CREDIT_CREW;
 import static com.an.trailers.Constants.MOVIE_STATUS_RELEASED;
 import static com.an.trailers.activity.DetailActivity.DESC_TRANSITION_NAME;
-import static com.an.trailers.activity.DetailActivity.EXTRA_MAP;
 import static com.an.trailers.activity.DetailActivity.IMAGE_TRANSITION_NAME;
 import static com.an.trailers.activity.DetailActivity.TITLE_TRANSITION_NAME;
 
@@ -57,16 +56,21 @@ public class MovieDetailActivity extends AppCompatActivity implements Observer, 
 
 
     private void initializeView() {
+        ViewCompat.setTransitionName(detailActivityBinding.image, IMAGE_TRANSITION_NAME);
+        ViewCompat.setTransitionName(detailActivityBinding.movieTitle, TITLE_TRANSITION_NAME);
+        ViewCompat.setTransitionName(detailActivityBinding.movieDesc, DESC_TRANSITION_NAME);
         detailActivityBinding.expandButton.setPaintFlags(detailActivityBinding.expandButton.getPaintFlags() |  Paint.UNDERLINE_TEXT_FLAG);
     }
 
 
     private void initializeDataBinding() {
-//        Movie movie = (Movie) getIntent().getSerializableExtra(EXTRA_MAP);
-        Movie movie = BaseUtils.getMovieDetails(BaseUtils.getJSONStringFromRaw(getApplicationContext(), R.raw.sample_detail));
+        Movie movie = (Movie) getIntent().getSerializableExtra(Constants.EXTRA_MAP);
         movieDetailViewModel = new MovieDetailViewModel(this, movie);
 
         detailActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+        detailActivityBinding.setMovie(movie);
+        detailActivityBinding.shineButton.setChecked(movieDetailViewModel.isFavourite(movie.getId()));
+        handleFavouriteAction();
         detailActivityBinding.shineButton.setOnClickListener(this);
     }
 
@@ -89,7 +93,7 @@ public class MovieDetailActivity extends AppCompatActivity implements Observer, 
         recyclerView.setLayoutManager(similarMoviesLayout);
         recyclerView.smoothScrollToPosition(1);
 
-        SimilarMoviesListAdapter similarMoviesListAdapter = new SimilarMoviesListAdapter(getApplicationContext());
+        SimilarMoviesListAdapter similarMoviesListAdapter = new SimilarMoviesListAdapter(this);
         recyclerView.setAdapter(similarMoviesListAdapter);
     }
 
@@ -129,13 +133,11 @@ public class MovieDetailActivity extends AppCompatActivity implements Observer, 
             Movie movie = (Movie) object;
             detailActivityBinding.setMovie(movie);
             Picasso.get().load(movie.getPosterPath()).into(detailActivityBinding.image);
-            ViewCompat.setTransitionName(detailActivityBinding.image, IMAGE_TRANSITION_NAME);
-            ViewCompat.setTransitionName(detailActivityBinding.movieTitle, TITLE_TRANSITION_NAME);
-            ViewCompat.setTransitionName(detailActivityBinding.movieDesc, DESC_TRANSITION_NAME);
+
             detailActivityBinding.movieStatus.setItems(Arrays.asList(new String[]{ movie.getStatus() }));
             detailActivityBinding.collectionItemPicker.setUseRandomColor(true);
             detailActivityBinding.collectionItemPicker.setItems(movie.getGenreNames());
-            detailActivityBinding.txtRuntime.setText(movie.getFormattedRuntime());
+            detailActivityBinding.txtRuntime.setText(movie.getRuntimeInMins());
 
         } else if(object instanceof MovieResponse) {
             MovieResponse movieResponse = (MovieResponse) object;

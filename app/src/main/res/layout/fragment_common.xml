@@ -1,7 +1,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="FragmentCommonBinding" />
+    <data class="FragmentCommonBinding">
+
+        <variable
+            name="movie"
+            type="com.an.trailers.model.Movie" />
+
+    </data>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -9,6 +15,7 @@
 
         <com.an.trailers.views.DragLayout
             android:id="@+id/drag_layout"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:bototmExtraIndicatorHeight="@dimen/card_extra_height"
@@ -33,21 +40,22 @@
                         android:id="@+id/movie_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_marginLeft="@dimen/margin_medium"
                         android:layout_marginTop="@dimen/margin"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:paddingRight="@dimen/padding"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font_x_medium_large"
+                        android:text="@{movie.title}"
                         app:textFontPath="fonts/gt_medium.otf" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin"
-                        android:layout_marginRight="@dimen/margin_xlarge"
-                        android:layout_marginTop="@dimen/margin"
+                        android:layout_marginLeft="@dimen/margin_medium"
+                        android:layout_marginRight="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -57,7 +65,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ellipsize="end"
+                            android:minLines="2"
                             android:maxLines="2"
+                            android:text="@{movie.description}"
                             android:textColor="@color/text_desc_activity_detail"
                             android:textSize="@dimen/font_small_medium" />
 
@@ -85,7 +95,7 @@
                             android:layout_height="wrap_content"
                             android:isIndicator="true"
                             android:numStars="5"
-                            android:rating="4.5"
+                            android:rating="@{movie.computeRating}"
                             android:stepSize="0.1" />
 
                         <View

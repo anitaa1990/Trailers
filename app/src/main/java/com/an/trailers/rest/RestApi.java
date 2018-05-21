@@ -16,7 +16,7 @@ public interface RestApi {
 
 
     @GET
-    Observable<Movie> fetchMovies(@Url String url);
+    Observable<MovieResponse> fetchMovies(@Url String url);
 
 
     @GET("/3/movie/{movieId}")

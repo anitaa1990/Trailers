@@ -4,12 +4,12 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public class CustPagerTransformer implements ViewPager.PageTransformer {
+public class CustomerPagerTransformer implements ViewPager.PageTransformer {
 
     private int maxTranslateOffsetX;
     private ViewPager viewPager;
 
-    public CustPagerTransformer(Context context) {
+    public CustomerPagerTransformer(Context context) {
         this.maxTranslateOffsetX = dp2px(context, 180);
     }
 
@@ -30,9 +30,7 @@ public class CustPagerTransformer implements ViewPager.PageTransformer {
         }
     }
 
-    /**
-     * dp和像素转换
-     */
+
     private int dp2px(Context context, float dipValue) {
         float m = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * m + 0.5f);

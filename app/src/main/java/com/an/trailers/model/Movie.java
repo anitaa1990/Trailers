@@ -274,4 +274,8 @@ public class Movie implements Serializable {
         return getStatus().equalsIgnoreCase(MOVIE_STATUS_RELEASED) ? String.format("%s mins", String.valueOf(getRuntime())) :
                 BaseUtils.getFormattedDate(getReleaseDate());
     }
+
+    public Float computeRating() {
+        return (getVoteAverage() / 10) * 5;
+    }
 }

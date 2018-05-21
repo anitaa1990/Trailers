@@ -25,21 +25,19 @@
 
 
     <string-array name="menu_names">
-        <item>@string/drawer_close</item>
         <item>@string/upcoming</item>
         <item>@string/now_playing</item>
         <item>@string/top_rated</item>
-        <item>@string/dvd</item>
         <item>@string/favourites</item>
+        <item>@string/drawer_close</item>
     </string-array>
 
     <integer-array name="menu_icons">
-        <item>@drawable/icn_close</item>
         <item>@drawable/ic_m_upcoming</item>
         <item>@drawable/ic_m_now_play</item>
         <item>@drawable/ic_m_toprated</item>
-        <item>@drawable/ic_m_dvd</item>
         <item>@drawable/ic_m_fav</item>
+        <item>@drawable/icn_close</item>
     </integer-array>
 
 

@@ -2,7 +2,6 @@ package com.an.trailers.fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,11 +14,8 @@ import com.an.trailers.model.Movie;
 import com.an.trailers.service.RESTExecutorService;
 import com.an.trailers.service.VolleyTask;
 import com.an.trailers.utils.BaseUtils;
-import com.an.trailers.views.CustPagerTransformer;
+import com.an.trailers.views.CustomerPagerTransformer;
 import com.an.trailers.views.progress.LoadingView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +33,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     private String method;
     private int currentPage = 1;
     private long totalPages;
-    private List<CommonFragment> fragments = new ArrayList<>();
+    private List<CommonTestFragment> fragments = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
 
     private View emptyContainer;
@@ -82,7 +78,6 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
         overlayView = rootView.findViewById(R.id.overlay);
         containerView = rootView.findViewById(R.id.fr_container);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        viewPagerBackground = (ViewPager) rootView.findViewById(R.id.viewPagerBackground);
         emptyContainer = rootView.findViewById(R.id.emptyContainer);
         loadingView = (LoadingView) rootView.findViewById(R.id.progress_view);
 
@@ -101,7 +96,7 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     }
 
     private void fillViewPager() {
-        viewPager.setPageTransformer(false, new CustPagerTransformer(activity));
+        viewPager.setPageTransformer(false, new CustomerPagerTransformer(activity));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int pos = 0;
 
@@ -156,20 +151,20 @@ public class ContentFragment extends BaseFragment implements MovieResponseListen
     }
 
     private void handleFirstMovieResponse() {
-        for (Movie movie : movies) {
-            if(movie.getPosterPath() != null)
-                fragments.add(CommonFragment.newInstance(movie));
-        }
-        adapter = new CommonPagerAdapter(getChildFragmentManager(), fragments);
-        viewPager.setAdapter(adapter);
+//        for (Movie movie : movies) {
+//            if(movie.getPosterPath() != null)
+//                fragments.add(CommonTestFragment.newInstance(movie));
+//        }
+//        adapter = new CommonPagerAdapter(getChildFragmentManager(), fragments);
+//        viewPager.setAdapter(adapter);
     }
 
     private void handleMovieResponse(List<Movie> movieList) {
-        for (Movie movie : movieList) {
-            if(movie.getPosterPath() != null)
-                adapter.addFragment(CommonFragment.newInstance(movie));
-        }
-        adapter.notifyDataSetChanged();
+//        for (Movie movie : movieList) {
+//            if(movie.getPosterPath() != null)
+//                adapter.addFragment(CommonTestFragment.newInstance(movie));
+//        }
+//        adapter.notifyDataSetChanged();
     }
 
     private void handleEmptyResponse() {

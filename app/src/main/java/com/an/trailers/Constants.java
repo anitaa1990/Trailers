@@ -21,6 +21,13 @@ public interface Constants {
     String METHOD_RATING = "movie_rating";
     String METHOD_MOVIE_SIMILAR = "movie_similar";
 
+
+    String EXTRA_MAP = "map";
+    String INTENT_MOVIE = "intent_movie";
+    String INTENT_MOVIE_ID = "intent_movie_id";
+    String INTENT_VIDEO_KEY = "intent_video_key";
+
+
     String CREDIT_CAST = "cast";
     String CREDIT_CREW = "crew";
 
@@ -32,6 +39,7 @@ public interface Constants {
 
     String BASE_URL = "https://api.themoviedb.org/3/";
 
+    String MOVIES_FAVOURITES = "favourites";
     String MOVIES_UPCOMING_PATH = "movie/upcoming?api_key=%s&language=en-US&region=US&page=%s";
     String MOVIES_NOW_PLAYING_PATH = "movie/now_playing?api_key=%s&language=en-US&region=US&page=%s";
     String MOVIES_TOP_RATED_PATH = "movie/top_rated?api_key=%s&language=en-US&region=US&page=%s";
