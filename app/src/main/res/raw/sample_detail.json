@@ -1,59 +1,67 @@
 {
   "adult": false,
-  "backdrop_path": "/PIXSMakrO3s2dqA7mCvAAoVR0E.jpg",
+  "backdrop_path": "/3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg",
   "belongs_to_collection": {
-    "id": 2326,
-    "name": "Underworld Collection",
-    "poster_path": "/aK8qq0X0pZbf5ncE3JLQ27hdC4F.jpg",
-    "backdrop_path": "/2gSaXagD9ZCuBHOsXF4tvtW7Djd.jpg"
+    "id": 448150,
+    "name": "Deadpool Collection",
+    "poster_path": "/30c5jO7YEXuF8KiWXLg9m28GWDA.jpg",
+    "backdrop_path": "/hBQOWY8qWXJVFAc8yLTh1teIu43.jpg"
   },
-  "budget": 35000000,
+  "budget": 0,
   "genres": [{
     "id": 28,
     "name": "Action"
   }, {
-    "id": 27,
-    "name": "Horror"
+    "id": 35,
+    "name": "Comedy"
+  }, {
+    "id": 878,
+    "name": "Science Fiction"
   }],
-  "homepage": "http://www.underworldbloodwars-movie.com/",
-  "id": 346672,
-  "imdb_id": "tt3717252",
+  "homepage": null,
+  "id": 383498,
+  "imdb_id": "tt5463162",
   "original_language": "en",
-  "original_title": "Underworld: Blood Wars",
-  "overview": "Vampire death dealer Selene fends off brutal attacks from both the Lycan clan and the Vampire faction that betrayed her. With her only allies, David and his father Thomas, she must stop the eternal war between Lycans and Vampires, even if it means she has to make the ultimate sacrifice.",
-  "popularity": 16.3377,
-  "poster_path": "/nHXiMnWUAUba2LZ0dFkNDVdvJ1o.jpg",
+  "original_title": "Deadpool 2",
+  "overview": "Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.",
+  "popularity": 47.360244,
+  "poster_path": "/rLIIGGCdj6EGxZKY8aqIYBfsib6.jpg",
   "production_companies": [{
-    "name": "Lakeshore Entertainment",
-    "id": 126
+    "id": 7505,
+    "logo_path": "/837VMM4wOkODc1idNxGT0KQJlej.png",
+    "name": "Marvel Entertainment",
+    "origin_country": "US"
   }, {
-    "name": "Screen Gems",
-    "id": 3287
+    "id": 25,
+    "logo_path": "/qZCc1lty5FzX30aOCVRBLzaVmcp.png",
+    "name": "20th Century Fox",
+    "origin_country": "US"
   }, {
-    "name": "Sketch Films",
-    "id": 7738
+    "id": 28788,
+    "logo_path": null,
+    "name": "Genre Films",
+    "origin_country": "US"
+  }, {
+    "id": 431,
+    "logo_path": null,
+    "name": "The Donners' Company",
+    "origin_country": "US"
   }],
   "production_countries": [{
     "iso_3166_1": "US",
     "name": "United States of America"
   }],
-  "release_date": "2016-11-28",
-  "revenue": 81093313,
-  "runtime": 91,
+  "release_date": "2018-05-15",
+  "revenue": 0,
+  "runtime": 108,
   "spoken_languages": [{
     "iso_639_1": "en",
     "name": "English"
-  }, {
-    "iso_639_1": "km",
-    "name": ""
-  }, {
-    "iso_639_1": "uk",
-    "name": "Український"
   }],
-  "status": "Released",
-  "tagline": "Protect the Bloodline",
-  "title": "Underworld: Blood Wars",
+  "status": "Post Production",
+  "tagline": "Prepare for the Second Coming.",
+  "title": "Deadpool 2",
   "video": false,
-  "vote_average": 4.9,
-  "vote_count": 1139
+  "vote_average": 6.9,
+  "vote_count": 9
 }

@@ -18,6 +18,9 @@ public class MovieResponse implements Serializable {
     @SerializedName("total_results")
     private long totalResults;
 
+    private String status;
+    private Data data;
+
     public int getPage() {
         return page;
     }
@@ -56,5 +59,21 @@ public class MovieResponse implements Serializable {
 
     public void setTotalResults(long totalResults) {
         this.totalResults = totalResults;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
     }
 }

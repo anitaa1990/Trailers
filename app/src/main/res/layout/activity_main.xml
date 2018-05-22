@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="MainActivityBinding" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <io.codetail.widget.RevealFrameLayout
+            android:id="@+id/container_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_activity_detail">
+
+            <LinearLayout
+                android:id="@+id/content_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <include layout="@layout/view_toolbar"
+                android:id="@+id/included_layout" />
+
+        </io.codetail.widget.RevealFrameLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="@dimen/sliding_menu_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|bottom"
+            android:scrollbarThumbVertical="@android:color/transparent">
+
+            <LinearLayout
+                android:id="@+id/left_drawer"
+                android:layout_width="@dimen/sliding_menu_width"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                android:orientation="vertical"
+                android:onClick="handleLeftDrawerAction" />
+        </ScrollView>
+    </android.support.v4.widget.DrawerLayout>
+
+</layout>

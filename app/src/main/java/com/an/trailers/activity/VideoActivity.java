@@ -1,54 +1,57 @@
 package com.an.trailers.activity;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Pair;
 import android.widget.Toast;
 import com.an.trailers.Constants;
 import com.an.trailers.R;
-import com.an.trailers.callback.RESTListener;
-import com.an.trailers.model.Cast;
-import com.an.trailers.model.Crew;
-import com.an.trailers.model.Movie;
-import com.an.trailers.model.Rating;
-import com.an.trailers.model.Video;
-import com.an.trailers.service.RESTExecutorService;
-import com.an.trailers.service.VolleyTask;
+import com.an.trailers.databinding.VideoActivityBinding;
+import com.an.trailers.viewmodel.VideoDetailViewModel;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
+import java.util.Observable;
+import java.util.Observer;
 
-import java.util.List;
+public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, Observer, Constants {
 
-public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, Constants, RESTListener {
-
-    private static final int RECOVERY_REQUEST = 1;
-    private YouTubePlayerView youTubeView;
-    private String videoId;
     private YouTubePlayer youTubePlayer;
+    private static final int RECOVERY_REQUEST = 1;
+
+
+    private VideoActivityBinding videoActivityBinding;
+    private VideoDetailViewModel videoDetailViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video);
 
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        youTubeView.initialize(Constants.YOUTUBE_API_KEY, this);
-
-        videoId = getIntent().getStringExtra("video_key");
-        if(videoId == null) {
-            String movieId = getIntent().getExtras().getString("movieId");
-            RESTExecutorService.submit(new VolleyTask(this, METHOD_VIDEO, movieId, this));
-        }
+        initializeDataBinding();
+        initializeViewModel();
     }
+
+
+    private void initializeDataBinding() {
+        videoActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_video);
+        videoActivityBinding.youtubeView.initialize(Constants.YOUTUBE_API_KEY, this);
+    }
+
+
+    private void initializeViewModel() {
+        String videoId = getIntent().getStringExtra(INTENT_VIDEO_KEY);
+        String movieId = getIntent().getExtras().getString(INTENT_MOVIE_ID);
+        videoDetailViewModel = new VideoDetailViewModel(getApplicationContext(), movieId, videoId);
+        videoDetailViewModel.addObserver(this);
+    }
+
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         player.setFullscreen(true);
         this.youTubePlayer = player;
-        if (!wasRestored && videoId != null) {
-            player.loadVideo(videoId); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+        if (!wasRestored && videoDetailViewModel.getVideoKey() != null) {
+             player.loadVideo(videoDetailViewModel.getVideoKey()); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
     }
 
@@ -71,29 +74,21 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
     }
 
     protected YouTubePlayer.Provider getYouTubePlayerProvider() {
-        return youTubeView;
+        return videoActivityBinding.youtubeView;
     }
 
+
     @Override
-    public void onVideoResponse(List<Video> videos) {
-        this.videoId = videos.get(0).getKey();
+    public void update(Observable observable, Object o) {
         if(youTubePlayer != null) {
-            youTubePlayer.loadVideo(this.videoId);
+            youTubePlayer.loadVideo(videoDetailViewModel.getVideoKey());
         }
     }
 
-    @Override
-    public void onMovieDetailResponse(Movie movie) {
-
-    }
 
     @Override
-    public void onCreditsResponse(Pair<List<Cast>, List<Crew>> creditPair) {
-
-    }
-
-    @Override
-    public void onRatingsResponse(Rating ratings) {
-
+    protected void onDestroy() {
+        super.onDestroy();
+        videoDetailViewModel.reset();
     }
 }

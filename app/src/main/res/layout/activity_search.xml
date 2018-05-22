@@ -1,0 +1,70 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="SearchActivityBinding" />
+
+    <RelativeLayout
+        android:id="@+id/fr_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_activity_detail">
+
+        <include
+            android:id="@+id/included_similar_layout"
+            layout="@layout/view_search" />
+
+        <RelativeLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bottom_layout_height"
+            android:layout_alignParentBottom="true">
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/position_view"
+                android:layout_width="1px"
+                android:layout_height="1px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_bottom_layout_height"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.SearchView
+
+                    android:id="@+id/search"
+                    style="@style/SearchViewTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    app:closeIcon="@drawable/close"
+                    app:goIcon="@drawable/search"
+                    app:queryHint="@string/search_query_hint"
+                    app:searchHintIcon="@drawable/search"
+                    app:searchIcon="@drawable/search" />
+
+                <View
+                    android:id="@+id/search_icon"
+                    android:layout_width="@dimen/search_icon_size"
+                    android:layout_height="@dimen/search_icon_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_large"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@drawable/search" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

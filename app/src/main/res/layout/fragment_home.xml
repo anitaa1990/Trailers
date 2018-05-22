@@ -1,0 +1,20 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="HomeFragmentBinding" />
+
+    <RelativeLayout
+        android:id="@+id/fr_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_activity_detail">
+
+        <include
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:id="@+id/included_similar_layout"
+            layout="@layout/view_search" />
+
+    </RelativeLayout>
+
+</layout>

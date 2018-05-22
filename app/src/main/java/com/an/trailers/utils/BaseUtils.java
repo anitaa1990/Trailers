@@ -4,21 +4,26 @@ package com.an.trailers.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.res.TypedArray;
+import android.graphics.Point;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.text.TextUtils;
+import android.os.Build;
 import android.util.Pair;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.an.trailers.Constants;
 import com.an.trailers.R;
+import com.an.trailers.fragment.CommonFragment;
 import com.an.trailers.model.APIResponse;
 import com.an.trailers.model.Cast;
 import com.an.trailers.model.Crew;
+import com.an.trailers.model.MovieDb;
 import com.an.trailers.model.MovieResponse;
 import com.an.trailers.model.Movie;
 import com.an.trailers.model.Rating;
 import com.an.trailers.model.Video;
+import com.an.trailers.views.menu.SlideMenuItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -29,14 +34,19 @@ import java.lang.reflect.Type;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import static com.an.trailers.Constants.LOCALE_CACHE_PATH;
 
 public class BaseUtils {
 
-    private static String getJSONStringFromRaw(Context context, int rawId) {
+    public static String getJSONStringFromRaw(Context context, int rawId) {
 
         InputStream content = context.getResources().openRawResource(rawId);
         BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
@@ -55,6 +65,43 @@ public class BaseUtils {
     public static int dpToPx(Context context, int dp) {
         float density = context.getResources().getDisplayMetrics().density;
         return Math.round((float) dp * density);
+    }
+
+    public static float dip2px(Context context, float dpValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return dpValue * scale;
+    }
+
+    public static int getScreenWidth(Context mContext) {
+        boolean width = false;
+        WindowManager wm = (WindowManager)mContext.getSystemService("window");
+        Display display = wm.getDefaultDisplay();
+        int width1;
+        if(Build.VERSION.SDK_INT > 12) {
+            Point size = new Point();
+            display.getSize(size);
+            width1 = size.x;
+        } else {
+            width1 = display.getWidth();
+        }
+
+        return width1;
+    }
+
+    public static int getScreenHeight(Context mContext) {
+        boolean height = false;
+        WindowManager wm = (WindowManager)mContext.getSystemService("window");
+        Display display = wm.getDefaultDisplay();
+        int height1;
+        if(Build.VERSION.SDK_INT > 12) {
+            Point size = new Point();
+            display.getSize(size);
+            height1 = size.y;
+        } else {
+            height1 = display.getHeight();
+        }
+
+        return height1;
     }
 
     public static String getFormattedDate(String dateString) {
@@ -114,6 +161,31 @@ public class BaseUtils {
         return rating;
     }
 
+    public static List<String> getGenres(List<Object> genres) {
+        List<String> genreNames = new ArrayList<>(genres.size());
+        for(Object obj : genres) {
+            if(obj instanceof String)
+                genreNames.add(Objects.toString(obj, null));
+            else genreNames.add(String.valueOf(((Map)obj).get("name")));
+        }
+        return genreNames;
+    }
+
+
+    public static List<SlideMenuItem> getMenuList(Context context) {
+        List<SlideMenuItem> slideMenuItems = new ArrayList<>();
+        List<String> menuTitles = Arrays.asList(context.getResources().getStringArray(R.array.menu_names));
+        TypedArray menuIcons = context.getResources().obtainTypedArray(R.array.menu_icons);
+
+        for(int i = 0; i< menuTitles.size(); i++) {
+            SlideMenuItem slideMenuItem = new SlideMenuItem(menuTitles.get(i), menuIcons.getResourceId(i, -1));
+            slideMenuItems.add(slideMenuItem);
+        }
+
+        menuIcons.recycle();
+        return slideMenuItems;
+    }
+
     public static void shareMovie(Activity activity,
                                   String videoId) {
         String shareText = String.format(Constants.YOUTUBE_VIDEO_PATH, videoId);
@@ -133,5 +205,61 @@ public class BaseUtils {
             }
         }
         return null;
+    }
+
+    public static List<Movie> getFavMovies() {
+        List<Movie> movies = new ArrayList<>();
+        Map<Long, Movie> favMovieMap = MovieDb.getInstance().getFavMovies();
+        Iterator<Map.Entry<Long,Movie>> iterator = favMovieMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Long,Movie> entry = iterator.next();
+            movies.add(entry.getValue());
+        }
+        return movies;
+    }
+
+
+    public static List<CommonFragment> getFragments(List<Movie> movies) {
+        List<CommonFragment> commonFragments = new ArrayList<>();
+        for (Movie movie : movies) {
+            if(movie.getPosterPath() != null)
+                commonFragments.add(CommonFragment.newInstance(movie));
+        }
+        return commonFragments;
+    }
+
+
+
+    /* You can use this method to store the
+ * request response from your local cache  */
+    public static void writeObjectToDisk(final Object object) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ObjectUtil objDataStream = new ObjectUtil();
+                objDataStream.writeObjects(object, LOCALE_CACHE_PATH);
+            }
+        }).start();
+    }
+
+    /* You can use this method to retrieve the
+     * request response from your local cache  */
+    public static Object readObjectFromDisk() {
+        ObjectUtil objDataStream = new ObjectUtil();
+        return objDataStream.readObjects(LOCALE_CACHE_PATH);
+    }
+
+    public static void loadExternalBrowser(Activity activity, String url) {
+        try {
+            if (!url.startsWith("https://") && !url.startsWith("http://")) {
+                url = "http://" + url;
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            activity.startActivity(intent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
